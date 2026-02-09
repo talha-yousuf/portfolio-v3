@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom dim theme using CSS variables */
+.dim {
+  color-scheme: dark;
+}
+
+.dim .bg-white {
+  background-color: #171717;
+}
+
+.dim .dark\:bg-slate-900 {
+  background-color: #0a0a0a;
+}
+
+.dim .dark\:bg-slate-800,
+.dim .bg-gray-50 {
+  background-color: #262626;
+}
+
+.dim .dark\:bg-slate-700 {
+  background-color: #404040;
+}
+
+.dim .text-gray-900,
+.dim .dark\:text-gray-100 {
+  color: #e5e5e5;
+}
+
+.dim .text-gray-600,
+.dim .dark\:text-gray-400 {
+  color: #a3a3a3;
+}
+
+.dim .dark\:border-slate-700,
+.dim .border-gray-200 {
+  border-color: #404040;
+}
+
+.dim .dark\:border-slate-600 {
+  border-color: #525252;
+}
+
+.dim .dark\:text-purple-400 {
+  color: #fbbf24;
+}
+
+.dim .text-purple-600 {
+  color: #fbbf24;
+}
+
+.dim .bg-gradient-to-r {
+  background-image: linear-gradient(to right, #fbbf24, #f59e0b);
+}
+
+.dim .dark\:bg-purple-900 {
+  background-color: #78350f;
+}
+
+.dim .dark\:text-purple-300 {
+  color: #fde047;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}

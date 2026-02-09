@@ -1,0 +1,195 @@
+{
+  "personalInfo": {
+    "name": "Talha Yousuf",
+    "title": "Senior Full Stack Software Engineer",
+    "email": "talhayousuf.work@gmail.com",
+    "phone": "+92-307-6003927",
+    "linkedin": "https://linkedin.com/in/talha-yousuf",
+    "github": "https://github.com/talha-yousuf",
+    "location": "Rawalpindi, Punjab, Pakistan",
+    "profileImage": "",
+    "bio": "Senior Full Stack Software Engineer with 6+ years of experience building scalable web applications, microservices, and cloud infrastructure. Specialized in React, Node.js, and AWS technologies."
+  },
+  "stats": {
+    "yearsExperience": "6+",
+    "projectsCompleted": "20+",
+    "technologies": "30+",
+    "companies": "6"
+  },
+  "skills": [
+    {
+      "category": "Frontend",
+      "items": [
+        "React",
+        "Next.js",
+        "Redux",
+        "TypeScript",
+        "JavaScript",
+        "Tailwind CSS",
+        "Material UI",
+        "Angular"
+      ]
+    },
+    {
+      "category": "Backend & Databases",
+      "items": [
+        "Node.js",
+        "Python",
+        "Express.js",
+        "Nest.js",
+        "PostgreSQL",
+        "MongoDB",
+        "REST APIs",
+        "System Design"
+      ]
+    },
+    {
+      "category": "Cloud & DevOps",
+      "items": ["AWS", "Docker", "Git", "Serverless", "Infrastructure as Code"]
+    },
+    {
+      "category": "Data & AI/ML",
+      "items": ["Pandas", "NumPy", "PyTorch", "LangChain"]
+    }
+  ],
+  "experience": [
+    {
+      "title": "Full Stack Engineer",
+      "company": "Freelancer/Contractor",
+      "companyUrl": "",
+      "location": "Remote",
+      "startDate": "March 2025",
+      "endDate": "Present",
+      "current": true,
+      "achievements": [
+        "Integrated local LLM model and Slack APIs with backend microservices to deploy a proprietary AI assistant within company's Slack, resulting in successful funding round evaluation.",
+        "Designed and implemented event-driven workflows in microservices using Kafka and REST APIs, building complex backend services with NestJS and PostgreSQL to deliver core business functionality for a fintech platform.",
+        "Delivered employee management system MVP using NestJS, React, and PostgreSQL, providing comprehensive HR functionality.",
+        "Built and shipped feature flagging internal tool MVP with NestJS, React, and PostgreSQL stack.",
+        "Led architecture and system design decisions, including database schema design, for implementing new product features.",
+        "Improved system performance and scalability through database normalization, query optimization, and refactoring backend service."
+      ]
+    },
+    {
+      "title": "Software Engineer",
+      "company": "DPL Pvt. Ltd.",
+      "companyUrl": "https://www.linkedin.com/company/dpl-it/",
+      "location": "Pakistan",
+      "startDate": "September 2023",
+      "endDate": "February 2025",
+      "current": false,
+      "achievements": [
+        "Led migration of multi-tenant B2B e-commerce platform from legacy to modern architecture, maintaining feature consistency across applications and enabling continued migration without disrupting active tenants.",
+        "Implemented synchronized user authentication across multiple legacy and modern applications, using redirects and auth-key strategies, ensuring seamless transitions for users without service disruption.",
+        "Leveraged Next.js SSR to build dynamic SEO pages, improving search engine rankings and traffic acquisition for the platform.",
+        "Built RESTful APIs and AWS Lambda microservices using Node.js and PostgreSQL, supporting core platform functionality across multiple applications within the platform.",
+        "Integrated google analytics tracking to capture user engagement and performance metrics, enabling data-driven product decisions.",
+        "Debugged and optimized serverless deployments, resolving production issues and improving Lambda function performance.",
+        "Built scalable AWS Cloud Infrastructure POC using CloudFormation, with auto-scaling, load-balancing, database/cache management, security, and deployment pipeline, delivering an architectural template for future IaC usage."
+      ]
+    },
+    {
+      "title": "Senior Software Engineer",
+      "company": "Neoteric Softwares Pvt. Ltd.",
+      "companyUrl": "https://www.linkedin.com/company/neoteric-tech/",
+      "location": "Pakistan",
+      "startDate": "December 2022",
+      "endDate": "May 2023",
+      "current": false,
+      "achievements": [
+        "Built frontend for an NFT marketplace with React, Redux, and TailwindCSS, integrating web3-react for wallet connections and blockchain transactions, additionally built the admin CMS for content management and supporting backend services/APIs.",
+        "Led project planning including resource allocation, delivery estimations and timelines.",
+        "Established teams engineering standards for code quality, design patterns, and development workflows using pre-commit tools."
+      ]
+    },
+    {
+      "title": "MERN Stack Developer",
+      "company": "Sedenius Technologies Pvt. Ltd.",
+      "companyUrl": "https://www.linkedin.com/company/sedenius-technologies/",
+      "location": "Pakistan",
+      "startDate": "April 2021",
+      "endDate": "December 2023",
+      "current": false,
+      "achievements": [
+        "Led the development of a comprehensive asset management PWA using React, Node and Postgres, delivering features like task scheduling and planning, resource allocation, role-based access, and analytics dashboards.",
+        "Developed features and resolved critical bugs for React Native smart-home iOS/Android app, unblocking and delivering previously stalled project to market launch.",
+        "Built coding assessment platform MVP using React and Firebase for internal technical recruitment and evaluation.",
+        "Collaborated in system architecture and database design, wrote supporting APIs, led database normalization effort.",
+        "Implemented GDPR-compliance features to meet data protection regulatory requirements.",
+        "Maintained Jenkins CI/CD, implementing Bash scripts for managing release on self-hosted servers.",
+        "Wrote comprehensive E2E test automation suites using Cypress for cross-browser and cross-device validation, parallel to unit test coverage using Jest, ensuring TDD best practices."
+      ]
+    },
+    {
+      "title": "Design Engineer",
+      "company": "CARE Pvt. Ltd.",
+      "companyUrl": "https://www.linkedin.com/company/center-for-advanced-research-in-engineering-care/",
+      "location": "Pakistan",
+      "startDate": "July 2019",
+      "endDate": "April 2021",
+      "current": false,
+      "achievements": [
+        "Developed and deployed custom IoT web dashboards for enterprise clients, owning full frontend development and managing deployments, resulting in successful client demos and production rollouts.",
+        "Owned client-facing solutions design by collaborating with the stakeholders to collect and translate business requirements into technical feature.",
+        "Built Python data pipelines to ingest, clean, and transform raw IoT sensor data, for automated report generation that delivered actionable insights for data-driven decision-making.",
+        "Built and maintained Node.js backend services and REST APIs to support multiple projects.",
+        "Developed embedded IoT sensor nodes with firmware, PCB design, and on-site deployments resulting in successful field tests."
+      ]
+    },
+    {
+      "title": "Co-founder / Embedded Systems Engineer",
+      "company": "Self-Employed",
+      "companyUrl": "",
+      "location": "Pakistan",
+      "startDate": "April 2018",
+      "endDate": "June 2019",
+      "current": false,
+      "achievements": [
+        "Developed embedded hardware & software and the web UI for an agri-tech IoT system."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Bachelors of Electrical Engineering",
+      "institution": "NUST",
+      "institutionUrl": "https://nust.edu.pk/",
+      "location": "Pakistan",
+      "graduationYear": "2018",
+      "description": ""
+    }
+  ],
+  "projects": [
+    {
+      "name": "AI Slack Assistant",
+      "description": "Proprietary AI assistant integrated with Slack using local LLM models",
+      "technologies": ["LLM", "Slack API", "Microservices"],
+      "imageUrl": "",
+      "githubUrl": "",
+      "liveUrl": ""
+    },
+    {
+      "name": "NFT Marketplace",
+      "description": "Full-featured NFT marketplace with wallet integration and admin CMS",
+      "technologies": ["React", "Redux", "TailwindCSS", "web3-react"],
+      "imageUrl": "",
+      "githubUrl": "",
+      "liveUrl": ""
+    },
+    {
+      "name": "Asset Management PWA",
+      "description": "Comprehensive asset management system with scheduling, resource allocation, and analytics",
+      "technologies": ["React", "Node.js", "PostgreSQL"],
+      "imageUrl": "",
+      "githubUrl": "",
+      "liveUrl": ""
+    }
+  ],
+  "certifications": [],
+  "socialLinks": {
+    "twitter": "",
+    "instagram": "",
+    "medium": "",
+    "stackoverflow": ""
+  }
+}
