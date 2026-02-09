@@ -1,4 +1,5 @@
 {
+  "title": "<Talha_Yousuf />",
   "personalInfo": {
     "name": "Talha Yousuf",
     "title": "Senior Full Stack Software Engineer",
@@ -6,9 +7,9 @@
     "phone": "+92-307-6003927",
     "linkedin": "https://linkedin.com/in/talha-yousuf",
     "github": "https://github.com/talha-yousuf",
-    "location": "Rawalpindi, Punjab, Pakistan",
+    "location": "Pakistan",
     "profileImage": "",
-    "bio": "Senior Full Stack Software Engineer with 6+ years of experience building scalable web applications, microservices, and cloud infrastructure. Specialized in React, Node.js, and AWS technologies."
+    "bio": "Lorem Ipsum... just kidding, browse around to see what I do."
   },
   "stats": {
     "yearsExperience": "6+",
@@ -93,7 +94,7 @@
       "company": "Neoteric Softwares Pvt. Ltd.",
       "companyUrl": "https://www.linkedin.com/company/neoteric-tech/",
       "location": "Pakistan",
-      "startDate": "December 2022",
+      "startDate": "December 2023",
       "endDate": "May 2023",
       "current": false,
       "achievements": [

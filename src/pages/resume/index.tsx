@@ -1,118 +1,183 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import React from "react";
+
+const styles: {
+  [key: string]: React.CSSProperties;
+} = {
+  container: {
+    backgroundColor: "#ffffff",
+    color: "#050505",
+    fontFamily: "Helvetica, Arial, sans-serif",
+    lineHeight: "1.3",
+    fontSize: "9pt",
+    margin: "0 auto",
+    padding: "48px",
+    maxWidth: "75vw",
+  },
+  header: {
+    textAlign: "center",
+    marginBottom: "4px",
+  },
+  name: {
+    fontSize: "18pt",
+    fontWeight: "bold",
+    padding: "3px 0",
+  },
+  title: {
+    fontSize: "12pt",
+    fontWeight: "bold",
+    padding: "3px 0",
+  },
+  contacts: {
+    display: "flex",
+    justifyContent: "center",
+    gap: "24px",
+    fontWeight: "bold",
+    padding: "4px",
+  },
+  link: {
+    color: "#0e2875",
+    textDecoration: "none",
+  },
+  hr: {
+    border: "0",
+    borderTop: "0.3px solid #05050580",
+    margin: "4px 0",
+  },
+  sectionHeading: {
+    fontSize: "12pt",
+    fontWeight: "bold",
+    padding: "3px 0",
+  },
+  list: {
+    paddingLeft: "14px",
+    marginBottom: "8px",
+    lineHeight: "1.2",
+  },
+  listItem: {
+    marginBottom: "0.5px",
+  },
+  employmentHeading: {
+    display: "flex",
+    justifyContent: "space-between",
+    margin: "4px 8px",
+    borderBottom: "dotted 0.3px #050505",
+  },
+  bold: {
+    fontWeight: "bold",
+  },
+  italic: {
+    fontStyle: "italic",
+  },
+};
+
 function ResumePage({ data }: { data: any }) {
   const { personalInfo, skills, experience, education } = data;
 
   return (
-    <div className="max-w-4xl mx-auto p-8">
-      <div className="no-print mb-6 text-right">
-        <button
-          onClick={() => window.print()}
-          className="px-6 py-3 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-colors"
-        >
-          🖨️ Print Resume
-        </button>
-      </div>
+    <div className="resume-container" style={styles.container}>
+      <style>
+        {`@media print { 
+          body { margin: 0; } 
+          @page { size: A4; margin: 0.2in; } 
+          
+          .resume-container { 
+            margin: 0 !important; 
+            max-width: none !important; 
+            width: 100% !important;
+            padding: 0 !important;
+          }
+        }`}
+      </style>
 
-      <div className="bg-white text-gray-900 p-12 rounded-lg shadow-lg print:shadow-none">
-        <header className="text-center border-b-2 border-gray-300 pb-6 mb-8">
-          <h1 className="text-4xl font-bold mb-2">{personalInfo.name}</h1>
-          <h2 className="text-xl text-gray-600 mb-4">{personalInfo.title}</h2>
-          <div className="flex justify-center gap-4 flex-wrap text-sm text-gray-600">
-            <span>{personalInfo.email}</span>
-            <span>|</span>
-            <span>{personalInfo.phone}</span>
-            <span>|</span>
-            <a href={personalInfo.linkedin} className="hover:text-purple-600">
-              LinkedIn
-            </a>
-            <span>|</span>
-            <a href={personalInfo.github} className="hover:text-purple-600">
-              GitHub
-            </a>
-          </div>
-        </header>
+      {/* Header */}
+      <header style={styles.header}>
+        <h1 style={styles.name}>{personalInfo.name}</h1>
+        <h3 style={styles.title}>{personalInfo.title}</h3>
+        <div style={styles.contacts}>
+          <a href={`mailto:${personalInfo.email}`} style={styles.link}>
+            {personalInfo.email}
+          </a>
+          <span>|</span>
+          <span style={styles.link}>{personalInfo.phone}</span>
+          <span>|</span>
+          <a href={personalInfo.linkedin} style={styles.link}>
+            LinkedIn
+          </a>
+          <span>|</span>
+          <a href={personalInfo.github} style={styles.link}>
+            GitHub
+          </a>
+        </div>
+      </header>
 
-        <section className="mb-8">
-          <h3 className="text-2xl font-bold mb-4 text-gray-800">Skills</h3>
-          <div className="space-y-2">
-            {skills.map((category: any, idx: any) => (
-              <div key={idx}>
-                <span className="font-semibold">{category.category}: </span>
-                <span className="text-gray-700">
-                  {category.items.join(", ")}
-                </span>
-              </div>
-            ))}
-          </div>
-        </section>
+      <hr style={styles.hr} />
 
-        <hr className="my-6 border-gray-300" />
-
-        <section className="mb-8">
-          <h3 className="text-2xl font-bold mb-4 text-gray-800">Experience</h3>
-          <div className="space-y-6">
-            {experience.map((job: any, idx: any) => (
-              <div key={idx}>
-                <div className="flex justify-between items-baseline mb-1">
-                  <div>
-                    <strong className="text-lg">{job.title}</strong>
-                    {" | "}
-                    <a
-                      href={job.companyUrl}
-                      className="text-purple-600 hover:underline"
-                    >
-                      <em>{job.company}</em>
-                    </a>
-                  </div>
-                  <strong className="text-sm">
-                    {job.startDate} - {job.endDate}
-                  </strong>
-                </div>
-                <ul className="list-disc ml-6 space-y-1 text-sm text-gray-700">
-                  {job.achievements.map((achievement: any, achIdx: any) => (
-                    <li key={achIdx}>{achievement}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <hr className="my-6 border-gray-300" />
-
-        <section>
-          <h3 className="text-2xl font-bold mb-4 text-gray-800">Education</h3>
-          {education.map((edu: any, idx: any) => (
-            <div key={idx} className="flex justify-between items-baseline">
-              <div>
-                <strong className="text-lg">{edu.degree}</strong>
-                {" | "}
-                <a
-                  href={edu.institutionUrl}
-                  className="text-purple-600 hover:underline"
-                >
-                  <em>{edu.institution}</em>
-                </a>
-              </div>
-              <strong className="text-sm">Class of {edu.graduationYear}</strong>
-            </div>
+      {/* Skills */}
+      <section>
+        <h3 style={styles.sectionHeading}>Skills</h3>
+        <ul style={styles.list}>
+          {skills.map((category: any, idx: number) => (
+            <li key={idx} style={styles.listItem}>
+              <strong style={styles.bold}>{category.category}:</strong>
+              <span>{category.items.join(", ")}</span>
+            </li>
           ))}
-        </section>
-      </div>
+        </ul>
+      </section>
 
-      <style>{`
-        @media print {
-          body {
-            background: white;
-          }
-          .no-print {
-            display: none !important;
-          }
-          .bg-white {
-            box-shadow: none;
-          }
-        }
-      `}</style>
+      <hr style={styles.hr} />
+
+      {/* Experience */}
+      <section>
+        <h3 style={styles.sectionHeading}>Experience</h3>
+        {experience.map((job: any, idx: number) => (
+          <div key={idx}>
+            <div style={styles.employmentHeading}>
+              <span style={styles.bold}>
+                {job.title + " | "}
+                <a
+                  href={job.companyUrl}
+                  style={{ ...styles.link, ...styles.italic }}
+                >
+                  {job.company}
+                </a>
+              </span>
+              <span style={styles.bold}>
+                {job.startDate}–{job.endDate}
+              </span>
+            </div>
+            <ul style={styles.list}>
+              {job.achievements.map((achievement: any, achIdx: number) => (
+                <li key={achIdx} style={styles.listItem}>
+                  {achievement}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </section>
+
+      <hr style={styles.hr} />
+
+      {/* Education */}
+      <section>
+        <h3 style={styles.sectionHeading}>Education</h3>
+        {education.map((edu: any, idx: number) => (
+          <div key={idx} style={styles.employmentHeading}>
+            <span style={styles.bold}>
+              {edu.degree + " | "}
+              <a
+                href={edu.institutionUrl}
+                style={{ ...styles.link, ...styles.italic }}
+              >
+                {edu.institution}
+              </a>
+            </span>
+            <span style={styles.bold}>Class of {edu.graduationYear}</span>
+          </div>
+        ))}
+      </section>
     </div>
   );
 }
