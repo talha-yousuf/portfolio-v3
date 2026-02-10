@@ -1,173 +1,268 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState } from "react";
+import { Github, Linkedin, Mail, ArrowRight, Zap } from "lucide-react";
 
-function LandingPage({ data }: { data: any }) {
-  const { personalInfo, stats, skills, experience, projects } = data;
+const themes = [
+  {
+    name: "GitHub Dark",
+    bg: "#0d1117", // Deep Navy
+    text: "#e6edf3", // Off White
+    accent: "#2f81f7", // GitHub Blue
+    card: "#161b22", // Layer Grey
+    shadow: "0 8px 24px rgba(0,0,0,0.4)",
+  },
+  {
+    name: "Onyx",
+    bg: "#050505", // Pitch Black
+    text: "#F5F5F5", // Cloud White
+    accent: "#10B981", // Emerald Green
+    card: "#121212", // Obsidian Grey
+    shadow: "0 10px 30px rgba(0,0,0,0.5)",
+  },
+  {
+    name: "Splash",
+    bg: "#2D0B5A", // Deep Grape
+    text: "#FFFFFF", // Pure White
+    accent: "#de4050", // Hot Pink
+    card: "#3B0D71", // Electric Violet
+    shadow: "0 10px 40px rgba(0,0,0,0.3)",
+  },
+  {
+    name: "Magma",
+    bg: "#3E1404", // Deep Espresso
+    text: "#FFFFFF", // Pure White
+    accent: "#FB923C", // Neon Orange
+    card: "#562006", // Spiced Cider
+    shadow: "0 10px 40px rgba(0,0,0,0.4)",
+  },
+  {
+    name: "Cobalt",
+    bg: "#0A1931", // Deep Midnight
+    text: "#FFFFFF", // Pure White
+    accent: "#FFC947", // Electric Gold
+    card: "#185ADB", // Brandeis Blue
+    shadow: "0 10px 40px rgba(0,0,0,0.3)",
+  },
+  {
+    name: "Emerald",
+    bg: "#061A14", // Deep Forest
+    text: "#ECFDF5", // Mint White
+    accent: "#10B981", // Vivid Emerald
+    card: "#062C21", // Dark Seaweed
+    shadow: "0 10px 40px rgba(0,0,0,0.4)",
+  },
+  {
+    name: "Oceanic",
+    bg: "#0F172A", // Midnight Navy
+    text: "#F1F5F9", // Ice White
+    accent: "#38BDF8", // Sky Blue
+    card: "#1E293B", // Slate Blue
+    shadow: "0 10px 40px rgba(0,0,0,0.35)",
+  },
+  {
+    name: "Ember",
+    bg: "#181111", // Dark Charcoal
+    text: "#FFF7ED", // Paper White
+    accent: "#F97316", // Safety Orange
+    card: "#261C1C", // Burnt Coffee
+    shadow: "0 10px 40px rgba(0,0,0,0.45)",
+  },
+  {
+    name: "Amethyst",
+    bg: "#120B1A", // Deep Plum
+    text: "#F3E8FF", // Lavender White
+    accent: "#A855F7", // Bright Amethyst
+    card: "#1E1329", // Muted Purple
+    shadow: "0 10px 40px rgba(0,0,0,0.4)",
+  },
+  {
+    name: "Crimson",
+    bg: "#1A0505", // Blood Moon
+    text: "#FEE2E2", // Rose White
+    accent: "#EF4444", // Candy Apple Red
+    card: "#2D0A0A", // Deep Maroon
+    shadow: "0 10px 40px rgba(0,0,0,0.5)",
+  },
+  {
+    name: "Midnight",
+    bg: "#020617", // Deep Space
+    text: "#F8FAFC", // Ghost White
+    accent: "#6366F1", // Indigo Glow
+    card: "#0F172A", // Deep Slate
+    shadow: "0 10px 40px rgba(0,0,0,0.6)",
+  },
+  {
+    name: "Light",
+    bg: "#FDFDFD", // Snow White
+    text: "#1A1A1A", // Charcoal Black
+    accent: "#3B82F6", // Royal Blue
+    card: "#FFFFFF", // Pure White
+    shadow: "0 10px 30px rgba(0,0,0,0.05)",
+  },
+];
+
+const LandingPage = () => {
+  const [themeIndex, setThemeIndex] = useState(0);
+
+  const t = themes[themeIndex];
+
+  const baseStyles = {
+    container: {
+      backgroundColor: t.bg,
+      color: t.text,
+      minHeight: "100vh",
+      fontFamily: "Inter, system-ui, sans-serif",
+      transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: "20px",
+    },
+    heroCard: {
+      maxWidth: "1000px",
+      width: "100%",
+      display: "flex",
+      flexDirection: "row" as const,
+      alignItems: "center",
+      gap: "60px",
+      padding: "40px",
+      borderRadius: "40px",
+      // backgroundColor: t.card,
+      // boxShadow: t.shadow,
+      flexWrap: "wrap-reverse" as const,
+    },
+    title: {
+      fontSize: "clamp(2.5rem, 5vw, 4rem)",
+      fontWeight: 800,
+      lineHeight: 1.1,
+      marginBottom: "24px",
+      letterSpacing: "-0.03em",
+    },
+    buttonBase: {
+      padding: "16px 32px",
+      borderRadius: "16px",
+      fontWeight: 600,
+      cursor: "pointer",
+      display: "inline-flex",
+      alignItems: "center",
+      gap: "10px",
+      transition: "transform 0.2s ease, opacity 0.2s ease",
+      border: "none",
+      fontSize: "1rem",
+    },
+    iconLink: {
+      padding: "12px",
+      borderRadius: "12px",
+      color: t.text,
+      backgroundColor: "transparent",
+      border: `1px solid ${t.text}33`,
+      cursor: "pointer",
+      display: "flex",
+      transition: "all 0.2s ease",
+    },
+    image: {
+      width: "320px",
+      height: "320px",
+      borderRadius: "100%",
+      objectFit: "cover" as const,
+      border: `8px solid ${t.accent}`,
+    },
+    splashToggle: {
+      position: "fixed" as const,
+      bottom: "30px",
+      right: "30px",
+      width: "56px",
+      height: "56px",
+      borderRadius: "28px",
+      backgroundColor: t.accent,
+      color: "#FFF",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      cursor: "pointer",
+      border: "none",
+      boxShadow: "0 10px 20px rgba(0,0,0,0.2)",
+    },
+  };
 
   return (
-    <div className="max-w-6xl mx-auto p-8">
-      <section className="text-center py-20">
-        <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-4xl text-white font-bold">
-          {personalInfo.name
-            .split(" ")
-            .map((n: any) => n[0])
-            .join("")}
-        </div>
-        <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
-          {personalInfo.name}
-        </h1>
-        <h2 className="text-2xl text-gray-600 dark:text-gray-400 dim:text-neutral-400 mb-6">
-          {personalInfo.title}
-        </h2>
-        <p className="text-lg text-gray-600 dark:text-gray-400 dim:text-neutral-400 max-w-2xl mx-auto mb-8">
-          {personalInfo.bio}
-        </p>
-        <div className="flex gap-4 justify-center">
-          <a
-            href={`mailto:${personalInfo.email}`}
-            className="px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg font-medium hover:shadow-lg transition-shadow"
-          >
-            Contact Me
-          </a>
-          <a
-            href={personalInfo.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-3 border-2 border-gray-300 dark:border-slate-600 dim:border-neutral-600 rounded-lg font-medium hover:border-purple-600 transition-colors"
-          >
-            GitHub
-          </a>
-        </div>
-      </section>
+    <div style={baseStyles.container}>
+      {/* Color Splash Toggle */}
+      <button
+        style={baseStyles.splashToggle}
+        onClick={() => setThemeIndex((themeIndex + 1) % themes.length)}
+        title={t.name}
+      >
+        <Zap size={24} fill="currentColor" />
+      </button>
 
-      {stats && (
-        <section className="py-12 bg-gray-50 dark:bg-slate-800 dim:bg-neutral-800 rounded-xl mb-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center px-8">
-            <div>
-              <div className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2">
-                {stats.yearsExperience}
-              </div>
-              <div className="text-gray-600 dark:text-gray-400 dim:text-neutral-400">
-                Years Experience
-              </div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2">
-                {stats.projectsCompleted}
-              </div>
-              <div className="text-gray-600 dark:text-gray-400 dim:text-neutral-400">
-                Projects
-              </div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2">
-                {stats.technologies}
-              </div>
-              <div className="text-gray-600 dark:text-gray-400 dim:text-neutral-400">
-                Technologies
-              </div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2">
-                {stats.companies}
-              </div>
-              <div className="text-gray-600 dark:text-gray-400 dim:text-neutral-400">
-                Companies
-              </div>
+      {/* Global Animation Styles */}
+      <style>{`
+        button:hover { transform: translateY(-2px); opacity: 0.9; }
+        button:active { transform: translateY(0); }
+      `}</style>
+
+      <div style={baseStyles.heroCard}>
+        {/* Text Content */}
+        <div style={{ flex: 1, minWidth: "300px" }}>
+          <h1 style={baseStyles.title}>
+            Building <span style={{ color: t.accent }}>digital</span>{" "}
+            experiences.
+          </h1>
+          <p
+            style={{
+              fontSize: "1.25rem",
+              opacity: 0.7,
+              marginBottom: "40px",
+              maxWidth: "480px",
+            }}
+          >
+            A Senior Full Stack Engineer focused on clean code, scalable
+            systems, and elegant design.
+          </p>
+
+          <div
+            style={{
+              display: "flex",
+              gap: "16px",
+              alignItems: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            <button
+              style={{
+                ...baseStyles.buttonBase,
+                backgroundColor: t.accent,
+                color: "#FFF",
+              }}
+            >
+              Get in touch <ArrowRight size={18} />
+            </button>
+
+            <div style={{ display: "flex", gap: "12px" }}>
+              <button style={baseStyles.iconLink} title="GitHub">
+                <Github size={20} />
+              </button>
+              <button style={baseStyles.iconLink} title="LinkedIn">
+                <Linkedin size={20} />
+              </button>
+              <button style={baseStyles.iconLink} title="Email">
+                <Mail size={20} />
+              </button>
             </div>
           </div>
-        </section>
-      )}
-
-      <section className="mb-16">
-        <h2 className="text-3xl font-bold mb-8 text-center">Tech Stack</h2>
-        <div className="grid md:grid-cols-2 gap-6">
-          {skills.map((category: any, idx: any) => (
-            <div
-              key={idx}
-              className="p-6 bg-gray-50 dark:bg-slate-800 dim:bg-neutral-800 rounded-lg"
-            >
-              <h3 className="text-xl font-bold mb-4 text-purple-600 dark:text-purple-400 dim:text-yellow-500">
-                {category.category}
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {category.items.map((skill: any, skillIdx: any) => (
-                  <span
-                    key={skillIdx}
-                    className="px-3 py-1 bg-white dark:bg-slate-700 dim:bg-neutral-700 rounded-full text-sm border border-gray-200 dark:border-slate-600 dim:border-neutral-600"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
         </div>
-      </section>
 
-      <section className="mb-16">
-        <h2 className="text-3xl font-bold mb-8 text-center">Experience</h2>
-        <div className="space-y-6">
-          {experience.slice(0, 3).map((job: any, idx: any) => (
-            <div
-              key={idx}
-              className="p-6 bg-gray-50 dark:bg-slate-800 dim:bg-neutral-800 rounded-lg border border-gray-200 dark:border-slate-700 dim:border-neutral-700"
-            >
-              <div className="flex justify-between items-start mb-2">
-                <div>
-                  <h3 className="text-xl font-bold">{job.title}</h3>
-                  <p className="text-purple-600 dark:text-purple-400 dim:text-yellow-500">
-                    {job.company}
-                  </p>
-                </div>
-                <span className="text-sm text-gray-600 dark:text-gray-400 dim:text-neutral-400">
-                  {job.startDate} - {job.endDate}
-                </span>
-              </div>
-              <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400 dim:text-neutral-400">
-                {job.achievements
-                  .slice(0, 2)
-                  .map((achievement: any, achIdx: any) => (
-                    <li key={achIdx}>{achievement}</li>
-                  ))}
-              </ul>
-            </div>
-          ))}
+        {/* Hero Image */}
+        <div style={{ flexShrink: 0 }}>
+          <img
+            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400&h=400"
+            alt="Profile"
+            style={baseStyles.image}
+          />
         </div>
-      </section>
-
-      <section className="mb-16">
-        <h2 className="text-3xl font-bold mb-8 text-center">
-          Featured Projects
-        </h2>
-        <div className="grid md:grid-cols-3 gap-6">
-          {projects.map((project: any, idx: any) => (
-            <div
-              key={idx}
-              className="bg-gray-50 dark:bg-slate-800 dim:bg-neutral-800 rounded-lg overflow-hidden border border-gray-200 dark:border-slate-700 dim:border-neutral-700"
-            >
-              <div className="h-40 bg-gradient-to-br from-purple-400 to-indigo-500"></div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">{project.name}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400 dim:text-neutral-400 mb-4">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech: any, techIdx: any) => (
-                    <span
-                      key={techIdx}
-                      className="px-2 py-1 bg-purple-100 dark:bg-purple-900 dim:bg-yellow-900 text-purple-600 dark:text-purple-300 dim:text-yellow-300 text-xs rounded-full"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      </div>
     </div>
   );
-}
+};
 
 export default LandingPage;
