@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/landing";
 import ResumePage from "./pages/resume";
-import portfolioData from "./SSOT.json";
+import portfolioData from "./data";
 
 function App() {
   return (

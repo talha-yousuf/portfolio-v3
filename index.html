@@ -20,7 +20,7 @@
     fetch("src/SSOT.json")
       .then((response) => response.json())
       .then((data) => {
-        document.title = data.title;
+        document.title = data.webpageTitle;
       })
       .catch((err) => console.error("Error loading JSON:", err));
   </script>

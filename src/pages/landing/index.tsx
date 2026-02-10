@@ -1,15 +1,8 @@
 import { useState } from "react";
-import { Github, Linkedin, Mail, ArrowRight, Zap } from "lucide-react";
+import { Github, Linkedin, Mail, ArrowRight, Wand2Icon } from "lucide-react";
+import data from "../../data/index";
 
 const themes = [
-  {
-    name: "GitHub Dark",
-    bg: "#0d1117", // Deep Navy
-    text: "#e6edf3", // Off White
-    accent: "#2f81f7", // GitHub Blue
-    card: "#161b22", // Layer Grey
-    shadow: "0 8px 24px rgba(0,0,0,0.4)",
-  },
   {
     name: "Onyx",
     bg: "#050505", // Pitch Black
@@ -17,6 +10,22 @@ const themes = [
     accent: "#10B981", // Emerald Green
     card: "#121212", // Obsidian Grey
     shadow: "0 10px 30px rgba(0,0,0,0.5)",
+  },
+  {
+    name: "Volt",
+    bg: "#A3E635", // Electric Lime
+    text: "#1A2E05", // Deep Forest (High Contrast)
+    accent: "#FFFFFF", // Pure White
+    card: "#BEF264", // Soft Lime (Elevated)
+    shadow: "0 10px 30px rgba(26,46,5,0.15)",
+  },
+  {
+    name: "Ignite",
+    bg: "#F97316", // Safety Orange
+    text: "#431407", // Dark Mahogany
+    accent: "#FFEDD5", // Creamy Peach
+    card: "#FB923C", // Sunset Orange (Elevated)
+    shadow: "0 10px 30px rgba(67,20,7,0.2)",
   },
   {
     name: "Splash",
@@ -110,7 +119,6 @@ const LandingPage = () => {
       backgroundColor: t.bg,
       color: t.text,
       minHeight: "100vh",
-      fontFamily: "Inter, system-ui, sans-serif",
       transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
       display: "flex",
       alignItems: "center",
@@ -122,12 +130,11 @@ const LandingPage = () => {
       width: "100%",
       display: "flex",
       flexDirection: "row" as const,
-      alignItems: "center",
+      alignItems: "start",
       gap: "60px",
       padding: "40px",
-      borderRadius: "40px",
-      // backgroundColor: t.card,
-      // boxShadow: t.shadow,
+      borderRadius: "6px",
+      border: `${t.text}33 0.1px solid`,
       flexWrap: "wrap-reverse" as const,
     },
     title: {
@@ -160,11 +167,18 @@ const LandingPage = () => {
       transition: "all 0.2s ease",
     },
     image: {
-      width: "320px",
-      height: "320px",
+      width: "150px",
+      height: "150px",
       borderRadius: "100%",
       objectFit: "cover" as const,
-      border: `8px solid ${t.accent}`,
+      border: `4px solid ${t.accent}`,
+    },
+    imageFrame: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      borderRadius: "100%",
+      overflow: "hidden",
     },
     splashToggle: {
       position: "fixed" as const,
@@ -172,37 +186,89 @@ const LandingPage = () => {
       right: "30px",
       width: "56px",
       height: "56px",
-      borderRadius: "28px",
+      borderRadius: "32px",
       backgroundColor: t.accent,
-      color: "#FFF",
+      color: t.bg,
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
       cursor: "pointer",
       border: "none",
-      boxShadow: "0 10px 20px rgba(0,0,0,0.2)",
+      boxShadow: t.shadow,
+      transition: "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+      zIndex: 1000,
+      animation: "pulse 1s infinite",
     },
   };
 
   return (
     <div style={baseStyles.container}>
-      {/* Color Splash Toggle */}
-      <button
-        style={baseStyles.splashToggle}
-        onClick={() => setThemeIndex((themeIndex + 1) % themes.length)}
-        title={t.name}
-      >
-        <Zap size={24} fill="currentColor" />
-      </button>
-
       {/* Global Animation Styles */}
       <style>{`
         button:hover { transform: translateY(-2px); opacity: 0.9; }
         button:active { transform: translateY(0); }
       `}</style>
 
+      <style>{`
+        /* 1. The Breathing Pulse */
+        @keyframes pulse {
+          0% { transform: scale(1); box-shadow: 0 0 0 0px ${t.accent}44; }
+          50% { transform: scale(1.1); box-shadow: 0 0 0 15px ${t.accent}00; }
+          100% { transform: scale(1); box-shadow: 0 0 0 0px ${t.accent}00; }
+        }
+
+        /* 2. Hover Interaction */
+        .splash-button:hover {
+          transform: scale(1.15) rotate(15deg) !important;
+          animation: none; /* Stop pulsing when user engages */
+        }
+
+        /* 3. Click Feedback */
+        .splash-button:active {
+          transform: scale(0.9) !important;
+        }
+
+        /* 4. Optional Tooltip Hint */
+        .splash-button::before {
+          content: "Splash Themes";
+          position: absolute;
+          right: 80px;
+          background: ${t.text};
+          color: ${t.card};
+          padding: 6px 12px;
+          border-radius: 8px;
+          font-size: 12px;
+          font-weight: 600;
+          white-space: nowrap;
+          opacity: 0;
+          transform: translateX(10px);
+          transition: all 0.3s ease;
+          pointer-events: none;
+        }
+
+        .splash-button:hover::before {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      `}</style>
+
+      <button
+        style={baseStyles.splashToggle}
+        onClick={() => setThemeIndex((themeIndex + 1) % themes.length)}
+        title={t.name}
+      >
+        <Wand2Icon size={24} fill="currentColor" />
+      </button>
+
       <div style={baseStyles.heroCard}>
-        {/* Text Content */}
+        <div style={baseStyles.imageFrame}>
+          <img
+            src={data.personalInfo.profileImageUrl}
+            alt="Profile"
+            style={baseStyles.image}
+          />
+        </div>
+
         <div style={{ flex: 1, minWidth: "300px" }}>
           <h1 style={baseStyles.title}>
             Building <span style={{ color: t.accent }}>digital</span>{" "}
@@ -232,13 +298,18 @@ const LandingPage = () => {
               style={{
                 ...baseStyles.buttonBase,
                 backgroundColor: t.accent,
-                color: "#FFF",
+                color: t.text,
               }}
             >
               Get in touch <ArrowRight size={18} />
             </button>
 
-            <div style={{ display: "flex", gap: "12px" }}>
+            <div
+              style={{
+                display: "flex",
+                gap: "12px",
+              }}
+            >
               <button style={baseStyles.iconLink} title="GitHub">
                 <Github size={20} />
               </button>
@@ -250,15 +321,6 @@ const LandingPage = () => {
               </button>
             </div>
           </div>
-        </div>
-
-        {/* Hero Image */}
-        <div style={{ flexShrink: 0 }}>
-          <img
-            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400&h=400"
-            alt="Profile"
-            style={baseStyles.image}
-          />
         </div>
       </div>
     </div>
