@@ -12,7 +12,7 @@ export default {
     github: "https://github.com/talha-yousuf",
     location: "Pakistan",
     profileImageUrl,
-    bio: "Lorem Ipsum... just kidding, browse around to see what I do.",
+    bio: "Full Stack Software Engineer with 6+ years of experience, across diverse projects ranging from IoT, e-commerce, fintech to enterprise applications.",
   },
   stats: {
     yearsExperience: "6+",
