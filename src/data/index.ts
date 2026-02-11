@@ -424,26 +424,14 @@ export default {
   projects: [
     // 1. gatekeep
     // 1. ai-markdown-dedup
-
     // 1. zyprova
-
     // 1. NGAGE
-    // 1. aws CF template MVP
     // 1. concora, library client
     // 1. concora, design manager
-    // 1. concora, launch lighly
-
     // 1. frameless NFT ZKSYNC
     // 1. sedenius mm-iot
-    // 1. .stool
-
-    // 1. portfolio - nextJS
     // 1. genes and machines website
-
     // 1. wisermachines
-    // 1. PEWS
-
-    // 1. diode
 
     {
       name: "",
