@@ -15,10 +15,8 @@ export default {
     bio: "Full Stack Software Engineer with 6+ years of experience, across diverse projects ranging from IoT, e-commerce, fintech to enterprise applications.",
   },
   stats: {
-    yearsExperience: "6+",
+    careerStartYear: 2019,
     projectsWorkedOn: "20+",
-    technologies: "30+",
-    companies: "6",
   },
   clientCompanies: [
     {
@@ -141,112 +139,184 @@ export default {
   ],
   skillsAndTechForWebpage: [
     {
-      title: "React",
-      thumbnailUrl: "https://cdn.simpleicons.org/react/61DAFB",
-    },
-    {
-      title: "Next.js",
-      thumbnailUrl: "https://cdn.simpleicons.org/nextdotjs/000000",
-    },
-    {
-      title: "Redux",
-      thumbnailUrl: "https://cdn.simpleicons.org/redux/764ABC",
+      title: "JavaScript",
+      thumbnailUrl:
+        "https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E",
     },
     {
       title: "TypeScript",
-      thumbnailUrl: "https://cdn.simpleicons.org/typescript/3178C6",
+      thumbnailUrl:
+        "https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white",
     },
     {
-      title: "JavaScript",
-      thumbnailUrl: "https://cdn.simpleicons.org/javascript/F7DF1E",
+      title: "React",
+      thumbnailUrl:
+        "https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB",
     },
     {
-      title: "Tailwind CSS",
-      thumbnailUrl: "https://cdn.simpleicons.org/tailwindcss/06B6D4",
+      title: "Next.js",
+      thumbnailUrl:
+        "https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white",
     },
     {
-      title: "Material UI",
-      thumbnailUrl: "https://cdn.simpleicons.org/mui/007FFF",
+      title: "Redux",
+      thumbnailUrl:
+        "https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white",
     },
     {
       title: "Angular",
-      thumbnailUrl: "https://cdn.simpleicons.org/angular/DD0031",
+      thumbnailUrl:
+        "https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white",
+    },
+    {
+      title: "Tailwind CSS",
+      thumbnailUrl:
+        "https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white",
+    },
+    {
+      title: "Material UI",
+      thumbnailUrl:
+        "https://img.shields.io/badge/MUI-%230081CB.svg?style=for-the-badge&logo=material-ui&logoColor=white",
     },
     {
       title: "Node.js",
-      thumbnailUrl: "https://cdn.simpleicons.org/nodedotjs/339933",
-    },
-    {
-      title: "Python",
-      thumbnailUrl: "https://cdn.simpleicons.org/python/3776AB",
+      thumbnailUrl:
+        "https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white",
     },
     {
       title: "Express.js",
-      thumbnailUrl: "https://cdn.simpleicons.org/express/000000",
+      thumbnailUrl:
+        "https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB",
     },
     {
       title: "NestJS",
-      thumbnailUrl: "https://cdn.simpleicons.org/nestjs/E0234E",
-    },
-    {
-      title: "PostgreSQL",
-      thumbnailUrl: "https://cdn.simpleicons.org/postgresql/4169E1",
-    },
-    {
-      title: "MongoDB",
-      thumbnailUrl: "https://cdn.simpleicons.org/mongodb/47A248",
+      thumbnailUrl:
+        "https://img.shields.io/badge/nestjs-%23E0234E.svg?style=for-the-badge&logo=nestjs&logoColor=white",
     },
     {
       title: "GraphQL",
-      thumbnailUrl: "https://cdn.simpleicons.org/graphql/E10098",
+      thumbnailUrl:
+        "https://img.shields.io/badge/-GraphQL-E10098?style=for-the-badge&logo=graphql&logoColor=white",
+    },
+    {
+      title: "REST APIs",
+      thumbnailUrl:
+        "https://img.shields.io/badge/REST-02569B?style=for-the-badge&logo=rest&logoColor=white",
+    },
+    {
+      title: "PostgreSQL",
+      thumbnailUrl:
+        "https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white",
+    },
+    {
+      title: "MongoDB",
+      thumbnailUrl:
+        "https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white",
     },
     {
       title: "Redis",
-      thumbnailUrl: "https://cdn.simpleicons.org/redis/DC382D",
+      thumbnailUrl:
+        "https://img.shields.io/badge/redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white",
     },
     {
-      title: "AWS",
-      thumbnailUrl: "https://cdn.simpleicons.org/amazonaws/232F3E",
+      title: "Firebase",
+      thumbnailUrl:
+        "https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase",
     },
     {
-      title: "Docker",
-      thumbnailUrl: "https://cdn.simpleicons.org/docker/2496ED",
-    },
-    {
-      title: "Git",
-      thumbnailUrl: "https://cdn.simpleicons.org/git/F05032",
-    },
-    {
-      title: "Linux",
-      thumbnailUrl: "https://cdn.simpleicons.org/linux/FCC624",
+      title: "Python",
+      thumbnailUrl:
+        "https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54",
     },
     {
       title: "Pandas",
-      thumbnailUrl: "https://cdn.simpleicons.org/pandas/150458",
+      thumbnailUrl:
+        "https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white",
     },
     {
       title: "NumPy",
-      thumbnailUrl: "https://cdn.simpleicons.org/numpy/013243",
+      thumbnailUrl:
+        "https://img.shields.io/badge/numpy-%23013243.svg?style=for-the-badge&logo=numpy&logoColor=white",
     },
     {
       title: "PyTorch",
-      thumbnailUrl: "https://cdn.simpleicons.org/pytorch/EE4C2C",
+      thumbnailUrl:
+        "https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white",
     },
     {
       title: "LangChain",
-      thumbnailUrl: "https://cdn.simpleicons.org/langchain/121212",
+      thumbnailUrl:
+        "https://img.shields.io/badge/🦜_LangChain-121212?style=for-the-badge",
     },
     {
-      title: "Notion",
-      thumbnailUrl: "https://cdn.simpleicons.org/notion/000000",
+      title: "AWS",
+      thumbnailUrl:
+        "https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white",
+    },
+    {
+      title: "AWS Lambda",
+      thumbnailUrl:
+        "https://img.shields.io/badge/AWS_Lambda-FF9900?style=for-the-badge&logo=awslambda&logoColor=white",
+    },
+    {
+      title: "Serverless",
+      thumbnailUrl:
+        "https://img.shields.io/badge/Serverless-FD5750?style=for-the-badge&logo=serverless&logoColor=white",
+    },
+    {
+      title: "Docker",
+      thumbnailUrl:
+        "https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white",
+    },
+    {
+      title: "Infrastructure as Code",
+      thumbnailUrl:
+        "https://img.shields.io/badge/IaC-844FBA?style=for-the-badge",
+    },
+    {
+      title: "Linux",
+      thumbnailUrl:
+        "https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black",
+    },
+    {
+      title: "Git",
+      thumbnailUrl:
+        "https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white",
+    },
+    {
+      title: "CI/CD",
+      thumbnailUrl:
+        "https://img.shields.io/badge/CI%2FCD-239120?style=for-the-badge",
+    },
+    {
+      title: "Jest",
+      thumbnailUrl:
+        "https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white",
     },
     {
       title: "ESLint",
-      thumbnailUrl: "https://cdn.simpleicons.org/eslint/4B3263",
+      thumbnailUrl:
+        "https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white",
+    },
+    {
+      title: "Webpack",
+      thumbnailUrl:
+        "https://img.shields.io/badge/webpack-%238DD6F9.svg?style=for-the-badge&logo=webpack&logoColor=black",
     },
     {
       title: "Yarn",
-      thumbnailUrl: "https://cdn.simpleicons.org/yarn/2C8EBB",
+      thumbnailUrl:
+        "https://img.shields.io/badge/yarn-%232C8EBB.svg?style=for-the-badge&logo=yarn&logoColor=white",
+    },
+    {
+      title: "System Design",
+      thumbnailUrl:
+        "https://img.shields.io/badge/System_Design-4285F4?style=for-the-badge",
+    },
+    {
+      title: "Notion",
+      thumbnailUrl:
+        "https://img.shields.io/badge/Notion-%23000000.svg?style=for-the-badge&logo=notion&logoColor=white",
     },
   ],
   experience: [
@@ -394,4 +464,47 @@ export default {
     medium: "",
     stackoverflow: "",
   },
+  service: [
+    {
+      title: "Development",
+      bullets: [
+        "Frontend app development",
+        "Backend app development",
+        "Custom dashboards, admin panels, and internal tools",
+        "Data pipelines and reporting systems",
+        "SEO-focused SSR web apps",
+        "Embedded and system integration",
+      ],
+    },
+    {
+      title: "System Design",
+      bullets: [
+        "System design and architecture",
+        "AI and LLM integrations",
+        "Legacy to modern stack migrations",
+        "Performance optimization and refactoring",
+        "Architecture and scalability reviews",
+      ],
+    },
+    {
+      title: "Technical Consulting",
+      bullets: [
+        "Technical roadmap planning",
+        "Codebase audits",
+        "Feature feasibility and technical estimation",
+        "Engineering process setup and CI/CD workflows",
+        "Recruitment and interview support for dev teams",
+        "Technical support for investors and customer-facing liaison",
+      ],
+    },
+    {
+      title: "Documentation & Mentoring",
+      bullets: [
+        "Technical and architecture documentation",
+        "API documentation and developer onboarding",
+        "Engineering coaching and technical tutoring",
+        "Debugging and production issue resolution",
+      ],
+    },
+  ],
 };

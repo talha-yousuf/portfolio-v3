@@ -6,7 +6,7 @@
     <link
       rel="icon"
       type="image/svg+xml"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E👋%3C/text%3E%3C/svg%3E"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🤖%3C/text%3E%3C/svg%3E"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>...</title>
@@ -16,12 +16,8 @@
     <script type="module" src="/src/main.tsx"></script>
   </body>
 
-  <script>
-    fetch("src/SSOT.json")
-      .then((response) => response.json())
-      .then((data) => {
-        document.title = data.webpageTitle;
-      })
-      .catch((err) => console.error("Error loading JSON:", err));
+  <script type="module">
+    import data from "./src/data/index.ts";
+    document.title = data.webpageTitle;
   </script>
 </html>
