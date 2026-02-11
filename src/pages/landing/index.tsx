@@ -11,22 +11,6 @@ const themes: {
   shadow: string;
 }[] = [
   {
-    name: "Onyx",
-    bg: "#050505",
-    text: "#F5F5F5",
-    accent: "#04b77c",
-    bgSecondary: "#121212",
-    shadow: "0 10px 30px rgba(0,0,0,0.5)",
-  },
-  {
-    name: "Cobalt",
-    bg: "#0A1931",
-    text: "#FFFFFF",
-    accent: "#FB923C",
-    bgSecondary: "#185ADB",
-    shadow: "0 10px 40px rgba(0,0,0,0.3)",
-  },
-  {
     name: "Amethyst",
     bg: "#120B1A",
     text: "#F3E8FF",
@@ -40,6 +24,22 @@ const themes: {
     text: "#FFFFFF",
     accent: "#de4050",
     bgSecondary: "#3B0D71",
+    shadow: "0 10px 40px rgba(0,0,0,0.3)",
+  },
+  {
+    name: "Onyx",
+    bg: "#050505",
+    text: "#F5F5F5",
+    accent: "#04b77c",
+    bgSecondary: "#121212",
+    shadow: "0 10px 30px rgba(0,0,0,0.5)",
+  },
+  {
+    name: "Cobalt",
+    bg: "#0A1931",
+    text: "#FFFFFF",
+    accent: "#FB923C",
+    bgSecondary: "#185ADB",
     shadow: "0 10px 40px rgba(0,0,0,0.3)",
   },
   {
@@ -102,7 +102,7 @@ const LandingPage = () => {
       alignItems: "center",
       justifyContent: "center",
       maxHeight: "100vh",
-      minHeight: "100vh",
+      minHeight: "90vh",
       maxWidth: "100%",
       minWidth: "100%",
       padding: "40px",
@@ -165,20 +165,20 @@ const LandingPage = () => {
       justifyContent: "space-between",
       zIndex: 1000,
       border: "none",
+      backgroundColor: t.bg,
     },
     splashToggle: {
-      width: "40px",
-      height: "40px",
-      backgroundColor: t.accent,
+      width: "30px",
+      height: "30px",
+      backgroundColor: "transparent",
+      border: `solid 1px ${t.text}`,
       color: t.text,
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
       cursor: "pointer",
-      boxShadow: t.shadow,
       transition: "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
       animation: "pulse 1s infinite",
-      border: "none",
     },
   };
 
@@ -331,13 +331,13 @@ const LandingPage = () => {
             src={x.thumbnailUrl}
             title={x.title}
             style={{
-              height: "180px",
+              height: "150px",
               width: "200px",
               objectFit: "contain" as const,
               padding: "24px 36px",
               background: "white",
-              borderLeft: `solid 4px ${t.accent + "70"}`,
-              borderTop: `solid 4px ${t.accent + "70"}`,
+              borderTop: `solid 6px ${t.accent + (key % 2 !== 0 ? "50" : "")}`,
+              borderRight: `solid 6px ${t.accent + (key % 2 === 0 ? "50" : "")}`,
             }}
           />
         ))}
@@ -447,7 +447,13 @@ const LandingPage = () => {
             flex: "1",
           }}
         >
-          {["Home", "Skills", "Clients", "Services", "Projects"].map((x) => (
+          {[
+            { title: "Home", hash: "home" },
+            { title: "Clients", hash: "clients" },
+            { title: "Tech Stack", hash: "skills" },
+            // { title: "Services", hash: "services" },
+            { title: "Projects", hash: "projects" },
+          ].map((x) => (
             <button
               style={{
                 ...baseStyles.buttonBase,
@@ -459,7 +465,7 @@ const LandingPage = () => {
                 fontWeight: "normal",
               }}
             >
-              {x}
+              {x.title}
             </button>
           ))}
         </div>
@@ -508,9 +514,13 @@ const LandingPage = () => {
 
       <footer
         style={{
+          height: "10vh",
           textAlign: "center",
-          padding: "40px 20px",
-          marginTop: "60px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "6px",
           color: t.text,
           fontSize: "14px",
           background: t.bgSecondary,
@@ -518,7 +528,7 @@ const LandingPage = () => {
         }}
       >
         <p>Thanks for stopping by! 👋</p>
-        <p style={{ marginTop: "8px" }}>
+        <p>
           <a
             href={"mailto:" + data.personalInfo.email}
             style={{
