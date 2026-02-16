@@ -391,7 +391,6 @@ const LandingPage = () => {
           filter: brightness(0.7);
         }
       
-        /* 1. The Breathing Pulse */
         @keyframes pulse {
           0% { transform: scale(1); box-shadow: 0 0 0 0px ${t.accent}44; }
           50% { transform: scale(1.1); box-shadow: 0 0 0 15px ${t.accent}00; }
@@ -402,18 +401,15 @@ const LandingPage = () => {
           50% { visibility: hidden; }
         }
 
-        /* 2. Hover Interaction */
         .splash-button:hover {
           transform: scale(1.15) rotate(15deg) !important;
-          animation: none; /* Stop pulsing when user engages */
+          animation: none;
         }
 
-        /* 3. Click Feedback */
         .splash-button:active {
           transform: scale(0.9) !important;
         }
 
-        /* 4. Optional Tooltip Hint */
         .splash-button::before {
           content: "Splash Themes";
           position: absolute;
@@ -451,7 +447,8 @@ const LandingPage = () => {
             { title: "Home", hash: "home" },
             { title: "Clients", hash: "clients" },
             { title: "Tech Stack", hash: "skills" },
-            // { title: "Services", hash: "services" },
+            { title: "Services", hash: "services" },
+            { title: "Journey", hash: "experience" },
             { title: "Projects", hash: "projects" },
           ].map((x) => (
             <button
