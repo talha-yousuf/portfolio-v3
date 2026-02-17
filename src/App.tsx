@@ -1,18 +1,20 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/landing";
 import ResumePage from "./pages/resume";
-import portfolioData from "./data";
+import { ThemeProvider } from "./theme/Components";
 
 function App() {
   return (
-    <Router>
-      <div>
-        <Routes>
-          <Route path="/" element={<LandingPage data={portfolioData} />} />
-          <Route path="/resume" element={<ResumePage data={portfolioData} />} />
-        </Routes>
-      </div>
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <div>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/resume" element={<ResumePage />} />
+          </Routes>
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 }
 

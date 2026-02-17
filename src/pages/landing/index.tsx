@@ -1,85 +1,11 @@
-import { useState } from "react";
-import { Github, Linkedin, Mail, ArrowRight, Wand2Icon } from "lucide-react";
-import data from "../../data/index";
-
-const themes: {
-  name: string;
-  bg: string;
-  text: string;
-  accent: string;
-  bgSecondary: string;
-  shadow: string;
-}[] = [
-  {
-    name: "Amethyst",
-    bg: "#120B1A",
-    text: "#F3E8FF",
-    accent: "#A855F7",
-    bgSecondary: "#1E1329",
-    shadow: "0 10px 40px rgba(0,0,0,0.4)",
-  },
-  {
-    name: "Indigo",
-    bg: "#2D0B5A",
-    text: "#FFFFFF",
-    accent: "#de4050",
-    bgSecondary: "#3B0D71",
-    shadow: "0 10px 40px rgba(0,0,0,0.3)",
-  },
-  {
-    name: "Onyx",
-    bg: "#050505",
-    text: "#F5F5F5",
-    accent: "#04b77c",
-    bgSecondary: "#121212",
-    shadow: "0 10px 30px rgba(0,0,0,0.5)",
-  },
-  {
-    name: "Cobalt",
-    bg: "#0A1931",
-    text: "#FFFFFF",
-    accent: "#FB923C",
-    bgSecondary: "#185ADB",
-    shadow: "0 10px 40px rgba(0,0,0,0.3)",
-  },
-  {
-    name: "Emerald",
-    bg: "#061A14",
-    text: "#ECFDF5",
-    accent: "#10B981",
-    bgSecondary: "#062C21",
-    shadow: "0 10px 40px rgba(0,0,0,0.4)",
-  },
-  {
-    name: "Oceanic",
-    bg: "#0F172A",
-    text: "#F1F5F9",
-    accent: "#38BDF8",
-    bgSecondary: "#1E293B",
-    shadow: "0 10px 40px rgba(0,0,0,0.35)",
-  },
-  {
-    name: "Midnight",
-    bg: "#020617",
-    text: "#F8FAFC",
-    accent: "#6366F1",
-    bgSecondary: "#0F172A",
-    shadow: "0 10px 40px rgba(0,0,0,0.6)",
-  },
-  {
-    name: "Light",
-    bg: "#FDFDFD",
-    text: "#1A1A1A",
-    accent: "#3B82F6",
-    bgSecondary: "#FFFFFF",
-    shadow: "0 10px 30px rgba(0,0,0,0.05)",
-  },
-];
+import { Github, Linkedin, Mail, ArrowRight } from "lucide-react";
+import data from "../../data";
+import { useTheme } from "../../theme/useTheme";
+import { NavBar } from "./components/NavBar";
+import { Footer } from "./components/Footer";
 
 const LandingPage = () => {
-  const [themeIndex, setThemeIndex] = useState(0);
-
-  const t = themes[themeIndex];
+  const { t } = useTheme();
 
   const baseStyles: Record<
     string,
@@ -152,33 +78,6 @@ const LandingPage = () => {
       height: "200px",
       objectFit: "cover" as const,
       translate: "-6px -6px",
-    },
-    nav: {
-      position: "fixed" as const,
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "80px",
-      padding: "40px",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      zIndex: 1000,
-      border: "none",
-      backgroundColor: t.bg,
-    },
-    splashToggle: {
-      width: "30px",
-      height: "30px",
-      backgroundColor: "transparent",
-      border: `solid 1px ${t.text}`,
-      color: t.text,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      cursor: "pointer",
-      transition: "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
-      animation: "pulse 1s infinite",
     },
   };
 
@@ -376,172 +275,12 @@ const LandingPage = () => {
 
   return (
     <div style={baseStyles.container}>
-      {/* Global Animation Styles */}
-      <style>{`
-        button:hover { transform: translateY(-2px); opacity: 0.9; }
-        button:active { transform: translateY(0); }
-        
-        .profile-pic {
-          filter: brightness(1);
-          transition: filter 0.3s ease, transform 0.3s ease;
-          cursor: pointer;
-        }
-  
-        .profile-pic:hover {
-          filter: brightness(0.7);
-        }
-      
-        @keyframes pulse {
-          0% { transform: scale(1); box-shadow: 0 0 0 0px ${t.accent}44; }
-          50% { transform: scale(1.1); box-shadow: 0 0 0 15px ${t.accent}00; }
-          100% { transform: scale(1); box-shadow: 0 0 0 0px ${t.accent}00; }
-        }
-        
-        @keyframes blink {
-          50% { visibility: hidden; }
-        }
-
-        .splash-button:hover {
-          transform: scale(1.15) rotate(15deg) !important;
-          animation: none;
-        }
-
-        .splash-button:active {
-          transform: scale(0.9) !important;
-        }
-
-        .splash-button::before {
-          content: "Splash Themes";
-          position: absolute;
-          right: 80px;
-          background: ${t.text};
-          color: ${t.bgSecondary};
-          padding: 6px 12px;
-          border-radius: 8px;
-          font-size: 12px;
-          font-weight: 600;
-          white-space: nowrap;
-          opacity: 0;
-          transform: translateX(10px);
-          transition: all 0.3s ease;
-          pointer-events: none;
-        }
-
-        .splash-button:hover::before {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      `}</style>
-
-      <div style={baseStyles.nav}>
-        <div
-          style={{
-            display: "flex",
-            gap: "24px",
-            alignItems: "center",
-            height: "100%",
-            flex: "1",
-          }}
-        >
-          {[
-            { title: "Home", hash: "home" },
-            { title: "Clients", hash: "clients" },
-            { title: "Tech Stack", hash: "skills" },
-            { title: "Services", hash: "services" },
-            { title: "Journey", hash: "experience" },
-            { title: "Projects", hash: "projects" },
-          ].map((x) => (
-            <button
-              style={{
-                ...baseStyles.buttonBase,
-                backgroundColor: "none",
-                border: "0.3px solid",
-                color: t.accent,
-                borderColor: t.accent + "66",
-                background: "transparent",
-                fontWeight: "normal",
-              }}
-            >
-              {x.title}
-            </button>
-          ))}
-        </div>
-        <button
-          style={baseStyles.splashToggle}
-          onClick={() => setThemeIndex((themeIndex + 1) % themes.length)}
-          title={t.name}
-        >
-          <Wand2Icon size={18} fill="currentColor" />
-        </button>
-      </div>
-
-      <div
-        style={{
-          ...baseStyles.section,
-        }}
-      >
-        {heroSection}
-      </div>
-
-      <div
-        style={{
-          ...baseStyles.section,
-          background: "white",
-        }}
-      >
-        {clientsSection}
-      </div>
-
-      <div
-        style={{
-          ...baseStyles.section,
-          background: t.bgSecondary,
-        }}
-      >
-        {skillsSection}
-      </div>
-
-      <div
-        style={{
-          ...baseStyles.section,
-        }}
-      >
-        {projectsSection}
-      </div>
-
-      <footer
-        style={{
-          height: "10vh",
-          textAlign: "center",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: "6px",
-          color: t.text,
-          fontSize: "14px",
-          background: t.bgSecondary,
-          width: "100%",
-        }}
-      >
-        <p>Thanks for stopping by! 👋</p>
-        <p>
-          <a
-            href={"mailto:" + data.personalInfo.email}
-            style={{
-              color: t.accent,
-              textDecoration: "none",
-              transition: "opacity 0.2s",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.8")}
-            onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-          >
-            {data.personalInfo.email}
-          </a>
-          {" | "}
-          &copy; {new Date().getFullYear()}
-        </p>
-      </footer>
+      <NavBar />
+      <div style={baseStyles.section}>{heroSection}</div>
+      <div style={baseStyles.section}>{clientsSection}</div>
+      <div style={baseStyles.section}>{skillsSection}</div>
+      <div style={baseStyles.section}>{projectsSection}</div>
+      <Footer />
     </div>
   );
 };

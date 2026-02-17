@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
+import data from "../../data";
 
 const styles: {
   [key: string]: React.CSSProperties;
@@ -7,7 +8,7 @@ const styles: {
   container: {
     backgroundColor: "#ffffff",
     color: "#050505",
-    fontFamily: "Helvetica, Arial, sans-serif",
+    // fontFamily: "Helvetica, Arial, sans-serif",
     lineHeight: "1.3",
     fontSize: "9pt",
     margin: "0 auto",
@@ -71,7 +72,7 @@ const styles: {
   },
 };
 
-function ResumePage({ data }: { data: any }) {
+function ResumePage() {
   const { personalInfo, skills, experience, education } = data;
 
   return (
