@@ -3,6 +3,7 @@ import data from "../../data";
 import { useTheme } from "../../theme/useTheme";
 import { NavBar } from "./components/NavBar";
 import { Footer } from "./components/Footer";
+import ProjectCard from "./components/ProjectCard";
 
 const LandingPage = () => {
   const { t } = useTheme();
@@ -271,7 +272,20 @@ const LandingPage = () => {
     </div>
   );
 
-  const projectsSection = null;
+  const projectsSection = (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center ",
+        flexWrap: "wrap",
+      }}
+    >
+      {data.projects.map((x) => (
+        <ProjectCard projectData={x} />
+      ))}
+    </div>
+  );
 
   return (
     <div style={baseStyles.container}>
