@@ -17,6 +17,7 @@ import {
 } from "@heroui/react";
 import { Github, MonitorPlay, Package, FileText, X } from "lucide-react";
 import data from "../../../data";
+import { useTheme } from "../../../theme/useTheme";
 
 const useSlideshow = (images: string[], interval = 2800) => {
   const [index, setIndex] = useState(0);
@@ -52,6 +53,7 @@ export default function ProjectCard({
 }: {
   projectData: (typeof data.projects)[0];
 }) {
+  const { t } = useTheme();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const allImages = [
@@ -95,7 +97,13 @@ export default function ProjectCard({
           isPressable
           isHoverable
           onPress={onOpen}
-          className="w-[340px] bg-content1 border border-default-100"
+          style={{
+            backgroundColor: t.bgSecondary,
+            borderColor: t.accent,
+            color: t.text,
+            boxShadow: t.shadow,
+          }}
+          className="w-[340px] border transition-transform duration-300 hover:scale-105 hover:shadow-xl"
         >
           <CardBody className="p-0 overflow-hidden">
             {/* Thumbnail slideshow */}
@@ -132,8 +140,8 @@ export default function ProjectCard({
                   <Chip
                     key={d}
                     size="sm"
-                    variant="flat"
-                    className="bg-black/50 text-white backdrop-blur-sm text-[10px]"
+                    style={{ backgroundColor: t.accent, color: t.bg }}
+                    className="text-[10px]"
                   >
                     {d}
                   </Chip>
@@ -146,19 +154,25 @@ export default function ProjectCard({
               <h3 className="text-base font-bold capitalize tracking-tight mb-1">
                 {projectData.name}
               </h3>
-              <p className="text-small text-default-500 leading-relaxed line-clamp-2 mb-3">
+              <p
+                style={{ color: t.text }}
+                className="text-small leading-relaxed line-clamp-2 mb-3"
+              >
                 {projectData.description}
               </p>
               <div className="flex flex-wrap gap-1">
-                {projectData.technologies.map((t) => (
+                {projectData.technologies.map((tech) => (
                   <Chip
-                    key={t}
+                    key={tech}
                     size="sm"
-                    variant="flat"
-                    color="success"
-                    className="text-[10px]"
+                    style={{
+                      backgroundColor: t.bg,
+                      borderColor: t.accent,
+                      color: t.text,
+                    }}
+                    className="text-[10px] border"
                   >
-                    {t}
+                    {tech}
                   </Chip>
                 ))}
               </div>
@@ -168,7 +182,10 @@ export default function ProjectCard({
           {/* Footer links */}
           {links.length > 0 && (
             <CardFooter className="flex gap-2 flex-wrap px-4 pt-2 pb-3">
-              <Divider className="mb-2 w-full" />
+              <Divider
+                style={{ backgroundColor: t.accent }}
+                className="mb-2 w-full"
+              />
               {links.map((l) => (
                 <Button
                   key={l.label}
@@ -176,10 +193,12 @@ export default function ProjectCard({
                   href={l.href}
                   isExternal
                   size="sm"
-                  variant={l.primary ? "solid" : "bordered"}
-                  color={l.primary ? "success" : "default"}
-                  startContent={l.icon}
-                  className="text-[11px] h-7 min-w-0"
+                  style={{
+                    backgroundColor: l.primary ? t.accent : "transparent",
+                    borderColor: t.accent,
+                    color: l.primary ? t.bg : t.accent,
+                  }}
+                  className="text-[11px] h-7 min-w-0 border transition-transform duration-200 hover:scale-105"
                   // eslint-disable-next-line @typescript-eslint/no-explicit-any
                   onPress={(e: any) => e.stopPropagation()}
                 >
@@ -192,8 +211,8 @@ export default function ProjectCard({
       </div>
 
       {/* ── Drawer ── */}
-      <Drawer isOpen={isOpen} onClose={onClose} size="md" placement="right">
-        <DrawerContent>
+      <Drawer isOpen={isOpen} onClose={onClose} size="5xl" placement="right">
+        <DrawerContent style={{ backgroundColor: t.bg, color: t.text }}>
           <DrawerHeader className="flex flex-col gap-1 capitalize">
             {projectData.name}
             <div className="flex gap-1 flex-wrap mt-1">
@@ -201,8 +220,7 @@ export default function ProjectCard({
                 <Chip
                   key={d}
                   size="sm"
-                  variant="flat"
-                  color="secondary"
+                  style={{ backgroundColor: t.accent, color: t.bg }}
                   className="text-[10px]"
                 >
                   {d}
@@ -226,26 +244,32 @@ export default function ProjectCard({
               </div>
             )}
 
-            <Divider />
+            <Divider style={{ backgroundColor: t.accent }} />
 
-            <p className="text-small text-default-600 leading-relaxed">
+            <p className="text-small leading-relaxed">
               {projectData.description}
             </p>
 
             <div>
-              <p className="text-tiny text-default-400 uppercase tracking-widest mb-2">
+              <p
+                style={{ color: t.accent }}
+                className="text-tiny uppercase tracking-widest mb-2"
+              >
                 Technologies
               </p>
               <div className="flex flex-wrap gap-1">
-                {projectData.technologies.map((t) => (
+                {projectData.technologies.map((tech) => (
                   <Chip
-                    key={t}
+                    key={tech}
                     size="sm"
-                    variant="flat"
-                    color="success"
-                    className="text-[10px]"
+                    style={{
+                      backgroundColor: t.bgSecondary,
+                      borderColor: t.accent,
+                      color: t.text,
+                    }}
+                    className="text-[10px] border"
                   >
-                    {t}
+                    {tech}
                   </Chip>
                 ))}
               </div>
@@ -260,10 +284,12 @@ export default function ProjectCard({
                 href={l.href}
                 isExternal
                 size="sm"
-                variant={l.primary ? "solid" : "bordered"}
-                color={l.primary ? "success" : "default"}
-                startContent={l.icon}
-                className="text-[11px]"
+                style={{
+                  backgroundColor: l.primary ? t.accent : "transparent",
+                  borderColor: t.accent,
+                  color: l.primary ? t.bg : t.accent,
+                }}
+                className="text-[11px] border"
               >
                 {l.label}
               </Button>
@@ -274,6 +300,7 @@ export default function ProjectCard({
               onPress={onClose}
               startContent={<X size={13} />}
               className="ml-auto"
+              style={{ color: t.text }}
             >
               Close
             </Button>

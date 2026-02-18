@@ -4,8 +4,8 @@ import { useTheme } from "../../../theme/useTheme";
 const NAV_BUTTONS = [
   { title: "Home", hash: "home" },
   { title: "About", hash: "about" },
-  { title: "Clients", hash: "clients" },
   { title: "Stack", hash: "skills" },
+  { title: "Clients", hash: "clients" },
   { title: "Services", hash: "services" },
   { title: "Journey", hash: "experience" },
   { title: "Projects", hash: "projects" },

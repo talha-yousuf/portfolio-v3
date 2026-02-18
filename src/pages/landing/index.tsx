@@ -28,7 +28,7 @@ const LandingPage = () => {
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-      maxHeight: "100vh",
+      // maxHeight: "100vh",
       minHeight: "90vh",
       maxWidth: "100%",
       minWidth: "100%",
@@ -279,6 +279,8 @@ const LandingPage = () => {
         alignItems: "center",
         justifyContent: "center ",
         flexWrap: "wrap",
+        width: "80vw",
+        gap: "24px",
       }}
     >
       {data.projects.map((x) => (

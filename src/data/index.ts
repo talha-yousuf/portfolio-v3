@@ -423,6 +423,30 @@ export default {
   ],
   projects: [
     {
+      name: "Placeholder Project",
+      description:
+        "A sample project used as a placeholder to demonstrate structure, layout, and data binding within a portfolio or application.",
+      technologies: ["React", "TypeScript", "Tailwind CSS", "Node.js"],
+      domains: ["Web Development", "UI/UX", "Frontend", "Full Stack"],
+      thumbnailUrl: "https://placehold.co/600x400/png",
+      imageUrls: [
+        "https://placehold.co/1200x800/png",
+        "https://placehold.co/1200x800/png?text=Screenshot+2",
+        "https://placehold.co/1200x800/png?text=Screenshot+3",
+      ],
+      videoUrls: ["https://samplelib.com/lib/preview/mp4/sample-5s.mp4"],
+      githubUrl: "https://github.com/username/placeholder-project",
+      liveDemoUrl: "https://example.com/demo",
+      productPageUrl: "https://example.com/product",
+      markdownFileUrl:
+        "https://raw.githubusercontent.com/username/placeholder-project/main/README.md",
+      status: "In Development",
+      date: "2026-02-18",
+      featured: true,
+      hidden: false,
+      company: "Placeholder Labs",
+    },
+    {
       name: "gatekeep",
       description: "",
       technologies: [""],
