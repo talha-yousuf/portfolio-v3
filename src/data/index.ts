@@ -1,110 +1,240 @@
-import profileImageUrl from "./images/personal/profile-pic.png";
-import clientLogoUrls from "./images/clients";
+export interface PortfolioDataType {
+  webpageTitle: string;
 
-export default {
+  personalInfo: {
+    name: string;
+    title: string;
+    email: string;
+    phone: string;
+    linkedin: string;
+    github: string;
+    location: string;
+    bio: string;
+    profileImageUrl: string;
+  };
+
+  stats: {
+    careerStartYear: number;
+    projectsWorkedOn: string;
+  };
+
+  clientCompanies: {
+    title: string;
+    thumbnailUrl: string;
+    websiteUrl: string;
+  }[];
+
+  skills: {
+    category: string;
+    items: string[];
+  }[];
+
+  skillsAndTechForWebpage: {
+    title: string;
+    thumbnailUrl: string;
+  }[];
+
+  experience: {
+    title: string;
+    company: string;
+    companyUrl: string;
+    startDate: string;
+    endDate: string;
+    current: boolean;
+    achievements: string[];
+  }[];
+
+  education: {
+    degree: string;
+    institution: string;
+    institutionUrl: string;
+    location: string;
+    graduationYear: string;
+    description: string;
+  }[];
+
+  projects: {
+    order: number;
+    featured: boolean;
+    hidden: boolean;
+    githubUrl: string;
+    demoUrl: string;
+    productPageUrl: string;
+    folderName: string;
+    docUrl: string;
+    thumbnailUrl: string;
+    assetsUrls: string[];
+    name: string;
+    shortDescription: string;
+    description: string[];
+    architectureNotes: string[];
+    stack: string[];
+    domains: string[];
+    contribution: string[];
+  }[];
+
+  certifications: never[];
+
+  socialLinks: {
+    twitter: string;
+    instagram: string;
+    medium: string;
+    stackoverflow: string;
+  };
+
+  service: {
+    title: string;
+    bullets: string[];
+  }[];
+}
+
+const ROOT_URL_RAW =
+  "https://raw.githubusercontent.com/talha-yousuf/portfolio-data/refs/heads/main";
+
+export const getProjectUrls = async (
+  folder: string,
+): Promise<{
+  doc: string;
+  thumb: string;
+  assets: string[];
+}> => {
+  try {
+    const assetsNames: string[] = await (
+      await fetch(ROOT_URL_RAW + `/projects/${folder}/assets/manifest.json`)
+    ).json();
+
+    return {
+      doc: ROOT_URL_RAW + `/projects/${folder}/documentation.md`,
+      thumb: ROOT_URL_RAW + `/projects/${folder}/assets/thumb.png`,
+      assets: assetsNames
+        .filter((x) => x !== "thumb.png")
+        .map((x) => ROOT_URL_RAW + `/projects/${folder}/assets/${x}`)
+        .filter((x) => x),
+    };
+  } catch (
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _error: unknown
+  ) {
+    return {
+      doc: "",
+      thumb: "",
+      assets: [],
+    };
+  }
+};
+
+const portFolioData: PortfolioDataType = {
   webpageTitle: "Talha Yousuf - Software Engineer",
+  //
   personalInfo: {
     name: "Talha Yousuf",
     title: "Software Engineer",
+    //
     email: "talhayousuf.work@gmail.com",
     phone: "+92-307-6003927",
+    //
     linkedin: "https://linkedin.com/in/talha-yousuf",
     github: "https://github.com/talha-yousuf",
+    //
     location: "Pakistan",
-    profileImageUrl,
     bio: "Full Stack Software Engineer with 6+ years of experience, across diverse projects ranging from IoT, e-commerce, fintech to enterprise applications.",
+    //
+    profileImageUrl: ROOT_URL_RAW + "/personal/profile-pic.png",
   },
+  //
   stats: {
     careerStartYear: 2019,
     projectsWorkedOn: "20+",
   },
+  //
   clientCompanies: [
     {
       title: "Genes and Machines",
-      thumbnailUrl: clientLogoUrls.genesandmachines,
+      thumbnailUrl: ROOT_URL_RAW + "/clients/genesandmachines.png",
       websiteUrl: "",
     },
     {
       title: "CARE",
-      thumbnailUrl: clientLogoUrls.care,
+      thumbnailUrl: ROOT_URL_RAW + "/clients/care.png",
       websiteUrl: "https://carepvtltd.com/",
     },
     {
       title: "WiserMachines",
-      thumbnailUrl: clientLogoUrls.wisermachines,
+      thumbnailUrl: ROOT_URL_RAW + "/clients/wisermachines.png",
       websiteUrl: "https://www.linkedin.com/company/wisermachines/",
     },
-
     {
       title: "UET",
-      thumbnailUrl: clientLogoUrls.uet,
+      thumbnailUrl: ROOT_URL_RAW + "/clients/uet.png",
       websiteUrl: "https://www.uettaxila.edu.pk/",
     },
     {
       title: "Shifa Intl. Hospital",
-      thumbnailUrl: clientLogoUrls.shifa,
+      thumbnailUrl: ROOT_URL_RAW + "/clients/shifa.png",
       websiteUrl: "https://www.shifa.com.pk/",
     },
     {
       title: "Lotte Kolson",
-      thumbnailUrl: clientLogoUrls.kolson,
+      thumbnailUrl: ROOT_URL_RAW + "/clients/kolson.png",
       websiteUrl: "https://www.lottekolson.com/",
     },
     {
       title: "Crescent-Bahuman",
-      thumbnailUrl: clientLogoUrls.cbl,
+      thumbnailUrl: ROOT_URL_RAW + "/clients/cbl.png",
       websiteUrl: "https://www.crescentbahuman.com/",
     },
     {
       title: "Sedenius Engineering",
-      thumbnailUrl: clientLogoUrls.sedeniuseng,
+      thumbnailUrl: ROOT_URL_RAW + "/clients/sedeniuseng.png",
       websiteUrl: "https://www.linkedin.com/company/sedenius-engineering-gmbh/",
     },
     {
       title: "Sedenius Technologies",
-      thumbnailUrl: clientLogoUrls.sedeniustech,
+      thumbnailUrl: ROOT_URL_RAW + "/clients/sedeniustech.png",
       websiteUrl: "https://www.linkedin.com/company/sedenius-technologies/",
     },
     {
       title: "Neoteric Softwares",
-      thumbnailUrl: clientLogoUrls.neoteric,
+      thumbnailUrl: ROOT_URL_RAW + "/clients/neoteric.png",
       websiteUrl: "",
     },
     {
       title: "Frameless",
-      thumbnailUrl: clientLogoUrls.frameless,
+      thumbnailUrl: ROOT_URL_RAW + "/clients/frameless.png",
       websiteUrl: "",
     },
     {
       title: "DPL",
-      thumbnailUrl: clientLogoUrls.dpl,
+      thumbnailUrl: ROOT_URL_RAW + "/clients/dpl.png",
       websiteUrl: "https://www.dplit.com/",
     },
     {
       title: "Concora",
-      thumbnailUrl: clientLogoUrls.concora,
+      thumbnailUrl: ROOT_URL_RAW + "/clients/concora.png",
       websiteUrl: "https://www.linkedin.com/company/archbase-concora/",
     },
     {
       title: "nGAGE",
-      thumbnailUrl: clientLogoUrls.nagage,
+      thumbnailUrl: ROOT_URL_RAW + "/clients/nagage.png",
       websiteUrl: "https://ngageatwork.com/",
     },
     {
       title: "nuSoft",
-      thumbnailUrl: clientLogoUrls.nusoft,
+      thumbnailUrl: ROOT_URL_RAW + "/clients/nusoft.png",
       websiteUrl: "https://www.nusoft.co/",
     },
     {
       title: "Zyprova",
-      thumbnailUrl: clientLogoUrls.zyprova,
+      thumbnailUrl: ROOT_URL_RAW + "/clients/zyprova.png",
       websiteUrl: "https://www.zyprova.com/",
     },
   ],
+  //
   skills: [
     {
       category: "Frontend",
       items: [
+        //
         "React",
         "Next.js",
         "Redux",
@@ -118,6 +248,7 @@ export default {
     {
       category: "Backend & Databases",
       items: [
+        //
         "Node.js",
         "Python",
         "Express.js",
@@ -130,11 +261,24 @@ export default {
     },
     {
       category: "Cloud & DevOps",
-      items: ["AWS", "Docker", "Git", "Serverless", "Infrastructure as Code"],
+      items: [
+        //
+        "AWS",
+        "Docker",
+        "Git",
+        "Serverless",
+        "Infrastructure as Code",
+      ],
     },
     {
       category: "Data & AI/ML",
-      items: ["Pandas", "NumPy", "PyTorch", "LangChain"],
+      items: [
+        //
+        "Pandas",
+        "NumPy",
+        "PyTorch",
+        "LangChain",
+      ],
     },
   ],
   skillsAndTechForWebpage: [
@@ -319,6 +463,7 @@ export default {
         "https://img.shields.io/badge/Notion-%23000000.svg?style=for-the-badge&logo=notion&logoColor=white",
     },
   ],
+  //
   experience: [
     {
       title: "Full Stack Engineer",
@@ -422,246 +567,352 @@ export default {
     },
   ],
   projects: [
-    // {
-    //   name: "Placeholder Project",
-    //   description:
-    //     "A sample project used as a placeholder to demonstrate structure, layout, and data binding within a portfolio or application.",
-    //   technologies: ["React", "TypeScript", "Tailwind CSS", "Node.js"],
-    //   domains: ["Web Development", "UI/UX", "Frontend", "Full Stack"],
-    //   thumbnailUrl: "https://placehold.co/600x400/png",
-    //   imageUrls: [
-    //     "https://placehold.co/1200x800/png",
-    //     "https://placehold.co/1200x800/png?text=Screenshot+2",
-    //     "https://placehold.co/1200x800/png?text=Screenshot+3",
-    //   ],
-    //   videoUrls: ["https://samplelib.com/lib/preview/mp4/sample-5s.mp4"],
-    //   githubUrl: "https://github.com/username/placeholder-project",
-    //   liveDemoUrl: "https://example.com/demo",
-    //   productPageUrl: "https://example.com/product",
-    //   markdownFileUrl:
-    //     "https://raw.githubusercontent.com/username/placeholder-project/main/README.md",
-    //   status: "In Development",
-    //   date: "2026-02-18",
-    //   featured: true,
-    //   hidden: false,
-    //   company: "Placeholder Labs",
-    // },
-    // {
-    //   name: "gatekeep",
-    //   description: "",
-    //   technologies: [""],
-    //   domains: [""],
-    //   thumbnailUrl: "",
-    //   imageUrls: [""],
-    //   videoUrls: [""],
-    //   githubUrl: "",
-    //   liveDemoUrl: "",
-    //   productPageUrl: "",
-    //   markdownFileUrl: "",
-    //   status: "",
-    //   date: "",
-    //   featured: false,
-    //   hidden: false,
-    //   company: "",
-    // },
-    // {
-    //   name: "ai-markdown-dedup",
-    //   description: "",
-    //   technologies: [""],
-    //   domains: [""],
-    //   thumbnailUrl: "",
-    //   imageUrls: [""],
-    //   videoUrls: [""],
-    //   githubUrl: "",
-    //   liveDemoUrl: "",
-    //   productPageUrl: "",
-    //   markdownFileUrl: "",
-    //   status: "",
-    //   date: "",
-    //   featured: false,
-    //   hidden: false,
-    //   company: "",
-    // },
     {
-      name: "zyprova",
-      description: "",
-      technologies: [""],
-      domains: [""],
-      thumbnailUrl: "",
-      imageUrls: [""],
-      videoUrls: [""],
-      githubUrl: "",
-      liveDemoUrl: "",
-      productPageUrl: "",
-      markdownFileUrl: "",
-      status: "",
-      date: "",
-      featured: false,
+      order: 0,
+      featured: true,
       hidden: false,
-      company: "",
+      githubUrl: "",
+      demoUrl: "",
+      productPageUrl: "https://www.zyprova.com/",
+      folderName: "zyprova",
+      docUrl: "",
+      thumbnailUrl: "",
+      assetsUrls: [""],
+
+      name: "Zyprova",
+      shortDescription:
+        "AI-powered corporate planning platform replacing spreadsheets with natural language forecasting.",
+      description: [
+        "Zyprova is a B2B SaaS platform that lets executives and operators run financial, headcount, and equity planning through natural language instead of formulas and disconnected spreadsheets.",
+        "The platform supports conversational financial forecasting, scenario modeling (best/base/worst case), headcount and compensation planning, cap table and equity integration, and board-ready reporting. An all in one unified workspace for Finance, HR, and operations teams.",
+        "My work spanned across the core business logic services and system design, also contributing to the AI integration layers.",
+      ],
+      architectureNotes: [
+        "Event-driven microservices platform built on NestJS and TypeScript, with Kafka as the messaging backbone connecting all independently deployable services.",
+        "Features an AI-powered Slack integration service that implements a full RAG pipeline using LangChain and ChromaDB, acting as middleware between the company Slack workspace and a proprietary LLM.",
+        "A central API gateway handles all routing and request validation, abstracting microservice complexity from the Vue.js frontend.",
+        "PostgreSQL (RDS Multi-AZ) serves as the primary data store across financial, HR, and user domains. ChromaDB on EBS provides vector storage for conversation context in the RAG pipeline.",
+        "All services are containerized and deployed to AWS via a centralized deployment-tools repository. Infrastructure includes ALB, ECS/EKS, MSK (managed Kafka), and CloudFront + S3 for frontend delivery.",
+        "A shared common-lib package provides TypeScript types, interfaces, and utilities to ensure consistency across services while maintaining independent deployability.",
+      ],
+      stack: [
+        "NestJS",
+        "TypeScript",
+        "PostgreSQL",
+        "Kafka",
+        "Docker",
+        "LangChain",
+        "ChromaDB",
+        "VueJS",
+        "REST APIs",
+        "AWS",
+        "Microservices Architecture",
+      ],
+      domains: [
+        "Financial Planning & Analysis",
+        "Corporate Performance Management (CPM)",
+        "FinTech",
+        "B2B SaaS",
+        "Workforce Planning",
+        "Equity & Cap Table Management",
+        "Strategic Planning & Forecasting",
+        "Business Intelligence",
+        "Enterprise SaaS",
+      ],
+      contribution: [
+        "Integrated local LLM and Slack APIs with backend microservices to deploy a proprietary AI assistant within the company Slack, contributing to a successful funding round evaluation.",
+        "Built an end-to-end microservices pipeline for AI integration, including data preprocessing workflows, RAG capabilities, concurrent request handling, timeout management, and metadata persistence.",
+        "Designed and implemented event-driven workflows across microservices using Kafka and REST APIs, delivering core business functionality for the fintech platform.",
+        "Led architecture and system design decisions including database schema design, established technical standards for code quality, and drove implementation of new product features.",
+        "Improved system performance and scalability through database normalization, query optimization, and backend service refactoring.",
+        "Collaborated with frontend developers, designers, and stakeholders to translate business requirements into technical deliverables.",
+      ],
     },
     {
-      name: "NGAGE",
-      description: "",
-      technologies: [""],
-      domains: [""],
-      thumbnailUrl: "",
-      imageUrls: [""],
-      videoUrls: [""],
-      githubUrl: "",
-      liveDemoUrl: "",
-      productPageUrl: "",
-      markdownFileUrl: "",
-      status: "",
-      date: "",
+      order: 4,
       featured: false,
       hidden: false,
-      company: "",
+      githubUrl: "",
+      demoUrl: "",
+      productPageUrl: "https://www.wisermachines.com/",
+      folderName: "wisermachines",
+      docUrl: "",
+      thumbnailUrl: "",
+      assetsUrls: [""],
+
+      name: "WiserMachines",
+      shortDescription:
+        "IoT machine monitoring platform for factory shop-floor digitization.",
+      description: [
+        "WiserMachines is a versatile IoT machine monitoring platform for the digitization of factory shop-floors. It gives industrial operators real-time visibility into machine performance, environment conditions, and production schedules, all mapped to the physical layout of their facilities.",
+        "The platform supports real-time IoT dashboards, factory mapping by workshops and zones, environment monitoring, maintenance and production scheduling, threshold-based alerts with push notifications, role-based access control, and actionable reporting.",
+      ],
+      architectureNotes: [
+        "MERN-stack web application extended with an embedded IoT layer. MQTT over an Eclipse Mosquitto broker handles real-time pub/sub communication between custom sensor nodes and the backend.",
+        "Node.js / Express.js backend bridges the MQTT broker and the React frontend, handling data ingestion, alert processing, report generation, and user management.",
+        "Dual database strategy: PostgreSQL for structured product and user data (accounts, roles, schedules), and MongoDB for high-volume, append-only sensor data.",
+        "Custom-built IoT sensor nodes with in-house firmware and PCBs designed in Altium Designer, deployed and tested in real factory environments.",
+        "Each client receives a tailored instance of the platform hosted on their internal on-site servers, ensuring data sovereignty and compatibility with industrial network constraints.",
+      ],
+      stack: [
+        "React",
+        "Angular",
+        "Redux",
+        "Material UI",
+        "Highcharts.js",
+        "Node.js",
+        "Express.js",
+        "MongoDB",
+        "PostgreSQL",
+        "MQTT",
+        "Eclipse Mosquitto",
+        "Altium Designer",
+      ],
+      domains: [
+        "Industrial Automation",
+        "IoT",
+        "Enterprise SaaS",
+        "Factory Floor Management",
+      ],
+      contribution: [
+        "Built customized, fully-responsive IoT portals using the MERN stack; implemented an early prototype using Angular.",
+        "Developed role-based authorization systems and real-time IoT dashboards for machine monitoring.",
+        "Built REST APIs using Node.js and Express.js; managed MongoDB and PostgreSQL databases.",
+        "Implemented data pipelines for IoT data ingestion, querying, and cleaning; organized sensor data from multiple sources and generated actionable reports for clients.",
+        "Contributed to firmware development for IoT sensor nodes, worked on PCB design and fabrication, and conducted hardware deployment and real-world testing in factory environments.",
+        "Shipped multiple customized instances to different industrial clients, hosted on their internal servers with tailored configurations.",
+        "Engaged with clients for weekly requirement gathering and translated evolving business requirements into technical features with the product team.",
+        "Collaborated with designers to align UI/UX designs with business needs.",
+      ],
     },
     {
-      name: "concora, library client",
-      description: "",
-      technologies: [""],
-      domains: [""],
-      thumbnailUrl: "",
-      imageUrls: [""],
-      videoUrls: [""],
-      githubUrl: "",
-      liveDemoUrl: "",
-      productPageUrl: "",
-      markdownFileUrl: "",
-      status: "",
-      date: "",
+      order: 5,
       featured: false,
       hidden: false,
-      company: "",
+      githubUrl: "",
+      demoUrl: "",
+      productPageUrl: "",
+      folderName: "mm-iot",
+      docUrl: "",
+      thumbnailUrl: "",
+      assetsUrls: [""],
+
+      name: "Machine Maintenance",
+      shortDescription:
+        "Comprehensive asset management & rental PWA with IoT tracking, collaborative planning, and role-based access.",
+      description: [
+        "Machine Maintenance is a comprehensive workspace PWA for management and rentals of physical assets such as electronics, hardware tools, vehicles, and any other equipment that can be monitored via IoT sensors.",
+        "Renting agencies, renters, and freelancers can track their rented or owned assets by location and status, and schedule them for rent or maintenance. Rental agency staff can collaboratively work on internal operations such as task planning, resource allocation, and problem reporting.",
+        "Users can have roles inside an agency (e.g. admin, manager, employee), each assignable a different level of authorization by the admin.",
+      ],
+      architectureNotes: [
+        "React PWA with Redux for state management, Material UI for components, LeafletJS for interactive GPS-based asset tracking maps, and Recharts for IoT analytics dashboards.",
+        "Django REST API backend backed by PostgreSQL, with MQTT for real-time IoT sensor data ingestion from onboard GPS and third-party sensors.",
+        "Jenkins CI/CD pipelines with Docker for containerized frontend deployments on self-hosted servers.",
+      ],
+      stack: [
+        "React",
+        "TypeScript",
+        "Redux",
+        "Material UI",
+        "LeafletJS",
+        "Django",
+        "PostgreSQL",
+        "MQTT",
+        "Docker",
+        "Jenkins",
+        "Cypress",
+        "Jest",
+      ],
+      domains: [
+        "Asset Management",
+        "IoT",
+        "PWA",
+        "B2B SaaS",
+        "Field Operations",
+      ],
+      contribution: [
+        "Led frontend development of the asset management PWA from scratch, planning and estimating tasks, implementing features, and transitioning into a frontend team lead role as the team scaled.",
+        "Collaborated with backend developers to design entity relationships and REST APIs, and participated in database normalization efforts.",
+        "Built an interactive map for live equipment tracking using onboard GPS sensors, and developed IoT analytics dashboards integrating data from multiple sensor sources.",
+        "Implemented role-based access control with customizable user authorization levels managed through an admin panel.",
+        "Collaborated with the product team, UI/UX designer, and stakeholders to gather business requirements and translate them into technical features.",
+        "Established and maintained Jenkins CI/CD pipelines with Docker for frontend deployments on self-hosted servers using Bash scripts.",
+        "Wrote comprehensive E2E test suites using Cypress for cross-browser and cross-device validation, alongside unit test coverage using Jest, enforcing TDD best practices.",
+        "Implemented GDPR-compliance features to meet data protection regulatory requirements.",
+      ],
     },
     {
-      name: "concora, design manager",
-      description: "",
-      technologies: [""],
-      domains: [""],
-      thumbnailUrl: "",
-      imageUrls: [""],
-      videoUrls: [""],
-      githubUrl: "",
-      liveDemoUrl: "",
-      productPageUrl: "",
-      markdownFileUrl: "",
-      status: "",
-      date: "",
+      order: 3,
       featured: false,
       hidden: false,
-      company: "",
+      githubUrl: "",
+      demoUrl: "",
+      productPageUrl: "",
+      folderName: "frameless",
+      docUrl: "",
+      thumbnailUrl: "",
+      assetsUrls: [""],
+
+      name: "Frameless",
+      shortDescription:
+        "A multi-blockchain NFT marketplace where users can mint, buy, and sell NFTs. Built on ZkSync (L2 Ethereum), offering lower gas fees and faster transactions than mainnet.",
+      description: [
+        "Frameless is a full-featured NFT trading platform built on ZkSync, a Layer 2 Ethereum scaling solution using ZK rollup technology. It allows creators and collectors to mint, list, buy, and sell NFTs with significantly reduced gas fees and faster finality compared to Ethereum mainnet. Users can configure collection parameters, set royalties, and manage their portfolios through a polished, responsive interface.",
+        "The platform consists of two applications: a customer-facing marketplace and an internal admin CMS. The marketplace covers the full user journey — from connecting a wallet and minting an NFT, to browsing listings, viewing activity logs, and completing purchases. Blockchain interactions are handled via the web3-react library, which manages wallet connections (e.g. MetaMask) and exposes utilities for signing and submitting transactions to the ZkSync network.",
+        "The admin CMS gives internal teams visibility into platform activity. Dashboards surface real-time analytics on listing volume and NFT popularity, while separate views handle user account management and transaction monitoring. Data visualizations are built with Recharts.",
+      ],
+      architectureNotes: [
+        "The frontend is split into two standalone React SPAs — the marketplace app and the admin CMS — each with its own Redux store and routing. Both apps share a common design system built with TailwindCSS, enforcing visual consistency across the platform.",
+        "Blockchain interactions follow an async, wallet-first pattern: the user connects their wallet via web3-react, which provides the signer context used to call smart contract functions (minting, transfers, purchases) against the ZkSync network. Transaction state and error handling are managed client-side.",
+        "Both applications are containerized with Docker and hosted on self-hosted Linux servers. CI/CD is handled via Jenkins pipelines that run automated tests and deploy on merge.",
+      ],
+      stack: [
+        "React",
+        "Redux",
+        "TailwindCSS",
+        "Formik",
+        "web3-react",
+        "Recharts",
+        "Docker",
+        "Jenkins",
+        "ZkSync",
+        "Ethereum",
+      ],
+      domains: [
+        "Blockchain",
+        "Web3",
+        "NFT",
+        "DeFi",
+        "Digital Collectibles",
+        "E-Commerce",
+      ],
+      contribution: [
+        "Planned and estimated the full frontend scope of the project as the full-stack developer responsible for all client-side delivery.",
+        "Built the design system from scratch — layout, reusable components, and custom styling — ensuring consistent UI/UX across both apps.",
+        "Developed the customer-facing marketplace: item and collection creation forms, listing pages, activity logs, user profiles, product detail pages, and the landing page.",
+        "Integrated blockchain functionality using web3-react: wallet connection, NFT minting on ZkSync/ETH, and transaction workflows for buying and selling.",
+        "Built the admin CMS: dashboards for listing oversight, transaction monitoring, real-time analytics, user account management, and activity tracking.",
+        "Implemented data visualizations for admin dashboards using Recharts.",
+        "Conducted code reviews and carried out QA processes.",
+      ],
     },
     {
-      name: "frameless NFT ZKSYNC",
-      description: "",
-      technologies: [""],
-      domains: [""],
-      thumbnailUrl: "",
-      imageUrls: [""],
-      videoUrls: [""],
-      githubUrl: "",
-      liveDemoUrl: "",
-      productPageUrl: "",
-      markdownFileUrl: "",
-      status: "",
-      date: "",
-      featured: false,
+      order: 1,
+      featured: true,
       hidden: false,
-      company: "",
+      githubUrl: "",
+      demoUrl: "",
+      productPageUrl: "https://www.concora.com/",
+      folderName: "concora",
+      docUrl: "",
+      thumbnailUrl: "",
+      assetsUrls: [""],
+
+      name: "Concora",
+      shortDescription:
+        "B2B SaaS platform modernizing how building product manufacturers engage architects, engineers, and contractors online.",
+      description: [
+        "Concora is a B2B SaaS platform serving building product manufacturers, providing a plug-in product specification experience purpose-built for architects, engineers, contractors, and designers (AECs). The platform has 60,000+ registered users and is the first web experience of its kind built specifically for the AEC industry.",
+        "The core product, Concora Spec, centralizes technical product documentation and gives design professionals a single hub for BIM/REVIT files, data sheets, 3-part specs, submittals, and project saves, while simultaneously capturing leads and analytics for manufacturers. Optional extensions add capabilities including custom brochures, project showcases, submittal generation, and category management.",
+        "My work spanned both generations of the platform across the full stack: spearheading the new Spec Manager frontend from scratch, contributing to the new Spec Library frontend, developing RESTful APIs on the Concora API monolith, and building NestJS Lambda microservices.",
+      ],
+      architectureNotes: [
+        "The platform consists of 8 repositories across two generations of the core web apps: a customer-facing Library (legacy React / new Next.js), a manufacturer-facing Manager (legacy React / new React), a Node.js/Express monolithic Concora API, a Library API proxy service, and a NestJS Lambda microservices repo.",
+        "The Concora API acts as a central monolith and gateway, routing requests to a collection of AWS Lambda microservices (NestJS) handling specific workloads: submittal and brochure PDF generation, CRM integration, product import/export, geocoding, SES email, and analytics transport.",
+        "Authentication is handled via Auth0 with JWT tokens carrying custom permission scopes in a namespace:resource:action pattern. A multi-tenancy system supports wildcard global tokens for internal admins and tenant-scoped tokens for manufacturer users, with a token swap flow for tenant selection.",
+        "The new Spec Library was rebuilt in Next.js primarily for SSR/SSG to establish a meaningful SEO surface absent from the legacy React SPA. It introduced mobile-responsive design, per-manufacturer visual theming, server-side i18n with Redis caching, and single sign-on shared with the Manager.",
+        "An internal feature flag and runtime config system (Launch Lightly) runs as its own frontend and API, driving per-client template selection and gating new features without redeployment.",
+        "Infrastructure runs on AWS: ECS (Docker/ECR) for all web apps and APIs, Lambda for all microservices, Amplify for the Next.js frontend, RDS (PostgreSQL) as the primary data store, Elasticsearch on EC2 for product search, RabbitMQ on EC2 for async messaging, Redis for caching, and S3 for assets and exports. Two Windows Server EC2 instances run async Revit/BIM processing workers built on the Autodesk Revit SDK.",
+      ],
+      stack: [
+        "React",
+        "Next.js",
+        "TypeScript",
+        "Redux",
+        "Chakra UI",
+        "Express.js",
+        "NestJS",
+        "PostgreSQL",
+        "Elasticsearch",
+        "Redis",
+        "RabbitMQ",
+        "Auth0",
+        "Docker",
+        "AWS",
+        "Microservices",
+        "Storybook",
+      ],
+      domains: [
+        "B2B SaaS",
+        "Building Product Manufacturing",
+        "Architecture & Construction",
+        "BIM & Revit",
+        "Enterprise SaaS",
+        "Product Specification",
+        "Lead Generation",
+        "Multi-Tenancy",
+        "CRM Integration",
+      ],
+      contribution: [
+        "Spearheaded the development of the new Spec Manager frontend from scratch using React, Redux, Chakra UI, and Launch Lightly, serving as the primary owner of the app throughout its build.",
+        "Led the migration of legacy Manager features into the new Spec Manager, ensuring functional consistency while establishing a modern architecture with feature-flag-gated rollouts.",
+        "Designed and implemented a synchronized authentication system between the Manager and Library apps, including a multi-tenancy token swap flow via Auth0 for internal admin tenant selection.",
+        "Drove an SEO optimization initiative leveraging Next.js SSR/SSG, building dynamic SEO pages and supporting Lambda microservices to automate metadata management without manual intervention.",
+        "Designed and implemented RESTful APIs on the Concora API monolith using Node.js, Express.js, and PostgreSQL, and developed NestJS Lambda microservices integrated with the central API.",
+        "Utilized AWS services including ECS, Lambda, S3, RDS, and CloudWatch to build, deploy, and maintain platform infrastructure, including debugging and optimizing serverless Lambda deployments.",
+      ],
     },
     {
-      name: "sedenius mm-iot",
-      description: "",
-      technologies: [""],
-      domains: [""],
-      thumbnailUrl: "",
-      imageUrls: [""],
-      videoUrls: [""],
-      githubUrl: "",
-      liveDemoUrl: "",
-      productPageUrl: "",
-      markdownFileUrl: "",
-      status: "",
-      date: "",
-      featured: false,
+      order: 2,
+      featured: true,
       hidden: false,
-      company: "",
-    },
-    // {
-    //   name: "genes and machines website",
-    //   description: "",
-    //   technologies: [""],
-    //   domains: [""],
-    //   thumbnailUrl: "",
-    //   imageUrls: [""],
-    //   videoUrls: [""],
-    //   githubUrl: "",
-    //   liveDemoUrl: "",
-    //   productPageUrl: "",
-    //   markdownFileUrl: "",
-    //   status: "",
-    //   date: "",
-    //   featured: false,
-    //   hidden: false,
-    //   company: "",
-    // },
-    {
-      name: "wisermachines",
-      description: "",
-      technologies: [""],
-      domains: [""],
-      thumbnailUrl: "",
-      imageUrls: [""],
-      videoUrls: [""],
       githubUrl: "",
-      liveDemoUrl: "",
-      productPageUrl: "",
-      markdownFileUrl: "",
-      status: "",
-      date: "",
-      featured: false,
-      hidden: false,
-      company: "",
+      demoUrl: "",
+      productPageUrl: "https://ngageatwork.com",
+      folderName: "ngage",
+      docUrl: "",
+      thumbnailUrl: "",
+      assetsUrls: [""],
+
+      name: "nGAGE",
+      shortDescription:
+        "AI-powered, gamified employee performance management platform for mid-to-large organizations.",
+      description: [
+        "nGAGE is a B2B SaaS platform that helps mid-to-large organizations manage employee productivity, engagement, and growth in one place, available on iOS, Android, and web.",
+        "The platform features a points-and-rewards gamification system tied to task completion and challenges, with a real reward store, leaderboards, and a real-time feedback loop built into the rewards flow.",
+        "Productivity tracking covers working hours, break patterns, remote workforce support, leave management, and HRM data export, all without invasive monitoring.",
+        "Continuous feedback replaces annual reviews with structured, ongoing performance ratings, feedback history, anonymous mode, self-evaluations, proactive feedback requests, and 360-degree review support.",
+        "AI-driven analytics surface performance trends and actionable insights, while MBTI personality integration gives managers visibility into team dynamics and collaboration patterns.",
+        "Personalized learning paths are tailored per employee based on role, performance data, and goals, enabling targeted upskilling rather than generic company-wide training.",
+      ],
+      architectureNotes: [
+        "A microservices platform built on NestJS and deployed on AWS, serving a React web app and a cross-platform mobile app via REST and WebSockets.",
+        "A single API Gateway acts as the entry point for all client traffic, handling request routing, auth verification, and rate limiting centrally.",
+        "Each domain runs as an independent NestJS service: Auth, Feedback/Performance, Productivity/Attendance, Gamification/Engagement, Notifications, and Analytics.",
+        "Each service owns its own PostgreSQL database, keeping data concerns isolated by domain, with schemas optimized for both read-heavy analytics and write-heavy feedback collection.",
+        "The Notifications service uses WebSockets to push live updates to clients, enabling instant feedback alerts, leaderboard changes, and challenge completions without polling.",
+      ],
+      stack: ["React", "NestJS", "PostgreSQL", "AWS"],
+      domains: [
+        "HR Tech",
+        "B2B SaaS",
+        "Enterprise Software",
+        "Employee Performance Management",
+        "Gamification",
+        "Productivity Tracking",
+        "Continuous Feedback",
+        "Team Analytics",
+        "Leave Management",
+      ],
+      contribution: [
+        "Designed and implemented RESTful APIs and NestJS microservices on AWS across several feature domains.",
+        "Built real-time notification pipelines using WebSockets.",
+        "Designed PostgreSQL schemas across multiple service domains, optimized for read-heavy analytics and write-heavy feedback collection.",
+        "Built out the full React UI across all major feature areas.",
+        "Owned features end-to-end from database schema through API to rendered UI.",
+      ],
     },
-    // {
-    //   name: "portfolio v2",
-    //   description: "",
-    //   technologies: [""],
-    //   domains: [""],
-    //   thumbnailUrl: "",
-    //   imageUrls: [""],
-    //   videoUrls: [""],
-    //   githubUrl: "",
-    //   liveDemoUrl: "",
-    //   productPageUrl: "",
-    //   markdownFileUrl: "",
-    //   status: "",
-    //   date: "",
-    //   featured: false,
-    //   hidden: false,
-    //   company: "",
-    // },
-    // {
-    //   name: "cloud formation",
-    //   description: "",
-    //   technologies: [""],
-    //   domains: [""],
-    //   thumbnailUrl: "",
-    //   imageUrls: [""],
-    //   videoUrls: [""],
-    //   githubUrl: "",
-    //   liveDemoUrl: "",
-    //   productPageUrl: "",
-    //   markdownFileUrl: "",
-    //   status: "",
-    //   date: "",
-    //   featured: false,
-    //   hidden: false,
-    //   company: "",
-    // },
   ],
   certifications: [],
   socialLinks: {
@@ -714,3 +965,5 @@ export default {
     },
   ],
 };
+
+export default portFolioData;

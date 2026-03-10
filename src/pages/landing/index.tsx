@@ -1,5 +1,5 @@
 import { Github, Linkedin, Mail, ArrowRight } from "lucide-react";
-import data from "../../data";
+import portFolioData from "../../data";
 import { useTheme } from "../../theme/useTheme";
 import { NavBar } from "./components/NavBar";
 import { Footer } from "./components/Footer";
@@ -97,7 +97,7 @@ const LandingPage = () => {
         <div style={baseStyles.imageFrame}>
           <img
             className="profile-pic"
-            src={data.personalInfo.profileImageUrl}
+            src={portFolioData.personalInfo.profileImageUrl}
             alt="Profile"
             style={baseStyles.image}
           />
@@ -112,9 +112,9 @@ const LandingPage = () => {
           }}
         >
           <h1 style={baseStyles.title}>
-            {data.personalInfo.name.split(" ")[0] + " "}
+            {portFolioData.personalInfo.name.split(" ")[0] + " "}
             <span style={{ color: t.accent }}>
-              {data.personalInfo.name.split(" ")[1]}
+              {portFolioData.personalInfo.name.split(" ")[1]}
             </span>
           </h1>
 
@@ -126,11 +126,16 @@ const LandingPage = () => {
               gap: "6px",
             }}
           >
-            <p style={baseStyles.paragraph}>{"> " + data.personalInfo.title}</p>
+            <p style={baseStyles.paragraph}>
+              {"> " + portFolioData.personalInfo.title}
+            </p>
 
             <p style={baseStyles.paragraph}>
               {"> " +
-                String(new Date().getFullYear() - data.stats.careerStartYear) +
+                String(
+                  new Date().getFullYear() -
+                    portFolioData.stats.careerStartYear,
+                ) +
                 " YOE"}
               <span
                 style={{ animation: "blink 1.2s steps(1, start) infinite" }}
@@ -225,7 +230,7 @@ const LandingPage = () => {
           justifyContent: "center",
         }}
       >
-        {data.clientCompanies.map((x, key) => (
+        {portFolioData.clientCompanies.map((x, key) => (
           <img
             key={key}
             src={x.thumbnailUrl}
@@ -265,7 +270,7 @@ const LandingPage = () => {
           gap: "12px",
         }}
       >
-        {data.skillsAndTechForWebpage.map((x, key) => (
+        {portFolioData.skillsAndTechForWebpage.map((x, key) => (
           <img key={key} src={x.thumbnailUrl} style={{ height: "50px" }} />
         ))}
       </div>
@@ -280,12 +285,26 @@ const LandingPage = () => {
         justifyContent: "center ",
         flexWrap: "wrap",
         width: "80vw",
-        gap: "24px",
+        gap: "14px",
       }}
     >
-      {data.projects.map((x) => (
-        <ProjectCard projectData={x} />
-      ))}
+      {portFolioData.projects
+        .sort((a, b) => a.order - b.order)
+        .map((x) => (
+          <div
+            key={x.folderName}
+            style={{
+              minWidth: "300px",
+              maxWidth: "400px",
+              height: "620px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center ",
+            }}
+          >
+            <ProjectCard project={x} />
+          </div>
+        ))}
     </div>
   );
 

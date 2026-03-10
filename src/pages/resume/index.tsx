@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
-import data from "../../data";
+import portFolioData from "../../data";
 
 const styles: {
   [key: string]: React.CSSProperties;
@@ -73,7 +73,7 @@ const styles: {
 };
 
 function ResumePage() {
-  const { personalInfo, skills, experience, education } = data;
+  const { personalInfo, skills, experience, education } = portFolioData;
 
   return (
     <div className="resume-container" style={styles.container}>

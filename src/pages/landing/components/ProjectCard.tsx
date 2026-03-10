@@ -1,312 +1,578 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  Image,
-  Chip,
-  Button,
-  Divider,
-  Drawer,
-  DrawerContent,
-  DrawerHeader,
-  DrawerBody,
-  DrawerFooter,
-  Link,
-  useDisclosure,
-} from "@heroui/react";
-import { Github, MonitorPlay, Package, FileText, X } from "lucide-react";
-import data from "../../../data";
+import { Github, ExternalLink, FileText, Monitor, Image } from "lucide-react";
 import { useTheme } from "../../../theme/useTheme";
+import { getProjectUrls, type PortfolioDataType } from "../../../data";
+import ProjectDocDrawer from "./ProjectDocDrawer";
 
-const useSlideshow = (images: string[], interval = 2800) => {
-  const [index, setIndex] = useState(0);
-  const [active, setActive] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  useEffect(() => {
-    if (images.length <= 1) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setActive(entry.isIntersecting),
-      { threshold: 0.4 },
-    );
-    if (cardRef.current) observer.observe(cardRef.current);
-    return () => observer.disconnect();
-  }, [images.length]);
-
-  useEffect(() => {
-    if (!active || images.length <= 1) return;
-    timerRef.current = setInterval(() => {
-      setIndex((i) => (i + 1) % images.length);
-    }, interval);
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-    };
-  }, [active, images.length, interval]);
-
-  return { index, cardRef };
-};
-
-export default function ProjectCard({
-  projectData,
+const WaveformThumbnail = ({
+  name,
+  style = {},
 }: {
-  projectData: (typeof data.projects)[0];
-}) {
+  name: string;
+  style?: React.CSSProperties;
+}) => {
   const { t } = useTheme();
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const allImages = [
-    projectData.thumbnailUrl,
-    ...(projectData.imageUrls ?? []),
-  ].filter(Boolean);
+  const W = 400;
+  const H = 225;
 
-  const { index: slideIndex, cardRef } = useSlideshow(allImages);
+  const hashStr = (str: string): number => {
+    let h = 2166136261;
+    for (let i = 0; i < str.length; i++) {
+      h ^= str.charCodeAt(i);
+      h = Math.imul(h, 16777619);
+    }
+    return h >>> 0;
+  };
 
-  const links = [
-    {
-      label: "Live Demo",
-      href: projectData.liveDemoUrl,
-      icon: <MonitorPlay size={13} />,
-      primary: true,
-    },
-    {
-      label: "GitHub",
-      href: projectData.githubUrl,
-      icon: <Github size={13} />,
-      primary: false,
-    },
-    {
-      label: "Product",
-      href: projectData.productPageUrl,
-      icon: <Package size={13} />,
-      primary: false,
-    },
-    {
-      label: "Docs",
-      href: projectData.markdownFileUrl,
-      icon: <FileText size={13} />,
-      primary: false,
-    },
-  ].filter((l) => l.href);
+  const seededRandom = (seed: number) => {
+    let s = seed;
+    return () => {
+      s = Math.imul(1664525, s) + 1013904223;
+      return (s >>> 0) / 0xffffffff;
+    };
+  };
+
+  const rand = seededRandom(hashStr(name));
+
+  const waves = Array.from({ length: 5 }, () => ({
+    amplitude: 18 + rand() * 28,
+    frequency: 1.2 + rand() * 3.5,
+    phase: rand() * Math.PI * 2,
+    opacity: 0.12 + rand() * 0.2,
+    strokeWidth: 0.8 + rand() * 1.2,
+  }));
+
+  const hero = {
+    amplitude: 28 + rand() * 20,
+    frequency: 1.4 + rand() * 1,
+    phase: rand() * Math.PI * 2,
+  };
+
+  const buildPath = (amp: number, freq: number, phase: number): string => {
+    const cy = H / 2;
+    const points = Array.from({ length: 121 }, (_, i) => {
+      const x = (i / 120) * W;
+      const y = cy + amp * Math.sin((i / 120) * Math.PI * 2 * freq + phase);
+      return `${x.toFixed(2)},${y.toFixed(2)}`;
+    });
+    return `M ${points.join(" L ")}`;
+  };
 
   return (
-    <>
-      <div ref={cardRef}>
-        <Card
-          isPressable
-          isHoverable
-          onPress={onOpen}
-          style={{
-            backgroundColor: t.bgSecondary,
-            borderColor: t.accent,
-            color: t.text,
-            boxShadow: t.shadow,
-          }}
-          className="w-[340px] border transition-transform duration-300 hover:scale-105 hover:shadow-xl"
-        >
-          <CardBody className="p-0 overflow-hidden">
-            {/* Thumbnail slideshow */}
-            <div className="relative w-full h-[190px] overflow-hidden">
-              {allImages.map((src, i) => (
-                <Image
-                  key={src + i}
-                  src={src}
-                  alt={`${projectData.name} — image ${i + 1}`}
-                  removeWrapper
-                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${
-                    i === slideIndex ? "opacity-100" : "opacity-0"
-                  }`}
-                />
-              ))}
+    <div
+      style={{
+        width: "100%",
+        aspectRatio: "16/9",
+        position: "relative",
+        overflow: "hidden",
+        background: t.bgSecondary,
+        ...style,
+      }}
+    >
+      <svg
+        viewBox={`0 0 ${W} ${H}`}
+        width="100%"
+        height="100%"
+        preserveAspectRatio="xMidYMid slice"
+        style={{ position: "absolute", inset: 0 }}
+      >
+        {waves.map((w, i) => (
+          <path
+            key={i}
+            d={buildPath(w.amplitude, w.frequency, w.phase)}
+            stroke={t.accent}
+            strokeWidth={w.strokeWidth}
+            strokeOpacity={w.opacity}
+            fill="none"
+          />
+        ))}
 
-              {/* Slide dots */}
-              {allImages.length > 1 && (
-                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 z-10">
-                  {allImages.map((_, i) => (
-                    <span
-                      key={i}
-                      className={`block h-1 rounded-full transition-all duration-500 ${
-                        i === slideIndex ? "w-4 bg-white" : "w-1 bg-white/40"
-                      }`}
-                    />
-                  ))}
-                </div>
-              )}
+        <path
+          d={buildPath(hero.amplitude, hero.frequency, hero.phase)}
+          stroke={t.accent}
+          strokeWidth="1.5"
+          strokeOpacity="0.7"
+          fill="none"
+        />
 
-              {/* Domain chips overlay */}
-              <div className="absolute top-2 left-2 flex gap-1 flex-wrap z-10">
-                {projectData.domains.map((d) => (
-                  <Chip
-                    key={d}
-                    size="sm"
-                    style={{ backgroundColor: t.accent, color: t.bg }}
-                    className="text-[10px]"
-                  >
-                    {d}
-                  </Chip>
-                ))}
-              </div>
-            </div>
+        <path
+          d={`${buildPath(hero.amplitude, hero.frequency, hero.phase)} L ${W},${H} L 0,${H} Z`}
+          fill={t.accent}
+          fillOpacity="0.04"
+        />
+      </svg>
 
-            {/* Body */}
-            <div className="px-4 pt-4 pb-2">
-              <h3 className="text-base font-bold capitalize tracking-tight mb-1">
-                {projectData.name}
-              </h3>
-              <p
-                style={{ color: t.text }}
-                className="text-small leading-relaxed line-clamp-2 mb-3"
-              >
-                {projectData.description}
-              </p>
-              <div className="flex flex-wrap gap-1">
-                {projectData.technologies.map((tech) => (
-                  <Chip
-                    key={tech}
-                    size="sm"
-                    style={{
-                      backgroundColor: t.bg,
-                      borderColor: t.accent,
-                      color: t.text,
-                    }}
-                    className="text-[10px] border"
-                  >
-                    {tech}
-                  </Chip>
-                ))}
-              </div>
-            </div>
-          </CardBody>
-
-          {/* Footer links */}
-          {links.length > 0 && (
-            <CardFooter className="flex gap-2 flex-wrap px-4 pt-2 pb-3">
-              <Divider
-                style={{ backgroundColor: t.accent }}
-                className="mb-2 w-full"
-              />
-              {links.map((l) => (
-                <Button
-                  key={l.label}
-                  as={Link}
-                  href={l.href}
-                  isExternal
-                  size="sm"
-                  style={{
-                    backgroundColor: l.primary ? t.accent : "transparent",
-                    borderColor: t.accent,
-                    color: l.primary ? t.bg : t.accent,
-                  }}
-                  className="text-[11px] h-7 min-w-0 border transition-transform duration-200 hover:scale-105"
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  onPress={(e: any) => e.stopPropagation()}
-                >
-                  {l.label}
-                </Button>
-              ))}
-            </CardFooter>
-          )}
-        </Card>
-      </div>
-
-      {/* ── Drawer ── */}
-      <Drawer isOpen={isOpen} onClose={onClose} size="5xl" placement="right">
-        <DrawerContent style={{ backgroundColor: t.bg, color: t.text }}>
-          <DrawerHeader className="flex flex-col gap-1 capitalize">
-            {projectData.name}
-            <div className="flex gap-1 flex-wrap mt-1">
-              {projectData.domains.map((d) => (
-                <Chip
-                  key={d}
-                  size="sm"
-                  style={{ backgroundColor: t.accent, color: t.bg }}
-                  className="text-[10px]"
-                >
-                  {d}
-                </Chip>
-              ))}
-            </div>
-          </DrawerHeader>
-
-          <DrawerBody className="gap-4">
-            {allImages.length > 0 && (
-              <div className="flex gap-2 overflow-x-auto pb-1">
-                {allImages.map((src, i) => (
-                  <Image
-                    key={i}
-                    src={src}
-                    alt={`${projectData.name} — image ${i + 1}`}
-                    className="h-24 w-36 object-cover rounded-lg flex-shrink-0"
-                    isZoomed
-                  />
-                ))}
-              </div>
-            )}
-
-            <Divider style={{ backgroundColor: t.accent }} />
-
-            <p className="text-small leading-relaxed">
-              {projectData.description}
-            </p>
-
-            <div>
-              <p
-                style={{ color: t.accent }}
-                className="text-tiny uppercase tracking-widest mb-2"
-              >
-                Technologies
-              </p>
-              <div className="flex flex-wrap gap-1">
-                {projectData.technologies.map((tech) => (
-                  <Chip
-                    key={tech}
-                    size="sm"
-                    style={{
-                      backgroundColor: t.bgSecondary,
-                      borderColor: t.accent,
-                      color: t.text,
-                    }}
-                    className="text-[10px] border"
-                  >
-                    {tech}
-                  </Chip>
-                ))}
-              </div>
-            </div>
-          </DrawerBody>
-
-          <DrawerFooter className="flex-wrap gap-2">
-            {links.map((l) => (
-              <Button
-                key={l.label}
-                as={Link}
-                href={l.href}
-                isExternal
-                size="sm"
-                style={{
-                  backgroundColor: l.primary ? t.accent : "transparent",
-                  borderColor: t.accent,
-                  color: l.primary ? t.bg : t.accent,
-                }}
-                className="text-[11px] border"
-              >
-                {l.label}
-              </Button>
-            ))}
-            <Button
-              variant="light"
-              size="sm"
-              onPress={onClose}
-              startContent={<X size={13} />}
-              className="ml-auto"
-              style={{ color: t.text }}
-            >
-              Close
-            </Button>
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
-    </>
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: `radial-gradient(ellipse at center, transparent 30%, ${t.bg}cc 100%)`,
+          pointerEvents: "none",
+        }}
+      />
+    </div>
   );
-}
+};
+
+const Thumbnail = ({
+  src,
+  style = {},
+}: {
+  src: string;
+  style?: React.CSSProperties;
+}) => {
+  const { t } = useTheme();
+
+  const [cachedSrc, setCachedSrc] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [hovered, setHovered] = useState<boolean>(false);
+
+  useEffect(() => {
+    let objectUrl: string;
+
+    if (src) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setCachedSrc("");
+      setLoading(true);
+      setError(false);
+
+      setTimeout(() => {
+        fetch(src)
+          .then((res) => {
+            if (!res.ok) {
+              throw new Error("Failed to fetch");
+            }
+
+            return res.blob();
+          })
+          .then((blob) => {
+            if (!blob.type.startsWith("image/")) {
+              throw new Error("Failed to fetch");
+            }
+
+            objectUrl = URL.createObjectURL(blob);
+
+            setCachedSrc(objectUrl);
+            setLoading(false);
+            setError(false);
+          })
+          .catch(() => {
+            setCachedSrc("");
+            setLoading(false);
+            setError(true);
+          });
+      }, 1000);
+    } else {
+      setCachedSrc("");
+      setLoading(false);
+      setError(true);
+    }
+
+    return () => {
+      if (objectUrl) URL.revokeObjectURL(objectUrl);
+    };
+  }, [src]);
+
+  return (
+    <div
+      style={{
+        width: "100%",
+        aspectRatio: "16/9",
+        position: "relative",
+        overflow: "hidden",
+        ...style,
+      }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {loading && !error && (
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: `linear-gradient(135deg, ${t.bgSecondary} 0%, ${t.accent}18 50%, ${t.bgSecondary} 100%)`,
+            backgroundSize: "200% 200%",
+            animation: "shimmer 2s ease infinite",
+            filter: "url(#noise)",
+          }}
+        >
+          <svg width="0" height="0" style={{ position: "absolute" }}>
+            <filter id="noise">
+              <feTurbulence
+                type="fractalNoise"
+                baseFrequency="0.75"
+                numOctaves="4"
+                stitchTiles="stitch"
+              />
+              <feColorMatrix type="saturate" values="0" />
+              <feBlend in="SourceGraphic" mode="overlay" result="blend" />
+              <feComposite in="blend" in2="SourceGraphic" operator="in" />
+            </filter>
+          </svg>
+        </div>
+      )}
+
+      {!loading && !error && (
+        <>
+          <img
+            src={cachedSrc}
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              transition: "transform 0.4s ease",
+              transform: hovered ? "scale(1.05)" : "scale(1)",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background:
+                "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.7) 100%)",
+              opacity: hovered ? 0 : 1,
+              transition: "opacity 0.4s ease",
+              pointerEvents: "none",
+            }}
+          />
+        </>
+      )}
+
+      {error && <WaveformThumbnail name={src} />}
+
+      <style>{`
+        @keyframes shimmer {
+          0%   { background-position: 0% 50%; }
+          50%  { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+      `}</style>
+    </div>
+  );
+};
+
+const ProjectCard = ({
+  project: projectProps,
+}: {
+  project: PortfolioDataType["projects"]["0"];
+}) => {
+  const { t } = useTheme();
+
+  const [hovered, setHovered] = useState<boolean>(false);
+  const [project, setProject] = useState<typeof projectProps>(projectProps);
+  const [docDrawerOpen, setDocDrawerOpen] = useState(false);
+  const [galleryOpen, setGalleryOpen] = useState(false);
+
+  const loaded = useRef<boolean>(false);
+
+  useEffect(() => {
+    if (!loaded.current) {
+      getProjectUrls(project.folderName).then((urls) => {
+        setProject({
+          ...project,
+          docUrl: urls.doc,
+          thumbnailUrl: urls.thumb,
+          assetsUrls: urls.assets,
+        });
+        loaded.current = true;
+      });
+    }
+  }, []);
+
+  return (
+    !project.hidden && (
+      <div
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        style={{
+          background: t.bg,
+          border: `1px solid ${hovered ? t.accent : t.text + "30"}`,
+          borderRadius: 4,
+          overflow: "hidden",
+          transition: "border-color 0.3s ease, box-shadow 0.3s ease",
+          boxShadow: hovered ? `0 8px 40px ${t.shadow}` : "none",
+          cursor: "default",
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <div style={{ position: "relative" }}>
+          <Thumbnail src={project.thumbnailUrl} />
+          {project.featured && (
+            <div
+              style={{
+                position: "absolute",
+                top: 12,
+                right: 12,
+                background: `${t.accent}cc`,
+                backdropFilter: "blur(8px)",
+                color: "#fff",
+                fontSize: 10,
+                letterSpacing: 2,
+                textTransform: "uppercase",
+                padding: "4px 10px",
+                borderRadius: 20,
+              }}
+            >
+              Featured
+            </div>
+          )}
+        </div>
+
+        <div
+          style={{
+            padding: "24px 28px 28px",
+            display: "flex",
+            flexDirection: "column",
+            flex: "1",
+            minHeight: 0,
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-start",
+              marginBottom: 12,
+            }}
+          >
+            <h3
+              style={{
+                margin: 0,
+                fontSize: 22,
+                fontWeight: 400,
+                color: t.text,
+                letterSpacing: "-0.02em",
+              }}
+            >
+              {project.name}
+            </h3>
+
+            <div style={{ display: "flex", gap: 10, paddingTop: 3 }}>
+              {[
+                {
+                  href: project.githubUrl,
+                  Icon: Github,
+                  label: "GitHub Repo",
+                },
+                {
+                  href: project.demoUrl,
+                  Icon: Monitor,
+                  label: "Live Demo",
+                },
+                {
+                  href: project.productPageUrl,
+                  Icon: ExternalLink,
+                  label: "Product Page",
+                },
+              ].map(({ href, Icon, label }) => (
+                <a
+                  target="_blank"
+                  key={label}
+                  href={href}
+                  title={label}
+                  onClick={!href ? (e) => e.preventDefault() : undefined}
+                  style={{
+                    color: t.text,
+                    opacity: href ? 0.4 : 0.2,
+                    transition: "opacity 0.2s",
+                    cursor: href ? "pointer" : "not-allowed",
+                    pointerEvents: href ? "auto" : "none",
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!href) return;
+                    e.currentTarget.style.opacity = "1";
+                    e.currentTarget.style.color = t.accent;
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!href) return;
+                    e.currentTarget.style.opacity = "0.4";
+                    e.currentTarget.style.color = t.text;
+                  }}
+                >
+                  <Icon size={15} />
+                </a>
+              ))}
+            </div>
+          </div>
+          <div
+            style={{ height: 1, background: t.bgSecondary, marginBottom: 14 }}
+          />
+          <p
+            style={{
+              margin: "0 0 20px",
+              fontSize: 14,
+              color: t.text,
+              opacity: 0.65,
+              lineHeight: 1.65,
+            }}
+          >
+            {project.shortDescription}
+          </p>
+
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 6,
+              marginBottom: 14,
+            }}
+          >
+            {project.stack.slice(0, 10).map((s) => (
+              <span
+                key={s}
+                style={{
+                  fontSize: 11,
+                  padding: "3px 8px",
+                  border: `1px solid ${t.accent}55`,
+                  color: t.accent,
+                  borderRadius: 2,
+                  fontFamily: "monospace",
+                  letterSpacing: 1,
+                }}
+              >
+                {s}
+              </span>
+            ))}
+            {project.stack.length > 10 && (
+              <span
+                style={{
+                  fontSize: 11,
+                  padding: "2px 7px",
+                  color: t.text,
+                  opacity: 0.35,
+                }}
+              >
+                +{project.stack.length - 10}
+              </span>
+            )}
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 5,
+              marginBottom: 14,
+            }}
+          >
+            {project.domains.slice(0, 4).map((d) => (
+              <span
+                key={d}
+                style={{
+                  fontSize: 11,
+                  padding: "2px 7px",
+                  background: t.bgSecondary,
+                  border: `1px solid ${t.text}55`,
+                  color: t.text,
+                  opacity: 0.6,
+                  borderRadius: 2,
+                }}
+              >
+                {d}
+              </span>
+            ))}
+            {project.domains.length > 4 && (
+              <span
+                style={{
+                  fontSize: 11,
+                  padding: "2px 7px",
+                  color: t.text,
+                  opacity: 0.35,
+                }}
+              >
+                +{project.domains.length - 4}
+              </span>
+            )}
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              flex: "1",
+              minHeight: 0,
+              justifyContent: "flex-end",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                gap: 10,
+              }}
+            >
+              {[
+                {
+                  content: project.docUrl,
+                  Icon: FileText,
+                  label: "Documentation",
+                  onClick: () => {
+                    setDocDrawerOpen(true);
+                  },
+                },
+                {
+                  content: project.assetsUrls,
+                  Icon: Image,
+                  label: "Gallery",
+                  onClick: () => {
+                    setGalleryOpen(true);
+                  },
+                },
+              ].map(({ content, Icon, label, onClick }) => (
+                <button
+                  key={label}
+                  title={label}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onClick();
+                  }}
+                  style={{
+                    color: t.text,
+                    opacity: content && content.length ? 0.8 : 0.7,
+                    transition: "opacity 0.2s",
+                    cursor:
+                      content && content.length ? "pointer" : "not-allowed",
+                    pointerEvents: content && content.length ? "auto" : "none",
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    gap: 5,
+                    fontSize: 12,
+                  }}
+                  onMouseEnter={(e) => {
+                    if (content && content.length) {
+                      e.currentTarget.style.opacity = "1";
+                      e.currentTarget.style.color = t.accent;
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (content && content.length) {
+                      e.currentTarget.style.opacity = "0.4";
+                      e.currentTarget.style.color = t.text;
+                    }
+                  }}
+                >
+                  <Icon size={15} />
+                  <span>{label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+        <ProjectDocDrawer
+          docUrl={project.docUrl}
+          open={docDrawerOpen}
+          onClose={() => setDocDrawerOpen(false)}
+        />
+      </div>
+    )
+  );
+};
+
+export default ProjectCard;

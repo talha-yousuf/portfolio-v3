@@ -51,6 +51,7 @@ export const NavBar = () => {
         >
           {NAV_BUTTONS.map((x) => (
             <button
+              key={x.hash}
               onClick={() => {
                 window.location.hash = x.hash;
               }}

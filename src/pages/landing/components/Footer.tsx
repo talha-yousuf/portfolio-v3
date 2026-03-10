@@ -1,5 +1,5 @@
 import { useTheme } from "../../../theme/useTheme";
-import data from "../../../data";
+import portFolioData from "../../../data";
 
 export const Footer = () => {
   const { t } = useTheme();
@@ -22,7 +22,7 @@ export const Footer = () => {
       <p>Thanks for stopping by! 👋</p>
       <p>
         <a
-          href={"mailto:" + data.personalInfo.email}
+          href={"mailto:" + portFolioData.personalInfo.email}
           style={{
             color: t.accent,
             textDecoration: "none",
@@ -31,7 +31,7 @@ export const Footer = () => {
           onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.8")}
           onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
         >
-          {data.personalInfo.email}
+          {portFolioData.personalInfo.email}
         </a>
         {" | "}
         &copy; {new Date().getFullYear()}
