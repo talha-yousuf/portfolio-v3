@@ -3,6 +3,7 @@ import { Github, ExternalLink, FileText, Monitor, Image } from "lucide-react";
 import { useTheme } from "../../../theme/useTheme";
 import { getProjectUrls, type PortfolioDataType } from "../../../data";
 import ProjectDocDrawer from "./ProjectDocDrawer";
+import ProjectImageDrawer from "./ProjectImageDrawer";
 
 const WaveformThumbnail = ({
   name,
@@ -281,6 +282,7 @@ const ProjectCard = ({
         loaded.current = true;
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -519,7 +521,7 @@ const ProjectCard = ({
                 {
                   content: project.assetsUrls,
                   Icon: Image,
-                  label: "Gallery",
+                  label: project.assetsUrls.length + " Images",
                   onClick: () => {
                     setGalleryOpen(true);
                   },
@@ -569,6 +571,11 @@ const ProjectCard = ({
           docUrl={project.docUrl}
           open={docDrawerOpen}
           onClose={() => setDocDrawerOpen(false)}
+        />
+        <ProjectImageDrawer
+          urls={project.assetsUrls}
+          open={galleryOpen}
+          onClose={() => setGalleryOpen(false)}
         />
       </div>
     )
