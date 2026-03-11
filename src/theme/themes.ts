@@ -19,6 +19,15 @@ export const themes: {
   icon: LucideIcon;
 }[] = [
   {
+    name: "Midnight",
+    bg: "#02030A",
+    text: "#F5F7FF",
+    accent: "#7C83FF",
+    bgSecondary: "#0C1022",
+    shadow: "0 12px 36px rgba(0,0,0,0.75)",
+    icon: Moon,
+  },
+  {
     name: "Cobalt",
     bg: "#020c1b",
     text: "#e8e8ea",
@@ -45,7 +54,6 @@ export const themes: {
     shadow: "0 12px 32px rgba(0,0,0,0.5)",
     icon: Stars,
   },
-
   {
     name: "Emerald",
     bg: "#041712",
@@ -64,15 +72,7 @@ export const themes: {
     shadow: "0 12px 32px rgba(0,0,0,0.5)",
     icon: Waves,
   },
-  {
-    name: "Midnight",
-    bg: "#02030A",
-    text: "#F5F7FF",
-    accent: "#7C83FF",
-    bgSecondary: "#0C1022",
-    shadow: "0 12px 36px rgba(0,0,0,0.75)",
-    icon: Moon,
-  },
+
   {
     name: "Light",
     bg: "#F7F9FC",

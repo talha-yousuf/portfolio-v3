@@ -1,9 +1,9 @@
-import { Github, Linkedin, Mail, ArrowRight } from "lucide-react";
 import portFolioData from "../../data";
 import { useTheme } from "../../theme/useTheme";
 import { NavBar } from "./components/NavBar";
 import { Footer } from "./components/Footer";
 import ProjectCard from "./components/ProjectCard";
+import HeroSection from "./components/HeroSection";
 
 const LandingPage = () => {
   const { t } = useTheme();
@@ -28,11 +28,9 @@ const LandingPage = () => {
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-      // maxHeight: "100vh",
-      minHeight: "90vh",
-      maxWidth: "100%",
-      minWidth: "100%",
-      padding: "40px",
+      height: "100vh",
+      width: "100%",
+      overflow: "hidden",
     },
     title: {
       fontSize: "clamp(3rem, 2.5vw, 4rem)",
@@ -81,135 +79,6 @@ const LandingPage = () => {
       translate: "-6px -6px",
     },
   };
-
-  const heroSection = (
-    <>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row" as const,
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "60px",
-          flexWrap: "wrap",
-        }}
-      >
-        <div style={baseStyles.imageFrame}>
-          <img
-            className="profile-pic"
-            src={portFolioData.personalInfo.profileImageUrl}
-            alt="Profile"
-            style={baseStyles.image}
-          />
-        </div>
-
-        <div
-          style={{
-            flex: 1,
-            display: "flex",
-            flexDirection: "column",
-            gap: "18px",
-          }}
-        >
-          <h1 style={baseStyles.title}>
-            {portFolioData.personalInfo.name.split(" ")[0] + " "}
-            <span style={{ color: t.accent }}>
-              {portFolioData.personalInfo.name.split(" ")[1]}
-            </span>
-          </h1>
-
-          <div
-            style={{
-              flex: 1,
-              display: "flex",
-              flexDirection: "column",
-              gap: "6px",
-            }}
-          >
-            <p style={baseStyles.paragraph}>
-              {"> " + portFolioData.personalInfo.title}
-            </p>
-
-            <p style={baseStyles.paragraph}>
-              {"> " +
-                String(
-                  new Date().getFullYear() -
-                    portFolioData.stats.careerStartYear,
-                ) +
-                " YOE"}
-              <span
-                style={{ animation: "blink 1.2s steps(1, start) infinite" }}
-              >
-                {"|"}
-              </span>
-            </p>
-          </div>
-
-          <div
-            style={{
-              display: "flex",
-              gap: "16px",
-              alignItems: "center",
-              flexWrap: "wrap",
-              marginTop: "48px",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                gap: "12px",
-              }}
-            >
-              <button style={baseStyles.iconLink} title="GitHub">
-                <Github size={16} />
-              </button>
-              <button style={baseStyles.iconLink} title="LinkedIn">
-                <Linkedin size={16} />
-              </button>
-              <button style={baseStyles.iconLink} title="Email">
-                <Mail size={16} />
-              </button>
-            </div>
-            <button
-              style={{
-                ...baseStyles.buttonBase,
-                backgroundColor: t.accent,
-                color: t.text,
-              }}
-            >
-              Resume <ArrowRight size={18} />
-            </button>
-          </div>
-        </div>
-      </div>
-      {/* <div
-        style={{
-          display: "flex",
-          paddingTop: "120px",
-          gap: "120px",
-          width: "100%",
-          justifyContent: "center",
-        }}
-      >
-        <div style={{ display: "flex", gap: "12px", alignItems: "end" }}>
-          <div style={baseStyles.title}>
-            {new Date().getFullYear() - data.stats.careerStartYear}
-          </div>
-          <strong>
-            <div>Years of</div>
-            <div>experience</div>
-          </strong>
-        </div>
-        <div style={{ display: "flex", gap: "12px", alignItems: "end" }}>
-          <div style={baseStyles.title}>{data.stats.projectsWorkedOn}</div>
-          <strong>
-            <div>Projects</div>
-            <div>Worked On</div>
-          </strong>
-        </div>
-      </div> */}
-    </>
-  );
 
   const clientsSection = (
     <div
@@ -311,7 +180,9 @@ const LandingPage = () => {
   return (
     <div style={baseStyles.container}>
       <NavBar />
-      <div style={baseStyles.section}>{heroSection}</div>
+      <div style={baseStyles.section}>
+        <HeroSection />
+      </div>
       <div style={baseStyles.section}>{clientsSection}</div>
       <div style={baseStyles.section}>{skillsSection}</div>
       <div style={baseStyles.section}>{projectsSection}</div>
