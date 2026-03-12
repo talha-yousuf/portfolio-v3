@@ -2,6 +2,7 @@ import { ArrowRight, ChevronDown, Github, Linkedin, Mail } from "lucide-react";
 import portFolioData from "../../../data";
 import { useTheme } from "../../../theme/useTheme";
 import { useEffect, useState } from "react";
+import { NAV_BUTTONS } from "../../../data/nav";
 
 const KEYFRAMES = `
   @keyframes blink  { 0%,100%{opacity:1} 50%{opacity:0} }
@@ -218,7 +219,7 @@ const HeroSection = () => {
                 {
                   icon: <Mail size={16} />,
                   label: "Email",
-                  href: "#contact",
+                  href: "#" + NAV_BUTTONS.contact.hash,
                   isExt: false,
                 },
               ] as const
@@ -286,7 +287,7 @@ const HeroSection = () => {
         }}
       >
         <a
-          href="#stack"
+          href={"#" + NAV_BUTTONS.stack.hash}
           style={{
             width: 40,
             height: 40,
@@ -298,7 +299,7 @@ const HeroSection = () => {
             display: "inline-flex",
             alignItems: "center",
             justifyContent: "center",
-            opacity: 0.6,
+            opacity: 1,
             animation: "scrollPrompt 1.6s ease-in-out infinite",
           }}
         >

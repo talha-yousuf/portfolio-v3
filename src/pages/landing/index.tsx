@@ -4,18 +4,15 @@ import { NavBar } from "./components/NavBar";
 import { Footer } from "./components/Footer";
 import ProjectCard from "./components/ProjectCard";
 import HeroSection from "./components/HeroSection";
+import { NAV_BUTTONS } from "../../data/nav";
 
 const LandingPage = () => {
   const { t } = useTheme();
 
-  const baseStyles: Record<
-    string,
-    React.HTMLAttributes<HTMLDivElement>["style"]
-  > = {
+  const baseStyles = {
     container: {
       backgroundColor: t.bg,
       color: t.text,
-      minHeight: "100vh",
       transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
       display: "flex",
       flexDirection: "column",
@@ -28,57 +25,37 @@ const LandingPage = () => {
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-      height: "100vh",
+      minHeight: "100vh",
       width: "100%",
-      overflow: "hidden",
     },
-    title: {
-      fontSize: "clamp(3rem, 2.5vw, 4rem)",
-      fontWeight: 800,
-      lineHeight: 1,
-      letterSpacing: "-0.03em",
-    },
-    paragraph: {
-      fontSize: "1.5rem",
-      opacity: 0.7,
-      fontFamily: "'Fira Code', 'Courier New', monospace",
-    },
-    buttonBase: {
-      padding: "12px 18px",
-      fontWeight: 600,
-      cursor: "pointer",
-      display: "inline-flex",
-      alignItems: "center",
-      gap: "10px",
-      transition: "transform 0.2s ease, opacity 0.2s ease",
-      border: "none",
-      fontSize: "1rem",
-    },
-    iconLink: {
-      padding: "12px",
-      color: t.text,
-      backgroundColor: "transparent",
-      border: `1px solid ${t.text}33`,
-      cursor: "pointer",
-      display: "flex",
-      transition: "all 0.2s ease",
-    },
-    imageFrame: {
-      position: "relative",
-      width: "200px",
-      height: "200px",
-      translate: "3px 3px",
-      background: t.accent,
-      transition: "all 0.3s ease",
-      cursor: "pointer",
-    },
-    image: {
-      width: "200px",
-      height: "200px",
-      objectFit: "cover" as const,
-      translate: "-6px -6px",
-    },
-  };
+  } satisfies Record<string, React.CSSProperties>;
+
+  const skillsSection = (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column" as const,
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "60px",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          width: "80vw",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "12px",
+        }}
+      >
+        {portFolioData.skillsAndTechForWebpage.map((x, key) => (
+          <img key={key} src={x.thumbnailUrl} style={{ height: "50px" }} />
+        ))}
+      </div>
+    </div>
+  );
 
   const clientsSection = (
     <div
@@ -119,33 +96,6 @@ const LandingPage = () => {
     </div>
   );
 
-  const skillsSection = (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column" as const,
-        alignItems: "center",
-        justifyContent: "center",
-        gap: "60px",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          width: "80vw",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "12px",
-        }}
-      >
-        {portFolioData.skillsAndTechForWebpage.map((x, key) => (
-          <img key={key} src={x.thumbnailUrl} style={{ height: "50px" }} />
-        ))}
-      </div>
-    </div>
-  );
-
   const projectsSection = (
     <div
       style={{
@@ -180,13 +130,26 @@ const LandingPage = () => {
   return (
     <div style={baseStyles.container}>
       <NavBar />
-      <div style={baseStyles.section}>
+
+      <div style={baseStyles.section} id={NAV_BUTTONS.home.hash}>
         <HeroSection />
       </div>
-      <div style={baseStyles.section}>{clientsSection}</div>
-      <div style={baseStyles.section}>{skillsSection}</div>
-      <div style={baseStyles.section}>{projectsSection}</div>
-      <Footer />
+
+      <div style={baseStyles.section} id={NAV_BUTTONS.stack.hash}>
+        {skillsSection}
+      </div>
+
+      <div style={baseStyles.section} id={NAV_BUTTONS.clients.hash}>
+        {clientsSection}
+      </div>
+
+      <div style={baseStyles.section} id={NAV_BUTTONS.projects.hash}>
+        {projectsSection}
+      </div>
+
+      <div style={baseStyles.section} id={NAV_BUTTONS.contact.hash}>
+        <Footer />
+      </div>
     </div>
   );
 };

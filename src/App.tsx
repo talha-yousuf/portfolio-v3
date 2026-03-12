@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import LandingPage from "./pages/landing";
 import ResumeRenderedPage from "./pages/resume/ResumeRenderedPage";
 import ResumePdfPage from "./pages/resume/ResumePdfPage";
@@ -13,6 +18,7 @@ function App() {
             <Route path="/" element={<LandingPage />} />
             <Route path="/resume" element={<ResumePdfPage />} />
             <Route path="/resume-rendered" element={<ResumeRenderedPage />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </div>
       </Router>
