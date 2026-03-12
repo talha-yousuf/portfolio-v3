@@ -538,7 +538,7 @@ const portFolioData: PortfolioDataType = {
       current: false,
       achievements: [
         "Developed and deployed custom IoT web dashboards for enterprise clients, owning full frontend development and managing deployments, resulting in successful client demos and production rollouts.",
-        "Owned client-facing solutions design by collaborating with the stakeholders to collect and translate business requirements into technical feature.",
+        "Owned client-facing solutions design by collaborating with stakeholders to collect and translate business requirements into features.",
         "Built Python data pipelines to ingest, clean, and transform raw IoT sensor data, for automated report generation that delivered actionable insights for data-driven decision-making.",
         "Built and maintained Node.js backend services and REST APIs to support multiple projects.",
         "Developed embedded IoT sensor nodes with firmware, PCB design, and on-site deployments resulting in successful field tests.",
@@ -552,7 +552,7 @@ const portFolioData: PortfolioDataType = {
       endDate: "June 2019",
       current: false,
       achievements: [
-        "Developed embedded hardware & software and the web UI for an agri-tech IoT system.",
+        // "Developed embedded hardware & software and the web UI for an agri-tech IoT system.",
       ],
     },
   ],

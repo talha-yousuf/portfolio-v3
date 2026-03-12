@@ -1,40 +1,38 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import portFolioData from "../../data";
 
-const styles: {
-  [key: string]: React.CSSProperties;
-} = {
-  container: {
+const styles = {
+  backdrop: {
+    backgroundColor: "#313131",
+  },
+  page: {
     backgroundColor: "#ffffff",
     color: "#050505",
-    // fontFamily: "Helvetica, Arial, sans-serif",
-    lineHeight: "1.3",
-    fontSize: "9pt",
-    margin: "0 auto",
-    padding: "48px",
-    maxWidth: "75vw",
+    fontFamily: "Helvetica",
+    width: "210mm",
+    height: "297mm",
+    margin: 0,
+    padding: "4.5mm 3.5mm",
+    overflow: "hidden",
+    fontSize: "3.3mm",
   },
   header: {
+    display: "flex",
+    flexDirection: "column",
+    alignContent: "center",
+    justifyContent: "center",
     textAlign: "center",
-    marginBottom: "4px",
+    gap: "0.5mm",
   },
   name: {
-    fontSize: "18pt",
+    fontSize: "7mm",
     fontWeight: "bold",
-    padding: "3px 0",
   },
-  title: {
-    fontSize: "12pt",
-    fontWeight: "bold",
-    padding: "3px 0",
-  },
-  contacts: {
+  subHeader: {
     display: "flex",
     justifyContent: "center",
-    gap: "24px",
-    fontWeight: "bold",
-    padding: "4px",
+    alignItems: "center",
+    gap: "2mm",
   },
   link: {
     color: "#0e2875",
@@ -42,143 +40,165 @@ const styles: {
   },
   hr: {
     border: "0",
-    borderTop: "0.3px solid #05050580",
-    margin: "4px 0",
+    borderTop: "0.3mm solid #05050580",
+    margin: "1mm",
   },
   sectionHeading: {
-    fontSize: "12pt",
     fontWeight: "bold",
-    padding: "3px 0",
+    marginTop: "1.8mm",
   },
-  list: {
-    paddingLeft: "14px",
-    marginBottom: "8px",
-    lineHeight: "1.2",
-  },
-  listItem: {
-    marginBottom: "0.5px",
-  },
-  employmentHeading: {
+  subSectionHeading: {
     display: "flex",
     justifyContent: "space-between",
-    margin: "4px 8px",
-    borderBottom: "dotted 0.3px #050505",
+    gap: "1mm",
+    marginBottom: "1mm",
+    marginLeft: "2mm",
+    marginRight: "2mm",
+    paddingTop: "1.4mm",
+    borderBottom: "0.3mm dotted #050505",
+    paddingBottom: "0.1mm",
   },
-  bold: {
-    fontWeight: "bold",
+  list: {
+    marginBottom: "1mm",
+    lineHeight: "4.2mm",
   },
-  italic: {
-    fontStyle: "italic",
+  listItem: {
+    marginBottom: "0.3mm",
+    display: "flex",
+    gap: "1mm",
   },
-};
+} satisfies Record<string, React.CSSProperties>;
 
 function ResumePage() {
-  const { personalInfo, skills, experience, education } = portFolioData;
-
   return (
-    <div className="resume-container" style={styles.container}>
+    <div style={styles.backdrop}>
       <style>
-        {`@media print { 
-          body { margin: 0; } 
-          @page { size: A4; margin: 0.2in; } 
-          
-          .resume-container { 
-            margin: 0 !important; 
-            max-width: none !important; 
-            width: 100% !important;
-            padding: 0 !important;
-          }
-        }`}
+        {`@media print { body { margin: 0; } @page { size: A4; margin: 0; } }`}
       </style>
 
-      {/* Header */}
-      <header style={styles.header}>
-        <h1 style={styles.name}>{personalInfo.name}</h1>
-        <h3 style={styles.title}>{personalInfo.title}</h3>
-        <div style={styles.contacts}>
-          <a href={`mailto:${personalInfo.email}`} style={styles.link}>
-            {personalInfo.email}
-          </a>
-          <span>|</span>
-          <span style={styles.link}>{personalInfo.phone}</span>
-          <span>|</span>
-          <a href={personalInfo.linkedin} style={styles.link}>
-            LinkedIn
-          </a>
-          <span>|</span>
-          <a href={personalInfo.github} style={styles.link}>
-            GitHub
-          </a>
-        </div>
-      </header>
+      <div id="resume-a4" style={styles.page}>
+        {/* Header */}
+        <header style={styles.header}>
+          <h1 style={styles.name}>{portFolioData.personalInfo.name}</h1>
 
-      <hr style={styles.hr} />
+          <div style={styles.subHeader}>
+            {/* Title */}
+            <strong>{portFolioData.personalInfo.title}</strong>
+            <span>/</span>
 
-      {/* Skills */}
-      <section>
-        <h3 style={styles.sectionHeading}>Skills</h3>
-        <ul style={styles.list}>
-          {skills.map((category: any, idx: number) => (
-            <li key={idx} style={styles.listItem}>
-              <strong style={styles.bold}>{category.category}:</strong>
-              <span>{category.items.join(", ")}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
+            {/* Email */}
+            <a
+              href={`mailto:${portFolioData.personalInfo.email}`}
+              style={styles.link}
+            >
+              {portFolioData.personalInfo.email}
+            </a>
+            <span>/</span>
 
-      <hr style={styles.hr} />
+            {/* Phone */}
+            <span>{portFolioData.personalInfo.phone}</span>
+            <span>/</span>
 
-      {/* Experience */}
-      <section>
-        <h3 style={styles.sectionHeading}>Experience</h3>
-        {experience.map((job: any, idx: number) => (
-          <div key={idx}>
-            <div style={styles.employmentHeading}>
-              <span style={styles.bold}>
-                {job.title + " | "}
-                <a
-                  href={job.companyUrl}
-                  style={{ ...styles.link, ...styles.italic }}
-                >
-                  {job.company}
-                </a>
-              </span>
-              <span style={styles.bold}>
-                {job.startDate}–{job.endDate}
-              </span>
-            </div>
-            <ul style={styles.list}>
-              {job.achievements.map((achievement: any, achIdx: number) => (
-                <li key={achIdx} style={styles.listItem}>
-                  {achievement}
-                </li>
-              ))}
-            </ul>
+            {/* LinkedIn */}
+            <a href={portFolioData.personalInfo.linkedin} style={styles.link}>
+              LinkedIn
+            </a>
+            <span>/</span>
+
+            {/* Github */}
+            <a href={portFolioData.personalInfo.github} style={styles.link}>
+              GitHub
+            </a>
           </div>
-        ))}
-      </section>
+        </header>
 
-      <hr style={styles.hr} />
+        <hr style={styles.hr} />
 
-      {/* Education */}
-      <section>
-        <h3 style={styles.sectionHeading}>Education</h3>
-        {education.map((edu: any, idx: number) => (
-          <div key={idx} style={styles.employmentHeading}>
-            <span style={styles.bold}>
-              {edu.degree + " | "}
-              <a
-                href={edu.institutionUrl}
-                style={{ ...styles.link, ...styles.italic }}
+        {/* Skills */}
+        <section>
+          <h3 style={styles.sectionHeading}>Skills:</h3>
+
+          <div style={styles.list}>
+            {portFolioData.skills.map((category, idx: number) => (
+              <div key={idx} style={styles.listItem}>
+                <div>&#9679;</div>
+
+                <em style={{ width: "40mm" }}>{category.category}:</em>
+
+                <div>{category.items.join(", ")}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <hr style={styles.hr} />
+
+        {/* Experience */}
+        <section>
+          <h3 style={styles.sectionHeading}>Experience:</h3>
+
+          {portFolioData.experience.map((job, idx: number) => (
+            <div key={idx}>
+              <div
+                style={{
+                  ...styles.subSectionHeading,
+                  ...(job.achievements.length > 0 ? {} : { border: "none" }),
+                }}
               >
-                {edu.institution}
-              </a>
-            </span>
-            <span style={styles.bold}>Class of {edu.graduationYear}</span>
-          </div>
-        ))}
-      </section>
+                <div>
+                  <strong>{job.title + " | "}</strong>
+
+                  <a href={job.companyUrl} style={styles.link}>
+                    <strong>
+                      <em>{job.company}</em>
+                    </strong>
+                  </a>
+                </div>
+
+                <strong style={styles.link}>
+                  {job.startDate}
+                  {" - "}
+                  {job.endDate}
+                </strong>
+              </div>
+
+              {job.achievements.length > 0 && (
+                <div style={styles.list}>
+                  {job.achievements.map((achievement, achIdx: number) => (
+                    <div key={achIdx} style={styles.listItem}>
+                      <div>&#9679; </div>
+                      <div>{achievement}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </section>
+
+        <hr style={styles.hr} />
+
+        {/* Education */}
+        <section>
+          <h3 style={styles.sectionHeading}>Education:</h3>
+
+          {portFolioData.education.map((edu, idx: number) => (
+            <div key={idx} style={styles.subSectionHeading}>
+              <div>
+                <strong>{edu.degree + " | "}</strong>
+
+                <a href={edu.institutionUrl} style={styles.link}>
+                  <strong>
+                    <em>{edu.institution}</em>
+                  </strong>
+                </a>
+              </div>
+
+              <strong style={styles.link}>Class of {edu.graduationYear}</strong>
+            </div>
+          ))}
+        </section>
+      </div>
     </div>
   );
 }
