@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/landing";
-import ResumePage from "./pages/resume";
+import ResumeRenderedPage from "./pages/resume/ResumeRenderedPage";
+import ResumePdfPage from "./pages/resume/ResumePdfPage";
 import { ThemeProvider } from "./theme/Components";
 
 function App() {
@@ -10,7 +11,8 @@ function App() {
         <div>
           <Routes>
             <Route path="/" element={<LandingPage />} />
-            <Route path="/resume" element={<ResumePage />} />
+            <Route path="/resume" element={<ResumePdfPage />} />
+            <Route path="/resume-rendered" element={<ResumeRenderedPage />} />
           </Routes>
         </div>
       </Router>
