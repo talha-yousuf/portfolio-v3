@@ -1,10 +1,11 @@
 import portFolioData from "../../data";
 import { useTheme } from "../../theme/useTheme";
 import { NavBar } from "./components/NavBar";
-import { Footer } from "./components/Footer";
+import { ContactSection } from "./components/ContactSection";
 import ProjectCard from "./components/ProjectCard";
 import HeroSection from "./components/HeroSection";
 import { NAV_BUTTONS } from "../../data/nav";
+import { SectionHeading } from "./components/SectionHeading";
 
 const LandingPage = () => {
   const { t } = useTheme();
@@ -28,23 +29,26 @@ const LandingPage = () => {
       minHeight: "100vh",
       width: "100%",
     },
+    sectionContainer: {
+      display: "flex",
+      flexDirection: "column" as const,
+      gap: "60px",
+      width: "80vw",
+      padding: "100px 0px",
+    },
   } satisfies Record<string, React.CSSProperties>;
 
   const skillsSection = (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column" as const,
-        alignItems: "center",
-        justifyContent: "center",
-        gap: "60px",
-      }}
-    >
+    <div style={baseStyles.sectionContainer}>
+      <SectionHeading
+        title="Stack"
+        subtitle="Tools and technologies I worked with daily."
+      />
+
       <div
         style={{
           display: "flex",
           flexWrap: "wrap",
-          width: "80vw",
           alignItems: "center",
           justifyContent: "center",
           gap: "12px",
@@ -58,20 +62,16 @@ const LandingPage = () => {
   );
 
   const clientsSection = (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column" as const,
-        alignItems: "center",
-        justifyContent: "center",
-        gap: "60px",
-      }}
-    >
+    <div style={baseStyles.sectionContainer}>
+      <SectionHeading
+        title="Clients"
+        subtitle="Companies and clients I have worked for over the years."
+      />
+
       <div
         style={{
           display: "flex",
           flexWrap: "wrap",
-          width: "90vw",
           alignItems: "center",
           justifyContent: "center",
         }}
@@ -87,8 +87,10 @@ const LandingPage = () => {
               objectFit: "contain" as const,
               padding: "24px 36px",
               background: "white",
-              borderTop: `solid 6px ${t.accent + (key % 2 !== 0 ? "50" : "")}`,
-              borderRight: `solid 6px ${t.accent + (key % 2 === 0 ? "50" : "")}`,
+              border: `solid 6px ${t.bg}`,
+              borderTopLeftRadius: "50px",
+              borderBottomRightRadius: "50px",
+              opacity: 0.8,
             }}
           />
         ))}
@@ -97,33 +99,38 @@ const LandingPage = () => {
   );
 
   const projectsSection = (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center ",
-        flexWrap: "wrap",
-        width: "80vw",
-        gap: "14px",
-      }}
-    >
-      {portFolioData.projects
-        .sort((a, b) => a.order - b.order)
-        .map((x) => (
-          <div
-            key={x.folderName}
-            style={{
-              minWidth: "300px",
-              maxWidth: "400px",
-              height: "620px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center ",
-            }}
-          >
-            <ProjectCard project={x} />
-          </div>
-        ))}
+    <div style={baseStyles.sectionContainer}>
+      <SectionHeading
+        title="Projects"
+        subtitle="Explore some of my engineering projects and technical work."
+      />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center ",
+          flexWrap: "wrap",
+          gap: "14px",
+        }}
+      >
+        {portFolioData.projects
+          .sort((a, b) => a.order - b.order)
+          .map((x) => (
+            <div
+              key={x.folderName}
+              style={{
+                minWidth: "300px",
+                maxWidth: "400px",
+                height: "620px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center ",
+              }}
+            >
+              <ProjectCard project={x} />
+            </div>
+          ))}
+      </div>
     </div>
   );
 
@@ -148,7 +155,7 @@ const LandingPage = () => {
       </div>
 
       <div style={baseStyles.section} id={NAV_BUTTONS.contact.hash}>
-        <Footer />
+        <ContactSection />
       </div>
     </div>
   );

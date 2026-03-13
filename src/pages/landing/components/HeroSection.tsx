@@ -4,18 +4,6 @@ import { useTheme } from "../../../theme/useTheme";
 import { useEffect, useState } from "react";
 import { NAV_BUTTONS } from "../../../data/nav";
 
-const KEYFRAMES = `
-  @keyframes blink  { 0%,100%{opacity:1} 50%{opacity:0} }
-  @keyframes spin   { to{transform:rotate(360deg)} }
-  @keyframes pulse  { 0%,100%{opacity:1;box-shadow:0 0 6px #3fb950} 50%{opacity:.35;box-shadow:0 0 2px #3fb950} }
-  @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
-  @keyframes scrollPrompt {
-    0%   { transform: translateY(0);   opacity: 1;    }
-    50%  { transform: translateY(10px); opacity: 0.4; }
-    100% { transform: translateY(0);   opacity: 1;    }
-  }
-`;
-
 const a = (color: string, pct: number) =>
   `color-mix(in srgb, ${color} ${pct}%, transparent)`;
 
@@ -36,8 +24,6 @@ const HeroSection = () => {
         padding: "160px 40px",
       }}
     >
-      <style>{KEYFRAMES}</style>
-
       {/* ORB: top-right atmosphere */}
       <div
         style={{

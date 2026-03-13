@@ -8,6 +8,7 @@ import LandingPage from "./pages/landing";
 import ResumeRenderedPage from "./pages/resume/ResumeRenderedPage";
 import ResumePdfPage from "./pages/resume/ResumePdfPage";
 import { ThemeProvider } from "./theme/Components";
+import "./global.css";
 
 function App() {
   return (

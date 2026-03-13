@@ -244,14 +244,6 @@ const Thumbnail = ({
       )}
 
       {error && <WaveformThumbnail name={src} />}
-
-      <style>{`
-        @keyframes shimmer {
-          0%   { background-position: 0% 50%; }
-          50%  { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-      `}</style>
     </div>
   );
 };
@@ -546,6 +538,8 @@ const ProjectCard = ({
                     alignItems: "center",
                     gap: 5,
                     fontSize: 12,
+                    backgroundColor: "transparent",
+                    border: "none",
                   }}
                   onMouseEnter={(e) => {
                     if (content && content.length) {
