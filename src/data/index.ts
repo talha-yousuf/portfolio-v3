@@ -32,6 +32,7 @@ export interface PortfolioDataType {
   skillsAndTechForWebpage: {
     title: string;
     thumbnailUrl: string;
+    featured: boolean;
   }[];
 
   experience: {
@@ -284,181 +285,217 @@ const portFolioData: PortfolioDataType = {
   skillsAndTechForWebpage: [
     {
       title: "JavaScript",
+      featured: true,
       thumbnailUrl:
         "https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E",
     },
     {
       title: "TypeScript",
+      featured: true,
       thumbnailUrl:
         "https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white",
     },
     {
       title: "React",
+      featured: true,
       thumbnailUrl:
         "https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB",
     },
     {
       title: "Next.js",
+      featured: true,
       thumbnailUrl:
         "https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white",
     },
     {
       title: "Redux",
+      featured: false,
       thumbnailUrl:
         "https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white",
     },
     {
       title: "Angular",
+      featured: false,
       thumbnailUrl:
         "https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white",
     },
     {
       title: "Tailwind CSS",
+      featured: true,
       thumbnailUrl:
         "https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white",
     },
     {
       title: "Material UI",
+      featured: false,
       thumbnailUrl:
         "https://img.shields.io/badge/MUI-%230081CB.svg?style=for-the-badge&logo=material-ui&logoColor=white",
     },
     {
       title: "Node.js",
+      featured: true,
       thumbnailUrl:
         "https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white",
     },
     {
       title: "Express.js",
+      featured: false,
       thumbnailUrl:
         "https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB",
     },
     {
       title: "NestJS",
+      featured: true,
       thumbnailUrl:
         "https://img.shields.io/badge/nestjs-%23E0234E.svg?style=for-the-badge&logo=nestjs&logoColor=white",
     },
     {
       title: "GraphQL",
+      featured: false,
       thumbnailUrl:
         "https://img.shields.io/badge/-GraphQL-E10098?style=for-the-badge&logo=graphql&logoColor=white",
     },
     {
       title: "REST APIs",
+      featured: false,
       thumbnailUrl:
         "https://img.shields.io/badge/REST-02569B?style=for-the-badge&logo=rest&logoColor=white",
     },
     {
       title: "PostgreSQL",
+      featured: true,
       thumbnailUrl:
         "https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white",
     },
     {
       title: "MongoDB",
+      featured: false,
       thumbnailUrl:
         "https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white",
     },
     {
       title: "Redis",
+      featured: false,
       thumbnailUrl:
         "https://img.shields.io/badge/redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white",
     },
     {
       title: "Firebase",
+      featured: false,
       thumbnailUrl:
         "https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase",
     },
     {
       title: "Python",
+      featured: true,
       thumbnailUrl:
         "https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54",
     },
     {
       title: "Pandas",
+      featured: false,
       thumbnailUrl:
         "https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white",
     },
     {
       title: "NumPy",
+      featured: false,
       thumbnailUrl:
         "https://img.shields.io/badge/numpy-%23013243.svg?style=for-the-badge&logo=numpy&logoColor=white",
     },
     {
       title: "PyTorch",
+      featured: false,
       thumbnailUrl:
         "https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white",
     },
     {
       title: "LangChain",
+      featured: true,
       thumbnailUrl:
         "https://img.shields.io/badge/🦜_LangChain-121212?style=for-the-badge",
     },
     {
       title: "AWS",
+      featured: true,
       thumbnailUrl:
         "https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white",
     },
     {
       title: "AWS Lambda",
+      featured: false,
       thumbnailUrl:
         "https://img.shields.io/badge/AWS_Lambda-FF9900?style=for-the-badge&logo=awslambda&logoColor=white",
     },
     {
       title: "Serverless",
+      featured: false,
       thumbnailUrl:
         "https://img.shields.io/badge/Serverless-FD5750?style=for-the-badge&logo=serverless&logoColor=white",
     },
     {
       title: "Docker",
+      featured: true,
       thumbnailUrl:
         "https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white",
     },
     {
-      title: "Infrastructure as Code",
+      title: "IaC",
+      featured: false,
       thumbnailUrl:
         "https://img.shields.io/badge/IaC-844FBA?style=for-the-badge",
     },
     {
       title: "Linux",
+      featured: false,
       thumbnailUrl:
         "https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black",
     },
     {
       title: "Git",
+      featured: true,
       thumbnailUrl:
         "https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white",
     },
     {
       title: "CI/CD",
+      featured: false,
       thumbnailUrl:
         "https://img.shields.io/badge/CI%2FCD-239120?style=for-the-badge",
     },
     {
       title: "Jest",
+      featured: false,
       thumbnailUrl:
         "https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white",
     },
     {
       title: "ESLint",
+      featured: false,
       thumbnailUrl:
         "https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white",
     },
     {
       title: "Webpack",
+      featured: false,
       thumbnailUrl:
         "https://img.shields.io/badge/webpack-%238DD6F9.svg?style=for-the-badge&logo=webpack&logoColor=black",
     },
     {
       title: "Yarn",
+      featured: false,
       thumbnailUrl:
         "https://img.shields.io/badge/yarn-%232C8EBB.svg?style=for-the-badge&logo=yarn&logoColor=white",
     },
     {
       title: "System Design",
+      featured: true,
       thumbnailUrl:
         "https://img.shields.io/badge/System_Design-4285F4?style=for-the-badge",
     },
     {
       title: "Notion",
+      featured: false,
       thumbnailUrl:
         "https://img.shields.io/badge/Notion-%23000000.svg?style=for-the-badge&logo=notion&logoColor=white",
     },
