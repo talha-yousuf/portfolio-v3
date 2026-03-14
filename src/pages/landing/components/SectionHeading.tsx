@@ -6,7 +6,7 @@ interface SectionHeadingProps {
   subtitle?: string;
 }
 
-export const SectionHeading = ({ title, subtitle }: SectionHeadingProps) => {
+const SectionHeading = ({ title, subtitle }: SectionHeadingProps) => {
   const { t } = useTheme();
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -66,3 +66,5 @@ export const SectionHeading = ({ title, subtitle }: SectionHeadingProps) => {
     </div>
   );
 };
+
+export default SectionHeading;

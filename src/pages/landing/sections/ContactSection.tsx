@@ -6,7 +6,7 @@ import portFolioData from "../../../data";
 const a = (color: string, pct: number) =>
   `color-mix(in srgb, ${color} ${pct}%, transparent)`;
 
-export const ContactSection = () => {
+const ContactSection = () => {
   const { t } = useTheme();
   const [copied, setCopied] = useState(false);
 
@@ -242,3 +242,5 @@ export const ContactSection = () => {
     </div>
   );
 };
+
+export default ContactSection;

@@ -4,7 +4,7 @@ import { useTheme } from "../../../theme/useTheme";
 import { NAV_BUTTONS } from "../../../data/nav";
 import { ChevronUp } from "lucide-react";
 
-export const NavBar = () => {
+const NavBar = () => {
   const { t } = useTheme();
 
   const [currentHovered, setCurrentHovered] = useState<string>("");
@@ -181,3 +181,5 @@ export const NavBar = () => {
     </>
   );
 };
+
+export default NavBar;
