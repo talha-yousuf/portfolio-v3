@@ -8,6 +8,7 @@ import ContactSection from "./sections/ContactSection";
 import ClientsSection from "./sections/ClientsSection";
 import SkillsSection from "./sections/SkillsSection";
 import ProjectsSection from "./sections/ProjectsSection";
+import SplashScreen from "./sections/SplashScreen";
 
 const LandingPage = () => {
   const { t } = useTheme();
@@ -41,57 +42,66 @@ const LandingPage = () => {
   } satisfies Record<string, React.CSSProperties>;
 
   return (
-    <div style={baseStyles.container}>
-      <NavBar />
+    <SplashScreen>
+      <div style={baseStyles.container}>
+        <NavBar />
 
-      <div style={baseStyles.section} id={NAV_BUTTONS.home.hash}>
-        <HeroSection />
-      </div>
+        <div style={baseStyles.section} id={NAV_BUTTONS.home.hash}>
+          <HeroSection />
+        </div>
 
-      <div style={baseStyles.section} id={NAV_BUTTONS.stack.hash}>
-        <div style={baseStyles.sectionContainer}>
-          <SectionHeading
-            title={NAV_BUTTONS.stack.title}
-            subtitle={NAV_BUTTONS.stack.subtitle}
-          />
+        <div style={baseStyles.section} id={NAV_BUTTONS.stack.hash}>
+          <div style={baseStyles.sectionContainer}>
+            <SectionHeading
+              title={NAV_BUTTONS.stack.title}
+              subtitle={NAV_BUTTONS.stack.subtitle}
+            />
 
-          <SkillsSection />
+            <SkillsSection />
+          </div>
+        </div>
+
+        <div style={baseStyles.section} id={NAV_BUTTONS.services.hash}>
+          <div style={baseStyles.sectionContainer}>
+            <SectionHeading title={NAV_BUTTONS.services.title} />
+
+            <ServicesSection />
+          </div>
+        </div>
+
+        <div style={baseStyles.section} id={NAV_BUTTONS.clients.hash}>
+          <div style={baseStyles.sectionContainer}>
+            <SectionHeading
+              title={NAV_BUTTONS.clients.title}
+              subtitle={NAV_BUTTONS.clients.subtitle}
+            />
+            <ClientsSection />
+          </div>
+        </div>
+
+        <div style={baseStyles.section} id={NAV_BUTTONS.projects.hash}>
+          <div style={baseStyles.sectionContainer}>
+            <SectionHeading
+              title={NAV_BUTTONS.projects.title}
+              subtitle={NAV_BUTTONS.projects.subtitle}
+            />
+
+            <ProjectsSection />
+          </div>
+        </div>
+
+        <div style={baseStyles.section} id={NAV_BUTTONS.contact.hash}>
+          <div style={baseStyles.sectionContainer}>
+            <SectionHeading
+              title={NAV_BUTTONS.contact.title}
+              subtitle={NAV_BUTTONS.contact.subtitle}
+            />
+
+            <ContactSection />
+          </div>
         </div>
       </div>
-
-      <div style={baseStyles.section} id={NAV_BUTTONS.services.hash}>
-        <div style={baseStyles.sectionContainer}>
-          <SectionHeading title={NAV_BUTTONS.services.title} />
-
-          <ServicesSection />
-        </div>
-      </div>
-
-      <div style={baseStyles.section} id={NAV_BUTTONS.clients.hash}>
-        <div style={baseStyles.sectionContainer}>
-          <SectionHeading
-            title={NAV_BUTTONS.clients.title}
-            subtitle={NAV_BUTTONS.clients.subtitle}
-          />
-          <ClientsSection />
-        </div>
-      </div>
-
-      <div style={baseStyles.section} id={NAV_BUTTONS.projects.hash}>
-        <div style={baseStyles.sectionContainer}>
-          <SectionHeading
-            title={NAV_BUTTONS.projects.title}
-            subtitle={NAV_BUTTONS.projects.subtitle}
-          />
-
-          <ProjectsSection />
-        </div>
-      </div>
-
-      <div style={baseStyles.section} id={NAV_BUTTONS.contact.hash}>
-        <ContactSection />
-      </div>
-    </div>
+    </SplashScreen>
   );
 };
 

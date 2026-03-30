@@ -7,7 +7,7 @@ export const NAV_BUTTONS = {
   stack: {
     title: "Stack",
     hash: "stack",
-    subtitle: "Tools and technologies I worked with daily.",
+    subtitle: "Tools and technologies I work with...",
   },
   services: {
     title: "Services",
@@ -17,7 +17,7 @@ export const NAV_BUTTONS = {
   clients: {
     title: "Clients",
     hash: "clients",
-    subtitle: "Companies and organizations I have worked for over the years.",
+    subtitle: "Clients and organizations I have worked for over the years.",
   },
   projects: {
     title: "Projects",
@@ -25,8 +25,9 @@ export const NAV_BUTTONS = {
     subtitle: "Explore some of my engineering projects and technical work.",
   },
   contact: {
-    title: "Contact",
+    title: "Get In Touch",
     hash: "contact",
-    subtitle: "",
+    subtitle:
+      "Interested in working together or have a question? Feel free to reach out!",
   },
 };

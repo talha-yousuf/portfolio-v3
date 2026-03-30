@@ -57,7 +57,7 @@ const SectionHeading = ({ title, subtitle }: SectionHeadingProps) => {
             fontSize: "0.95rem",
             lineHeight: 1.7,
             margin: 0,
-            maxWidth: 420,
+            // maxWidth: 420,
           }}
         >
           {subtitle}

@@ -60,6 +60,18 @@
     transform: translateY(0);
   }
 }
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+}
+
 @keyframes scrollPrompt {
   0% {
     transform: translateY(0);
@@ -126,5 +138,14 @@
   }
   to {
     transform: translateX(0);
+  }
+}
+
+@keyframes barGlow {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
   }
 }

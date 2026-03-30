@@ -47,7 +47,7 @@ export const ThemeSwitcher = () => {
         justifyContent: "center",
         background: t.accent,
         color: t.bg,
-        boxShadow: `0 6px 36px ${t.accent}77`,
+        // boxShadow: `0 6px 36px ${t.accent}77`,
         transition: "0.1s ease",
       }}
       onMouseEnter={(e) => {

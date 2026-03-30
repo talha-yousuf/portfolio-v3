@@ -1,8 +1,16 @@
-import { ArrowRight, ChevronDown, Github, Linkedin, Mail } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowRight,
+  ChevronDown,
+  Github,
+  Linkedin,
+  Mail,
+} from "lucide-react";
 import portFolioData from "../../../data";
 import { useTheme } from "../../../theme/useTheme";
 import { useEffect, useState } from "react";
 import { NAV_BUTTONS } from "../../../data/nav";
+import BgAnimation from "../bgAnimation";
 
 const a = (color: string, pct: number) =>
   `color-mix(in srgb, ${color} ${pct}%, transparent)`;
@@ -18,245 +26,172 @@ const HeroSection = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        flex: 1,
         width: "100%",
         height: "100%",
         overflow: "hidden",
         padding: "160px 40px",
       }}
     >
-      {/* ORB: top-right atmosphere */}
       <div
         style={{
           position: "absolute",
-          width: 520,
-          height: 520,
-          borderRadius: "50%",
-          background: `radial-gradient(circle, ${a(t.accent, 13)} 0%, transparent 70%)`,
-          filter: "blur(90px)",
-          top: -160,
-          right: -140,
-          pointerEvents: "none",
+          width: "100%",
+          height: "100%",
+          overflow: "hidden",
+          top: 0,
+          left: 0,
           zIndex: 0,
         }}
-      />
-
-      {/* ── MAIN ROW: photo + text ── */}
+      >
+        <BgAnimation type={0} />
+      </div>
       <div
         style={{
           position: "relative",
           zIndex: 1,
           display: "flex",
-          flexDirection: "row",
+          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          gap: 120,
-          flexWrap: "wrap-reverse",
+          gap: 32,
           animation: "fadeUp 0.7s ease both",
         }}
       >
-        {/* ── TEXT ── */}
-        <div
+        <ProfilePic />
+
+        <h1
           style={{
-            flex: 1,
-            minWidth: 280,
-            display: "flex",
-            flexDirection: "column",
-            gap: 16,
-            animation: "fadeUp 0.7s 0.08s ease both",
+            fontSize: "clamp(2.8rem, 4vw, 4rem)",
+            fontWeight: 800,
+            lineHeight: 1.05,
+            letterSpacing: "-0.03em",
+            margin: 0,
+            color: t.text,
           }}
         >
-          {/* Status badge */}
-          <div
+          {portFolioData.personalInfo.name.split(" ")[0] + " "}
+          <span style={{ color: t.accent }}>
+            {portFolioData.personalInfo.name.split(" ")[1]}
+          </span>
+        </h1>
+
+        <div
+          style={{
+            display: "flex",
+            gap: 32,
+            fontFamily: "'Fira Code', 'Courier New', monospace",
+            fontSize: "1.2rem",
+            color: t.text,
+            opacity: 0.8,
+            fontWeight: "bold",
+          }}
+        >
+          <span>{portFolioData.personalInfo.title}</span>
+          <span style={{ color: t.accent }}>{"//"}</span>
+          <span>
+            {String(
+              new Date().getFullYear() - portFolioData.stats.careerStartYear,
+            )}
+            {" years of experience"}
+          </span>
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            gap: 10,
+            alignItems: "center",
+            flexWrap: "wrap",
+          }}
+        >
+          {(
+            [
+              {
+                icon: <Github size={16} />,
+                label: "GitHub",
+                href: portFolioData.personalInfo.github,
+                isExt: true,
+              },
+              {
+                icon: <Linkedin size={16} />,
+                label: "LinkedIn",
+                href: portFolioData.personalInfo.linkedin,
+                isExt: true,
+              },
+              {
+                icon: <Mail size={16} />,
+                label: "Email",
+                href: "#" + NAV_BUTTONS.contact.hash,
+                isExt: false,
+              },
+            ] as const
+          ).map(({ icon, label, href, isExt }) => (
+            <a
+              target={isExt ? "_blank" : ""}
+              href={href}
+              key={label}
+              title={label}
+              style={{
+                width: 40,
+                height: 40,
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                borderRadius: 8,
+                background: "transparent",
+                border: `1px solid ${a(t.text, 18)}`,
+                color: t.text,
+                cursor: "pointer",
+              }}
+            >
+              {icon}
+            </a>
+          ))}
+
+          <a
+            href={"#" + NAV_BUTTONS.projects.hash}
             style={{
+              padding: "11px 20px",
+              fontWeight: 600,
+              fontSize: "0.9rem",
+              cursor: "pointer",
               display: "inline-flex",
               alignItems: "center",
               gap: 8,
-              padding: "5px 14px",
-              borderRadius: 100,
-              border: `1px solid ${a(t.accent, 30)}`,
-              background: a(t.accent, 10),
-              fontSize: 11,
-              letterSpacing: "0.06em",
-              color: t.accent,
-              width: "fit-content",
-            }}
-          >
-            <div
-              style={{
-                width: 6,
-                height: 6,
-                borderRadius: "50%",
-                background: "#3fb950",
-                animation: "pulse 2.5s ease infinite",
-              }}
-            />
-            Open to opportunities
-          </div>
-
-          {/* Name */}
-          <h1
-            style={{
-              fontSize: "clamp(2.8rem, 4vw, 4rem)",
-              fontWeight: 800,
-              lineHeight: 1.05,
-              letterSpacing: "-0.03em",
-              margin: 0,
+              borderRadius: 8,
+              background: "transparent",
+              border: `1px solid ${a(t.text, 18)}`,
               color: t.text,
+              textDecoration: "none",
             }}
           >
-            {portFolioData.personalInfo.name.split(" ")[0] + " "}
-            <span style={{ color: t.accent }}>
-              {portFolioData.personalInfo.name.split(" ")[1]}
-            </span>
-          </h1>
+            {"View My Work"}
+            <ArrowDown size={15} />
+          </a>
 
-          {/* Terminal lines */}
-          <div
+          <a
+            target="_blank"
+            href="/resume"
             style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 5,
-              fontFamily: "'Fira Code', 'Courier New', monospace",
-              fontSize: "1rem",
-              color: t.text,
-              opacity: 0.65,
-              fontWeight: "bold",
-            }}
-          >
-            <div style={{ display: "flex", gap: 8 }}>
-              <span style={{ color: t.accent, fontWeight: "800" }}>&gt;</span>
-              <span style={{ color: t.text + "90" }}>role &rarr;</span>
-              <span style={{ color: t.text }}>
-                {portFolioData.personalInfo.title}
-              </span>
-            </div>
-
-            <div style={{ display: "flex", gap: 8 }}>
-              <span style={{ color: t.accent, fontWeight: "800" }}>&gt;</span>
-              <span style={{ color: t.text + "90" }}>
-                years of experience &rarr;
-              </span>
-              <span style={{ color: t.text }}>
-                {String(
-                  new Date().getFullYear() -
-                    portFolioData.stats.careerStartYear,
-                )}
-              </span>
-            </div>
-
-            <div style={{ display: "flex", gap: 8 }}>
-              <span style={{ color: t.accent, fontWeight: "800" }}>&gt;</span>
-              <span style={{ color: t.text + "90" }}>
-                projects worked on &rarr;
-              </span>
-              <span style={{ color: t.text }}>
-                {String(portFolioData.stats.projectsWorkedOn)}
-              </span>
-              <span
-                style={{
-                  animation: "blink 1.2s steps(1,start) infinite",
-                  width: 6,
-                  height: 18,
-                  backgroundColor: t.accent,
-                  alignSelf: "center",
-                }}
-              ></span>
-            </div>
-          </div>
-
-          {/* Bio */}
-          <p
-            style={{
-              fontSize: "0.93rem",
-              color: t.text,
-              opacity: 0.42,
-              lineHeight: 1.65,
-              maxWidth: 360,
-              margin: 0,
-            }}
-          >
-            {portFolioData.personalInfo.bio}
-          </p>
-
-          {/* Social icons + Resume */}
-          <div
-            style={{
-              display: "flex",
-              gap: 10,
+              padding: "11px 20px",
+              fontWeight: 600,
+              fontSize: "0.9rem",
+              cursor: "pointer",
+              display: "inline-flex",
               alignItems: "center",
-              flexWrap: "wrap",
-              paddingTop: 4,
+              gap: 8,
+              border: "none",
+              borderRadius: 8,
+              background: t.accent,
+              color: t.text,
+              textDecoration: "none",
             }}
           >
-            {(
-              [
-                {
-                  icon: <Github size={16} />,
-                  label: "GitHub",
-                  href: portFolioData.personalInfo.github,
-                  isExt: true,
-                },
-                {
-                  icon: <Linkedin size={16} />,
-                  label: "LinkedIn",
-                  href: portFolioData.personalInfo.linkedin,
-                  isExt: true,
-                },
-                {
-                  icon: <Mail size={16} />,
-                  label: "Email",
-                  href: "#" + NAV_BUTTONS.contact.hash,
-                  isExt: false,
-                },
-              ] as const
-            ).map(({ icon, label, href, isExt }) => (
-              <a
-                target={isExt ? "_blank" : ""}
-                href={href}
-                key={label}
-                title={label}
-                style={{
-                  width: 40,
-                  height: 40,
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  borderRadius: 8,
-                  background: "transparent",
-                  border: `1px solid ${a(t.text, 18)}`,
-                  color: t.text,
-                  cursor: "pointer",
-                }}
-              >
-                {icon}
-              </a>
-            ))}
-
-            <a
-              target="_blank"
-              href="/resume"
-              style={{
-                padding: "11px 20px",
-                fontWeight: 600,
-                fontSize: "0.9rem",
-                cursor: "pointer",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                border: "none",
-                borderRadius: 8,
-                background: t.accent,
-                color: t.text,
-                textDecoration: "none",
-              }}
-            >
-              {"Resume "}
-              <ArrowRight size={15} />
-            </a>
-          </div>
+            {"Resume "}
+            <ArrowRight size={15} />
+          </a>
         </div>
-
-        <ProfilePic />
       </div>
 
       {/* ── BOTTOM CTAs ── */}
@@ -367,7 +302,7 @@ const ProfilePic = () => {
       onMouseLeave={() => setHovered(false)}
     >
       {/* Outer static ring */}
-      <div
+      {/* <div
         style={{
           position: "absolute",
           width: 260,
@@ -378,7 +313,6 @@ const ProfilePic = () => {
           pointerEvents: "none",
         }}
       >
-        {/* Glowing dot riding the ring */}
         <div
           style={{
             position: "absolute",
@@ -392,7 +326,6 @@ const ProfilePic = () => {
             boxShadow: `0 0 10px ${t.accent}`,
           }}
         />
-
         <div
           style={{
             position: "absolute",
@@ -406,10 +339,10 @@ const ProfilePic = () => {
             boxShadow: `0 0 10px ${t.accent}`,
           }}
         />
-      </div>
+      </div> */}
 
       {/* Inner spinning dashed ring */}
-      <div
+      {/* <div
         style={{
           position: "absolute",
           width: 226,
@@ -420,7 +353,6 @@ const ProfilePic = () => {
           pointerEvents: "none",
         }}
       >
-        {/* Glowing dot riding the ring */}
         <div
           style={{
             position: "absolute",
@@ -434,10 +366,10 @@ const ProfilePic = () => {
             boxShadow: `0 0 10px ${t.accent}`,
           }}
         />
-      </div>
+      </div> */}
 
       {/* Glow pooling beneath card */}
-      <div
+      {/* <div
         style={{
           position: "absolute",
           bottom: -30,
@@ -451,15 +383,15 @@ const ProfilePic = () => {
           opacity: 0.2,
           pointerEvents: "none",
         }}
-      />
+      /> */}
 
       {/* Photo card */}
       <div
         style={{
           position: "relative",
-          width: 176,
-          height: 204,
-          borderRadius: 14,
+          width: 150,
+          height: 150,
+          borderRadius: "100%",
           overflow: "hidden",
           border: `2px solid ${a(t.accent, 35)}`,
           boxShadow: `0 0 0 5px ${a(t.accent, 7)}, 0 20px 52px rgba(0,0,0,0.45)`,
@@ -504,11 +436,12 @@ const ProfilePic = () => {
               style={{
                 width: "98%",
                 height: "98%",
+                borderRadius: "100%",
                 objectFit: "cover",
                 transform: hovered ? "scale(1.05)" : "scale(1)",
                 transition: "transform 0.4s ease",
                 display: "block",
-                borderRadius: 0.95 * 14,
+                // borderRadius: 0.95 * 14,
               }}
             />
 
@@ -525,7 +458,7 @@ const ProfilePic = () => {
             >
               <div
                 style={{
-                  borderRadius: 0.95 * 14,
+                  borderRadius: "100%",
                   width: "98%",
                   height: "98%",
                   background:

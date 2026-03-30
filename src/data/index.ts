@@ -129,7 +129,7 @@ const portFolioData: PortfolioDataType = {
   //
   personalInfo: {
     name: "Talha Yousuf",
-    title: "Software Engineer",
+    title: "Full Stack Software Engineer",
     //
     email: "talhayousuf.work@gmail.com",
     phone: "+92-307-6003927",
