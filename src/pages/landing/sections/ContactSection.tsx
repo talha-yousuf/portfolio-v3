@@ -164,7 +164,7 @@ const ContactSection = () => {
         style={{
           borderTop: `1px solid ${a(t.text, 10)}`,
           width: "100%",
-          paddingTop: 24,
+          paddingTop: 12,
           textAlign: "center",
           color: t.text + "77",
           opacity: 0.3,
