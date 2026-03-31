@@ -166,14 +166,13 @@ const ContactSection = () => {
           width: "100%",
           paddingTop: 24,
           textAlign: "center",
-          color: t.text,
+          color: t.text + "77",
           opacity: 0.3,
           fontSize: "0.8rem",
           animation: "fadeUp 0.6s 0.3s ease both",
         }}
       >
-        {portFolioData.personalInfo.name} &copy; {new Date().getFullYear()}{" "}
-        &mdash; Thanks for stopping by! 👋
+        {portFolioData.personalInfo.name} &copy; {new Date().getFullYear()}
       </div>
     </div>
   );
