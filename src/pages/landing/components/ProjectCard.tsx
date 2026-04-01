@@ -283,12 +283,12 @@ const ProjectCard = ({
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         style={{
-          background: t.bg,
-          border: `1px solid ${hovered ? t.accent : t.text + "30"}`,
+          background: hovered ? t.bgSecondary : t.bg,
+          border: `1px solid ${t.text + "30"}`,
           borderRadius: 4,
           overflow: "hidden",
-          transition: "border-color 0.3s ease, box-shadow 0.3s ease",
-          boxShadow: hovered ? `0 8px 40px ${t.shadow}` : "none",
+          transition: "all 0.3s ease-in-out",
+          boxShadow: hovered ? t.shadow : "none",
           cursor: "default",
           width: "100%",
           height: "100%",

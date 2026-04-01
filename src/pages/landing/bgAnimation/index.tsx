@@ -1,5 +1,6 @@
 import { useTheme } from "../../../theme/useTheme";
 import Aurora from "./Aurora";
+import InfiniteGradient from "./InfiniteGradient";
 import SoftAurora from "./SoftAurora";
 
 export default function BgAnimation({ type }: { type: number }) {
@@ -7,9 +8,9 @@ export default function BgAnimation({ type }: { type: number }) {
 
   const elements = [
     <Aurora
-      colorStops={[t.bgSecondary, t.accent, t.text]}
-      blend={0.5}
-      amplitude={1.0}
+      colorStops={[t.accent, t.accent, t.accent]}
+      blend={1}
+      amplitude={0.7}
       speed={1}
     />,
     <SoftAurora
@@ -28,6 +29,7 @@ export default function BgAnimation({ type }: { type: number }) {
       enableMouseInteraction
       mouseInfluence={0.25}
     />,
+    <InfiniteGradient colors={[t.bgSecondary, t.accent + "70"]} />,
   ];
   return type > -1 ? elements[type] : null;
 }

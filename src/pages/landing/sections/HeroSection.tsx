@@ -42,6 +42,7 @@ const HeroSection = () => {
           top: 0,
           left: 0,
           zIndex: 0,
+          opacity: 0.5,
         }}
       >
         <BgAnimation type={0} />
@@ -55,7 +56,7 @@ const HeroSection = () => {
           alignItems: "center",
           justifyContent: "center",
           gap: 32,
-          animation: "fadeUp 0.7s ease both",
+          animation: "fadeUp 1s 0.5s ease both",
         }}
       >
         <ProfilePic />
@@ -103,6 +104,7 @@ const HeroSection = () => {
             gap: 10,
             alignItems: "center",
             flexWrap: "wrap",
+            animation: "fadeUp 1s 1s ease both",
           }}
         >
           {(
@@ -204,7 +206,7 @@ const HeroSection = () => {
           alignItems: "center",
           gap: 12,
           flexWrap: "wrap",
-          animation: "fadeUp 0.7s 0.28s ease both",
+          animation: "fadeUp 1s 1.5s ease both",
         }}
       >
         <a
@@ -301,101 +303,16 @@ const ProfilePic = () => {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Outer static ring */}
-      {/* <div
-        style={{
-          position: "absolute",
-          width: 260,
-          height: 260,
-          borderRadius: "50%",
-          border: `1px solid ${a(t.accent, 18)}`,
-          animation: "spin 36s linear infinite",
-          pointerEvents: "none",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            top: -4,
-            left: "50%",
-            transform: "translateX(-50%)",
-            width: 8,
-            height: 8,
-            borderRadius: "50%",
-            background: t.accent,
-            boxShadow: `0 0 10px ${t.accent}`,
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            bottom: -4,
-            right: "50%",
-            transform: "translateX(-70%)",
-            width: 8,
-            height: 8,
-            borderRadius: "50%",
-            background: t.accent,
-            boxShadow: `0 0 10px ${t.accent}`,
-          }}
-        />
-      </div> */}
-
-      {/* Inner spinning dashed ring */}
-      {/* <div
-        style={{
-          position: "absolute",
-          width: 226,
-          height: 226,
-          borderRadius: "50%",
-          border: `1px dashed ${a(t.accent, 28)}`,
-          animation: "spin 28s linear infinite",
-          pointerEvents: "none",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            top: -4,
-            left: "50%",
-            transform: "translateX(-50%)",
-            width: 8,
-            height: 8,
-            borderRadius: "50%",
-            background: t.accent,
-            boxShadow: `0 0 10px ${t.accent}`,
-          }}
-        />
-      </div> */}
-
-      {/* Glow pooling beneath card */}
-      {/* <div
-        style={{
-          position: "absolute",
-          bottom: -30,
-          left: "50%",
-          transform: "translateX(-50%)",
-          width: 150,
-          height: 50,
-          borderRadius: "50%",
-          background: t.accent,
-          filter: "blur(32px)",
-          opacity: 0.2,
-          pointerEvents: "none",
-        }}
-      /> */}
-
       {/* Photo card */}
       <div
         style={{
           position: "relative",
-          width: 150,
-          height: 150,
+          width: 170,
+          height: 170,
           borderRadius: "100%",
           overflow: "hidden",
-          border: `2px solid ${a(t.accent, 35)}`,
-          boxShadow: `0 0 0 5px ${a(t.accent, 7)}, 0 20px 52px rgba(0,0,0,0.45)`,
-          background: t.accent,
+          background: t.accent + 70,
+          transition: "all 0.4s ease",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -432,57 +349,22 @@ const ProfilePic = () => {
           <>
             <img
               src={cachedSrc}
-              alt="Profile"
+              alt=""
               style={{
-                width: "98%",
-                height: "98%",
+                width: "100%",
+                height: "100%",
                 borderRadius: "100%",
                 objectFit: "cover",
                 transform: hovered ? "scale(1.05)" : "scale(1)",
                 transition: "transform 0.4s ease",
                 display: "block",
-                // borderRadius: 0.95 * 14,
+                filter: "grayscale(50%)",
               }}
             />
-
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                width: "100%",
-                height: "100%",
-              }}
-            >
-              <div
-                style={{
-                  borderRadius: "100%",
-                  width: "98%",
-                  height: "98%",
-                  background:
-                    "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.7) 100%)",
-                  opacity: hovered ? 0 : 1,
-                  transition: "opacity 0.8s ease",
-                  pointerEvents: "none",
-                }}
-              />
-            </div>
           </>
         )}
 
         {error && <ProfilePicPlaceHolder />}
-
-        {/* Gradient sheen at bottom */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            pointerEvents: "none",
-            background: `linear-gradient(to bottom, transparent 60%, ${a(t.accent, 30)} 100%)`,
-          }}
-        />
       </div>
     </div>
   );

@@ -58,6 +58,7 @@ function TerminalCard({
   visible: boolean;
 }) {
   const { t } = useTheme();
+  const [hovered, setHovered] = useState(false);
 
   const filename = `0${index + 1}_${service.title
     .toLowerCase()
@@ -68,16 +69,20 @@ function TerminalCard({
 
   return (
     <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       style={{
         flex: "1 1 calc(50% - 8px)",
         minWidth: "320px",
-        border: `1px solid ${t.accent}22`,
-        borderRadius: "10px",
+        border: `1px solid`,
+        borderColor: hovered ? t.accent + 70 : t.accent + 20,
+        transition: "border-color 0.4s, color 0.4s",
+        boxShadow: `0 3px 12px ${hovered ? t.accent + "40" : "#00000050"}`,
+        borderRadius: "12px",
         overflow: "hidden",
         display: "flex",
         flexDirection: "column",
         backgroundColor: t.bgSecondary,
-        boxShadow: t.shadow,
         opacity: 0,
         ...(visible && {
           animationName: "terminalOpen",
@@ -108,7 +113,6 @@ function TerminalCard({
               style={{
                 width: "11px",
                 height: "11px",
-                borderRadius: "50%",
                 backgroundColor: color + "55",
               }}
             />
@@ -216,15 +220,15 @@ function Pill({ label }: { label: string }) {
       onMouseLeave={() => setHovered(false)}
       style={{
         backgroundColor: t.bg,
-        border: `1px solid ${hovered ? t.accent : t.accent + "22"}`,
+        border: `1px solid ${hovered ? t.accent + "80" : t.accent + "22"}`,
         borderRadius: "100px",
         padding: "6px 12px",
         fontFamily: "'IBM Plex Mono', monospace",
         fontSize: "11px",
-        color: hovered ? t.accent : t.accent + "85",
+        color: hovered ? t.accent : t.accent + "90",
         lineHeight: "1.4",
         cursor: "default",
-        transition: "border-color 0.18s, color 0.18s",
+        transition: "border-color 0.4s, color 0.4s",
         whiteSpace: "nowrap",
       }}
     >
