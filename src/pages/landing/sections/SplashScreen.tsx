@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTheme } from "../../../theme/useTheme";
 import BgAnimation from "../bgAnimation";
+import portFolioData from "../../../data";
 
 const PHRASES = ["init...", "loading assets...", "compiling..."];
 
@@ -59,6 +60,7 @@ const SplashScreen: React.FC<SplashScreenProps> = (props) => {
             top: 0,
             left: 0,
             zIndex: 1005,
+            opacity: 0.5,
           }}
         >
           <BgAnimation type={1} />
@@ -68,7 +70,7 @@ const SplashScreen: React.FC<SplashScreenProps> = (props) => {
           style={{
             position: "absolute",
             width: "100%",
-            height: "30%",
+            height: "100%",
             overflow: "hidden",
             bottom: 0,
             left: 0,
@@ -81,7 +83,7 @@ const SplashScreen: React.FC<SplashScreenProps> = (props) => {
         >
           <div
             style={{
-              width: "50%",
+              width: "370px",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -91,25 +93,22 @@ const SplashScreen: React.FC<SplashScreenProps> = (props) => {
           >
             <div
               style={{
-                width: "100%",
-                height: 8,
-                background: t.bgSecondary,
-                overflow: "hidden",
-                borderRadius: 8,
-                opacity: 0.5,
+                fontSize: "clamp(1.8rem, 3vw, 2.6rem)",
+                fontWeight: 800,
+                letterSpacing: "-0.03em",
+                margin: 0,
+                lineHeight: 1.1,
+                background: t.text,
+                color: t.bg,
+                borderRadius: "100%",
+                padding: "1rem",
+                marginBottom: 64,
               }}
             >
-              <div
-                style={{
-                  height: "100%",
-                  width: `${progress}%`,
-                  background: t.text,
-                  backgroundSize: "300% auto",
-                  animation: "barGlow 1s linear infinite",
-                  transition: "width .08s linear",
-                  borderRadius: 8,
-                }}
-              />
+              {portFolioData.personalInfo.name
+                .split(" ")
+                .map((x) => x.charAt(0))
+                .join("")}
             </div>
             <div
               style={{
@@ -139,6 +138,27 @@ const SplashScreen: React.FC<SplashScreenProps> = (props) => {
                 })}
               </span>
               <span>{progress}%</span>
+            </div>
+            <div
+              style={{
+                width: "100%",
+                height: 8,
+                background: t.text + 50,
+                overflow: "hidden",
+                borderRadius: 8,
+              }}
+            >
+              <div
+                style={{
+                  height: "100%",
+                  width: `${progress}%`,
+                  background: t.text + 90,
+                  backgroundSize: "300% auto",
+                  animation: "barGlow 1s linear infinite",
+                  transition: "width .08s linear",
+                  borderRadius: 8,
+                }}
+              />
             </div>
           </div>
         </div>
