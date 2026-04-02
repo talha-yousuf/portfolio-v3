@@ -1,18 +1,23 @@
 import { useEffect, useState } from "react";
-import { useTheme } from "../../../theme/useTheme";
+import { useTheme } from "../../../utils/useTheme";
 import BgAnimation from "../bgAnimation";
 import portFolioData from "../../../data";
+import { useScreenSize } from "../../../utils/useScreenSize";
 
 const PHRASES = ["init...", "loading assets...", "compiling..."];
 
-const TOTAL_DURATION = 2000; // ms
+const TOTAL_DURATION = 1000; // ms
 
 interface SplashScreenProps {
   children?: React.ReactNode;
 }
 
+const hasVisited = () => sessionStorage.getItem("hasVisited");
+const markVisited = () => sessionStorage.setItem("hasVisited", "true");
+
 const SplashScreen: React.FC<SplashScreenProps> = (props) => {
   const { t } = useTheme();
+  const { isDesktop } = useScreenSize();
 
   const [progress, setProgress] = useState(0);
 
@@ -31,7 +36,13 @@ const SplashScreen: React.FC<SplashScreenProps> = (props) => {
     };
   }, []);
 
-  return progress < 100 ? (
+  useEffect(() => {
+    if (progress <= 100) markVisited();
+  }, [progress]);
+
+  const show = () => progress < 100 && !hasVisited();
+
+  return show() ? (
     <div
       style={{
         position: "fixed",
@@ -39,7 +50,7 @@ const SplashScreen: React.FC<SplashScreenProps> = (props) => {
         left: 0,
         height: "100vh",
         width: "100vw",
-        zIndex: "1004",
+        zIndex: 1004,
         background: t.bg,
       }}
     >
@@ -63,7 +74,7 @@ const SplashScreen: React.FC<SplashScreenProps> = (props) => {
             opacity: 0.5,
           }}
         >
-          <BgAnimation type={1} />
+          <BgAnimation type={0} />
         </div>
 
         <div
@@ -83,7 +94,7 @@ const SplashScreen: React.FC<SplashScreenProps> = (props) => {
         >
           <div
             style={{
-              width: "370px",
+              width: isDesktop ? "400px" : "70%",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",

@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { Github, Linkedin, Copy, Check, ArrowRight } from "lucide-react";
-import { useTheme } from "../../../theme/useTheme";
+import { useTheme } from "../../../utils/useTheme";
 import portFolioData from "../../../data";
+import { useScreenSize } from "../../../utils/useScreenSize";
 
 const a = (color: string, pct: number) =>
   `color-mix(in srgb, ${color} ${pct}%, transparent)`;
 
 const ContactSection = () => {
   const { t } = useTheme();
+  const { isMobile } = useScreenSize();
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
@@ -20,11 +22,12 @@ const ContactSection = () => {
     <div
       style={{
         width: "100%",
-        height: "50vh",
+        height: isMobile ? "auto" : "50vh",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
+        gap: 60,
       }}
     >
       <div
@@ -35,7 +38,7 @@ const ContactSection = () => {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          gap: 60,
+          gap: 30,
         }}
       >
         <div

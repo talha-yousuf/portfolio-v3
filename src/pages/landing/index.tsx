@@ -1,4 +1,4 @@
-import { useTheme } from "../../theme/useTheme";
+import { useTheme } from "../../utils/useTheme";
 import { NAV_BUTTONS } from "../../data/nav";
 import NavBar from "./components/NavBar";
 import SectionHeading from "./components/SectionHeading";

@@ -49,7 +49,7 @@ export const themes: {
     name: "Indigo",
     bg: "#140A2A",
     text: "#F8FAFF",
-    accent: "#FF4D6D",
+    accent: "#ff4d4d",
     bgSecondary: "#20103D",
     shadow: "0 12px 32px rgba(0,0,0,0.5)",
     icon: Stars,

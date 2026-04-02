@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Github, ExternalLink, FileText, Monitor, Image } from "lucide-react";
-import { useTheme } from "../../../theme/useTheme";
+import { useTheme } from "../../../utils/useTheme";
 import { getProjectUrls, type PortfolioDataType } from "../../../data";
 import ProjectDocDrawer from "./ProjectDocDrawer";
 import ProjectImageDrawer from "./ProjectImageDrawer";

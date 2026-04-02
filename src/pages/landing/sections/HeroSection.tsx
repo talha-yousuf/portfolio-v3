@@ -7,16 +7,18 @@ import {
   Mail,
 } from "lucide-react";
 import portFolioData from "../../../data";
-import { useTheme } from "../../../theme/useTheme";
+import { useTheme } from "../../../utils/useTheme";
 import { useEffect, useState } from "react";
 import { NAV_BUTTONS } from "../../../data/nav";
 import BgAnimation from "../bgAnimation";
+import { useScreenSize } from "../../../utils/useScreenSize";
 
 const a = (color: string, pct: number) =>
   `color-mix(in srgb, ${color} ${pct}%, transparent)`;
 
 const HeroSection = () => {
   const { t } = useTheme();
+  const { isDesktop } = useScreenSize();
 
   return (
     <div
@@ -30,7 +32,7 @@ const HeroSection = () => {
         width: "100%",
         height: "100%",
         overflow: "hidden",
-        padding: "160px 40px",
+        padding: isDesktop ? "160px 40px" : "40px",
       }}
     >
       <div
@@ -79,23 +81,45 @@ const HeroSection = () => {
 
         <div
           style={{
-            display: "flex",
-            gap: 32,
             fontFamily: "'Fira Code', 'Courier New', monospace",
-            fontSize: "1.2rem",
+            fontSize: isDesktop ? "1.2rem" : "0.9rem",
             color: t.text,
             opacity: 0.8,
             fontWeight: "bold",
           }}
         >
-          <span>{portFolioData.personalInfo.title}</span>
-          <span style={{ color: t.accent }}>{"//"}</span>
-          <span>
-            {String(
-              new Date().getFullYear() - portFolioData.stats.careerStartYear,
-            )}
-            {" years of experience"}
-          </span>
+          {isDesktop ? (
+            <div style={{ display: "flex", gap: 32 }}>
+              <span>{portFolioData.personalInfo.title}</span>
+              <span style={{ color: t.accent }}>{"//"}</span>
+              <span>
+                {String(
+                  new Date().getFullYear() -
+                    portFolioData.stats.careerStartYear,
+                )}
+                {" years of experience"}
+              </span>
+            </div>
+          ) : (
+            <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+              <div>
+                <span style={{ color: t.accent, paddingRight: 16 }}>
+                  {"//"}
+                </span>
+                {portFolioData.personalInfo.title}
+              </div>
+              <div>
+                <span style={{ color: t.accent, paddingRight: 16 }}>
+                  {"//"}
+                </span>
+                {String(
+                  new Date().getFullYear() -
+                    portFolioData.stats.careerStartYear,
+                )}
+                {" YOE"}
+              </div>
+            </div>
+          )}
         </div>
 
         <div
@@ -103,6 +127,7 @@ const HeroSection = () => {
             display: "flex",
             gap: 10,
             alignItems: "center",
+            justifyContent: "center",
             flexWrap: "wrap",
             animation: "fadeUp 1s 1s ease both",
           }}
@@ -151,26 +176,34 @@ const HeroSection = () => {
             </a>
           ))}
 
-          <a
-            href={"#" + NAV_BUTTONS.projects.hash}
+          <div
             style={{
-              padding: "11px 20px",
-              fontWeight: 600,
-              fontSize: "0.9rem",
-              cursor: "pointer",
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 8,
-              borderRadius: 8,
-              background: "transparent",
-              border: `1px solid ${a(t.text, 18)}`,
-              color: t.text,
-              textDecoration: "none",
+              width: isDesktop ? "max-content" : "100%",
+              display: "flex",
+              justifyContent: "center",
             }}
           >
-            {"View My Work"}
-            <ArrowDown size={15} />
-          </a>
+            <a
+              href={"#" + NAV_BUTTONS.projects.hash}
+              style={{
+                padding: "11px 20px",
+                fontWeight: 600,
+                fontSize: "0.9rem",
+                cursor: "pointer",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                borderRadius: 8,
+                background: "transparent",
+                border: `1px solid ${a(t.text, 18)}`,
+                color: t.text,
+                textDecoration: "none",
+              }}
+            >
+              {"View My Work"}
+              <ArrowDown size={15} />
+            </a>
+          </div>
 
           <a
             target="_blank"
@@ -237,6 +270,7 @@ export default HeroSection;
 
 const ProfilePic = () => {
   const { t } = useTheme();
+  const { isDesktop } = useScreenSize();
 
   const src = portFolioData.personalInfo.profileImageUrl;
 
@@ -307,8 +341,8 @@ const ProfilePic = () => {
       <div
         style={{
           position: "relative",
-          width: 170,
-          height: 170,
+          width: isDesktop ? 170 : 90,
+          height: isDesktop ? 170 : 90,
           borderRadius: "100%",
           overflow: "hidden",
           background: t.accent + 70,

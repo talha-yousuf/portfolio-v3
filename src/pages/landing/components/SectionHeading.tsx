@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useTheme } from "../../../theme/useTheme";
+import { useTheme } from "../../../utils/useTheme";
 
 interface SectionHeadingProps {
   title: string;

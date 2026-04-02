@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useTheme } from "../../../theme/useTheme";
+import { useTheme } from "../../../utils/useTheme";
 import portFolioData, { type PortfolioDataType } from "../../../data";
 
 export default function ServicesSection() {

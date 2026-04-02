@@ -1,4 +1,4 @@
-import { useTheme } from "../../../theme/useTheme";
+import { useTheme } from "../../../utils/useTheme";
 import Aurora from "./Aurora";
 import InfiniteGradient from "./InfiniteGradient";
 import SoftAurora from "./SoftAurora";
