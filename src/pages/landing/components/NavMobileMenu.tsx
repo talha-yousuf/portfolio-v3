@@ -70,6 +70,8 @@ export default function NavMobileMenu() {
         onClick={() => setIsOpen(false)}
         style={{
           position: "fixed",
+          height: "100vh",
+          width: "100%",
           inset: 0,
           background: t.bg + "90",
           zIndex: 1007,

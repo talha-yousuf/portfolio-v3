@@ -85,7 +85,7 @@ const NavBar = () => {
             justifyContent: "space-between",
           }}
         >
-          {!isDesktop && <NavMobileMenu />}
+          {!isDesktop ? <NavMobileMenu /> : <div />}
 
           {isDesktop && (
             <div

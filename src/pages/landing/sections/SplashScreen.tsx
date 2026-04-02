@@ -12,9 +12,6 @@ interface SplashScreenProps {
   children?: React.ReactNode;
 }
 
-const hasVisited = () => sessionStorage.getItem("hasVisited");
-const markVisited = () => sessionStorage.setItem("hasVisited", "true");
-
 const SplashScreen: React.FC<SplashScreenProps> = (props) => {
   const { t } = useTheme();
   const { isDesktop } = useScreenSize();
@@ -36,13 +33,7 @@ const SplashScreen: React.FC<SplashScreenProps> = (props) => {
     };
   }, []);
 
-  useEffect(() => {
-    if (progress <= 100) markVisited();
-  }, [progress]);
-
-  const show = () => progress < 100 && !hasVisited();
-
-  return show() ? (
+  return progress < 100 ? (
     <div
       style={{
         position: "fixed",
