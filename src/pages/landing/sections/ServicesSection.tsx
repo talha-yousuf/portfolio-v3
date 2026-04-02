@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { useTheme } from "../../../utils/useTheme";
 import portFolioData, { type PortfolioDataType } from "../../../data";
+import { useScreenSize } from "../../../utils/useScreenSize";
 
 export default function ServicesSection() {
   const sectionRef = useRef(null);
+  const { isMobile } = useScreenSize();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -31,17 +33,23 @@ export default function ServicesSection() {
       <div
         style={{
           display: "flex",
+          flexDirection: isMobile ? "column" : "row",
+          justifyItems: "center",
+          alignItems: "center",
           flexWrap: "wrap",
           gap: "16px",
         }}
       >
         {portFolioData.service.map((service, i) => (
-          <TerminalCard
+          <div
             key={service.title}
-            index={i}
-            service={service}
-            visible={visible}
-          />
+            style={{
+              width: isMobile ? "100%" : "calc(50% - 16px)",
+              height: isMobile ? "auto" : "300px",
+            }}
+          >
+            <TerminalCard index={i} service={service} visible={visible} />
+          </div>
         ))}
       </div>
     </section>
@@ -73,7 +81,8 @@ function TerminalCard({
       onMouseLeave={() => setHovered(false)}
       style={{
         flex: "1 1 calc(50% - 8px)",
-        minWidth: "320px",
+        width: "100%",
+        height: "100%",
         border: `1px solid`,
         borderColor: hovered ? t.accent + 70 : t.accent + 20,
         transition: "border-color 0.4s, color 0.4s",
@@ -140,6 +149,9 @@ function TerminalCard({
           padding: "22px 20px 28px",
           flex: 1,
           backgroundColor: t.bgSecondary,
+          overflow: "auto",
+          width: "100%",
+          height: "100%",
         }}
       >
         {/* prompt */}

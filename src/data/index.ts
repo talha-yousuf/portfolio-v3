@@ -962,8 +962,8 @@ const portFolioData: PortfolioDataType = {
     {
       title: "Development",
       bullets: [
-        "Frontend app development",
-        "Backend app development",
+        "Frontend development",
+        "Backend development",
         "Custom dashboards, admin panels, and internal tools",
         "Data pipelines and reporting systems",
         "SEO-focused SSR web apps",
